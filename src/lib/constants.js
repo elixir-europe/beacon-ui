@@ -8,13 +8,13 @@ export const BEACON_NETWORK_COLUMNS = [
   {
     id: "maturity",
     label: "Beacon Maturity",
-    align: "center",
+    align: "left",
     width: "20%",
   },
   {
     id: "datasets_count",
     label: "nº of Datasets",
-    align: "right",
+    align: "left",
     numeric: true,
     width: "20%",
   },
@@ -41,13 +41,13 @@ export const BEACON_SINGLE_COLUMNS = [
   {
     id: 'maturity',
     label: "Beacon Maturity",
-    align: 'center',
+    align: 'left',
     width: '20%'
   },
   {
     id: 'datasets_count',
     label: "nº of Datasets",
-    align: 'right',
+    align: 'left',
     numeric: true,
     width: '20%'
   },
@@ -70,10 +70,10 @@ export const BEACON_SINGLE_COLUMNS = [
 ];
 
 export const BEACON_NETWORK_COLUMNS_EXPANDED = {
-  'beacon_dataset_name': '70%',
-  'beacon_dataset_response': '10%',
+  'beacon_dataset_name': '60%',
+  'beacon_dataset_response': '20%',
   'beacon_dataset_detail': {
-    width: '20%',
+    width: '10%',
     float: 'right'
   }
 }

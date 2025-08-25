@@ -65,21 +65,23 @@ const ResultsTableModal = ({ open, subRow, onClose }) => {
 
   const queryBuilder = (page) => {
     let skipItems = page * rowsPerPage;
+
+
     let filter = {
-      "meta": {
-        "apiVersion": "2.0"
+      meta: {
+        apiVersion: "2.0",
       },
-      "query": {
-        "filters": [],
-        "includeResultsetResponses": "HIT",
-        "testMode": false,
-        "requestedGranularity": "record",
-        "pagination": {
-          "skip": parseInt(`${(skipItems)}`),
-          "limit": parseInt(`${(rowsPerPage)}`)
-        },
-      }
-    }
+      query: {
+        filters: [],
+      },
+      includeResultsetResponses: "HIT",
+      pagination: {
+        skip: parseInt(`${(skipItems)}`),
+        limit: parseInt(`${(rowsPerPage)}`),
+      },
+      testMode: false,
+      requestedGranularity: "record",
+    };
 
     if(selectedFilter.length > 0) {
       let filterData = selectedFilter.map((item) =>
@@ -107,7 +109,7 @@ const ResultsTableModal = ({ open, subRow, onClose }) => {
     const fetchTableItems = async () => {
       try {
         setLoading(true);
-        const url = `${config.apiUrl}/${selectedPathSegment}/${subRow.id}/`;
+        const url = `${config.apiUrl}/${selectedPathSegment}`;
         setUrl(url);
         let query = queryBuilder(page);
 
@@ -121,6 +123,8 @@ const ResultsTableModal = ({ open, subRow, onClose }) => {
           })
         };
 
+        console.log("requestOptions: " , requestOptions)
+
         const response = await fetch(url, requestOptions);
         const data = await response.json();
         const results = data.response?.resultSets;
@@ -130,9 +134,7 @@ const ResultsTableModal = ({ open, subRow, onClose }) => {
           const itemId = item.beaconId || item.id;
           return id === itemId;
         });
-
-        console.log("beacon: " , beacon);
-
+        
         const totalDatasetsPages = Math.ceil(beacon.resultsCount / rowsPerPage);
         
         setTotalItems(beacon.resultsCount);

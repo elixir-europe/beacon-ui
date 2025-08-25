@@ -37,6 +37,7 @@ export default function Search({
   const { selectedPathSegment, setSelectedPathSegment } = useSelectedEntry();
   const [assembly, setAssembly] = useState(config.assemblyId[0]);
   const [open, setOpen] = useState(false);
+  const { isLoaded, setIsLoaded } = useSelectedEntry();
   const searchRef = useRef(null);
 
   useEffect(() => {
@@ -87,7 +88,9 @@ export default function Search({
         const res = await fetch(`${config.apiUrl}/map`);
         const data = await res.json();
         const endpointSets = data.response.endpointSets || {};
-  
+
+        setIsLoaded(false);
+
         const entries = Object.entries(endpointSets)
           .filter(filterGenomicVariation)
           .map(mapEntry)
@@ -100,6 +103,8 @@ export default function Search({
           setSelectedPathSegment(sorted[0].pathSegment);
         }
         await handleBeaconsInfo();
+
+        setIsLoaded(true);
       } catch (err) {
         console.error("Error fetching entry types:", err);
       } finally {
@@ -123,7 +128,7 @@ export default function Search({
   useEffect(() => {
     const fetchAll = async () => {
       await fetchConfiguration();
-      setLoading(false);
+      //setLoading(false);
     };
 
     fetchAll();
@@ -418,7 +423,7 @@ export default function Search({
           </Box>
         )}
 
-        {loading ? (
+        {loading || !isLoaded ? (
           <CircularProgress />
         ) : !isSingleEntryType ? (
           <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>

@@ -90,8 +90,6 @@ export default function ResultsTable() {
       });
     }
 
-    console.log("beacon<: ", beacon);
-
     const logo = beacon.response
       ? beacon.response?.organization?.logoUrl
       : beacon.organization?.logoUrl;
@@ -136,6 +134,7 @@ export default function ResultsTable() {
                   <TableCell
                     key={column.id}
                     align={column.align}
+                    style={{ width: column.width }}
                     sx={{
                       ...headerCellStyle,
                       width: column.width,

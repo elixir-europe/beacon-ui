@@ -4,6 +4,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useSelectedEntry } from "../context/SelectedEntryContext";
 import { COMMON_MESSAGES } from "../common/CommonMessage";
 import { PATH_SEGMENT_TO_ENTRY_ID } from "../../components/common/textFormatting";
+import LoupeIcon from '@mui/icons-material/Loupe';
 
 export default function SearchButton({ setSelectedTool }) {
   const {
@@ -15,6 +16,8 @@ export default function SearchButton({ setSelectedTool }) {
     entryTypesConfig,
     setMessage,
     setHasSearchBeenTriggered,
+    isLoaded,
+    setIsLoaded
   } = useSelectedEntry();
 
   const handleSearch = async () => {
@@ -22,6 +25,9 @@ export default function SearchButton({ setSelectedTool }) {
     const configForEntry = entryTypesConfig?.[entryTypeId];
     const nonFilteredAllowed =
       configForEntry?.nonFilteredQueriesAllowed ?? true;
+
+    console.log("handling ....")
+
     if (!nonFilteredAllowed && selectedFilter.length === 0) {
       console.log("🚫 Search blocked - filters are required");
       setMessage(COMMON_MESSAGES.addFilter);
@@ -34,33 +40,36 @@ export default function SearchButton({ setSelectedTool }) {
     setLoadingData(true);
     setResultData([]);
     setHasSearchBeenTriggered(true);
+    setIsLoaded(false);
 
     try {
       const url = `${config.apiUrl}/${selectedPathSegment}`;
       let response;
-      if (selectedFilter.length > 0) {
-        const query = queryBuilder(selectedFilter);
-        const requestOptions = {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ query }),
-        };
-        response = await fetch(url, requestOptions);
-      } else {
-        response = await fetch(url);
-      }
+
+      const query = queryBuilder(selectedFilter);
+      const requestOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ query }),
+      };
+
+      console.log("2: " , requestOptions)
+
+      response = await fetch(url, requestOptions);
+      
 
       if (!response.ok) {
         console.error("Fetch failed:", response.status);
         setResultData([]);
         setHasSearchResult(true);
+        setIsLoaded(true);
         return;
       }
 
       const data = await response.json();
-      // console.log("Response data:", data);
+      console.log("Response data:", data);
       
       // group beacons
       const rawItems = data?.response?.resultSets ?? data?.response?.collections ?? [];
@@ -105,6 +114,7 @@ export default function SearchButton({ setSelectedTool }) {
     } finally {
       setHasSearchResult(true);
       setLoadingData(false);
+      setIsLoaded(true);
     }
   };
 
@@ -153,8 +163,6 @@ export default function SearchButton({ setSelectedTool }) {
         borderRadius: "999px",
         textTransform: "none",
         fontSize: "14px",
-        // pl: 2,
-        // ml: 2,
         backgroundColor: config.ui.colors.primary,
         border: `1px solid ${config.ui.colors.primary}`,
         boxShadow: "none",
@@ -166,6 +174,7 @@ export default function SearchButton({ setSelectedTool }) {
       }}
       startIcon={<SearchIcon />}
       onClick={handleSearch}
+      disabled={!isLoaded}
     >
       Search
     </Button>

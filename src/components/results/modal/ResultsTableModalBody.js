@@ -100,7 +100,19 @@ const ResultsTableModalBody = ({ dataTable, totalItems, page, rowsPerPage, handl
     if (value == null) return "-";
 
     if (Array.isArray(value)) {
-      return value.map((el) => summarizeValue(el)).join(", ");
+      if (value.length === 1) {
+        return summarizeValue(value[0]);
+      }
+
+      return (
+        <ul style={{ margin: 0, paddingLeft: "1.2em", listStyle: "disc" }}>
+          {value.map((el, idx) => (
+            <li key={idx} style={{ fontSize: "inherit" }}>
+              {summarizeValue(el)}
+            </li>
+          ))}
+        </ul>
+      );
     }
 
     if (typeof value === "object") {
