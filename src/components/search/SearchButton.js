@@ -26,15 +26,14 @@ export default function SearchButton({ setSelectedTool }) {
     const nonFilteredAllowed =
       configForEntry?.nonFilteredQueriesAllowed ?? true;
 
-    console.log("handling ....")
 
     if (!nonFilteredAllowed && selectedFilter.length === 0) {
-      console.log("🚫 Search blocked - filters are required");
       setMessage(COMMON_MESSAGES.addFilter);
       setResultData([]);
       setHasSearchResult(true);
       return;
     }
+
     setMessage(null);
     setSelectedTool(null);
     setLoadingData(true);
@@ -55,10 +54,7 @@ export default function SearchButton({ setSelectedTool }) {
         body: JSON.stringify({ query }),
       };
 
-      console.log("2: " , requestOptions)
-
       response = await fetch(url, requestOptions);
-      
 
       if (!response.ok) {
         console.error("Fetch failed:", response.status);
@@ -69,7 +65,6 @@ export default function SearchButton({ setSelectedTool }) {
       }
 
       const data = await response.json();
-      console.log("Response data:", data);
       
       // group beacons
       const rawItems = data?.response?.resultSets ?? data?.response?.collections ?? [];
