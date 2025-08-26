@@ -27,7 +27,6 @@ export default function HomePage({ selectedTool, setSelectedTool }) {
 
   return (
     <>
-      {/* Main container */}
       <Box
         sx={{
           display: "flex",
@@ -43,12 +42,6 @@ export default function HomePage({ selectedTool, setSelectedTool }) {
             display: "flex",
             flexDirection: "column",
             width: { lg: "60%", md: "60%" },
-            // backgroundColor: {
-            //   lg: "lightsalmon",
-            //   md: "pink",
-            //   sm: "lightgreen",
-            //   xs: "lightblue",
-            // },
           }}
         >
           <Founders />

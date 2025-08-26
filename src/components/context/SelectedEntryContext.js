@@ -14,6 +14,7 @@ export const SelectedEntryProvider = ({ children }) => {
   const [entryTypesConfig, setEntryTypesConfig] = useState({});
   const [message, setMessage] = useState(null);
   const [hasSearchBeenTriggered, setHasSearchBeenTriggered] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   return (
     <SelectedEntryContext.Provider
@@ -40,6 +41,8 @@ export const SelectedEntryProvider = ({ children }) => {
         setMessage,
         hasSearchBeenTriggered,
         setHasSearchBeenTriggered,
+        isLoaded,
+        setIsLoaded
       }}
     >
       {children}

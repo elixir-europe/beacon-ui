@@ -2,16 +2,20 @@ import { useState, useEffect } from 'react';
 import {
   Box,
   Typography,
-  Link
+  Link,
+  Button
 } from "@mui/material";
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
+import DownloadIcon from '@mui/icons-material/Download';
+import LoadingButton from "@mui/lab/LoadingButton";
 import ResultsTableModalBody from './ResultsTableModalBody';
 import config from '../../../config/config.json';
 import CloseIcon from "@mui/icons-material/Close";
 import { InputAdornment, IconButton } from "@mui/material";
 import { useSelectedEntry } from "../../context/SelectedEntryContext";
 import Loader from "../../common/Loader";
+import Papa from "papaparse";
 
 const style = {
   position: 'absolute',
@@ -32,6 +36,7 @@ const ResultsTableModal = ({ open, subRow, onClose }) => {
   const [totalPages, setTotalPages] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [loadingDownload, setLoadingDownload] = useState(false);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [dataTable, setDataTable] = useState([]);
   const [url, setUrl] = useState("");
@@ -63,23 +68,158 @@ const ResultsTableModal = ({ open, subRow, onClose }) => {
     onClose();
   };
 
+  function summarizeValueText(value) {
+    if (value == null) return "";
+    if (Array.isArray(value)) {
+      return value.map(summarizeValueText).filter(Boolean).join(" | ");
+    }
+    if (typeof value === "object") {
+      if (value.label) return String(value.label);
+      if (value.id) return String(value.id);
+      const nested = Object.values(value).map(summarizeValueText).filter(Boolean);
+      return nested.join(", ");
+    }
+    return String(value);
+  }
+
+  async function buildDownloadRows(sortedHeaders, cleanAndParseInfo) {
+    try {
+      setLoadingDownload(true);
+      const url = `${config.apiUrl}/${selectedPathSegment}`;
+
+      let query = queryBuilder(page);
+
+      if (query?.pagination) {
+        query.pagination.limit = 5000;
+      }
+
+      const requestOptions = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          query
+        })
+      };
+
+      const response = await fetch(url, requestOptions);
+      const data = await response.json();
+      const beaconResults = data.response?.resultSets;
+
+      const beacon = beaconResults.find((item) => {
+        const id = subRow.beaconId || subRow.id;
+        const itemId = item.beaconId || item.id;
+        return id === itemId;
+      });
+
+      let cleanResults = beacon.results;
+
+      return cleanResults.map((item, index) => {
+        let id = item.id ?? `row_${index}`;
+        const parsedInfo = cleanAndParseInfo?.(item.info);
+
+        if (parsedInfo?.sampleID) id += `_${parsedInfo.sampleID}`;
+        else id += `_${index}`;
+
+        const row = {};
+
+        sortedHeaders.forEach((h) => {
+          const rawValue = item[h.id];
+          row[h.name ?? h.id] = summarizeValueText(rawValue);
+        });
+
+        row.__rowKey = id;
+        return row;
+      });
+    } catch(err) {
+      console.log("Failed download dataset: " , err);
+    } finally {
+      setLoadingDownload(false);
+    }
+  }
+
+const headersSet = new Set();
+  dataTable.forEach(obj => {
+    Object.keys(obj).forEach(key => {
+      headersSet.add(key);
+    });
+  });
+
+  const headers = Array.from(headersSet);
+
+  const indexedHeaders = {};
+  headers.forEach((header, index) => {
+    indexedHeaders[index] = {
+      id: header,
+      name: formatHeaderName(header)
+    };
+  });
+
+  function formatHeaderName(header) {
+    const withSpaces = header.replace(/([A-Z])/g, ' $1');
+    return withSpaces.charAt(0).toUpperCase() + withSpaces.slice(1);
+  }
+
+  const headersArray = Object.values(indexedHeaders);
+  const primaryId = headersArray.find(h => h.id === "id") 
+    ? "id" 
+    : headersArray.find(h => h.id === "variantInternalId") 
+    ? "variantInternalId" 
+    : null;
+
+  const sortedHeaders = primaryId
+    ? [
+        ...headersArray.filter(h => h.id === primaryId),
+        ...headersArray.filter(h => h.id !== primaryId)
+      ]
+    : headersArray;
+
+  const cleanAndParseInfo = (infoString) => {
+    try {
+      if (typeof infoString !== "string") return null;
+
+      const cleaned = infoString.replace(/"|"/g, '"');
+      const parsed = JSON.parse(cleaned);
+      return parsed;
+    } catch (error) {
+      console.log("Failed to parse item.info:", error);
+      return null;
+    }
+  };
+
+  const handleDownload = async () => {
+    const rows = await buildDownloadRows(sortedHeaders, cleanAndParseInfo);
+    const csv = Papa.unparse(rows);
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const fileName = `${subRow.beaconId}___${subRow.id}.csv`;
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = fileName;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
   const queryBuilder = (page) => {
     let skipItems = page * rowsPerPage;
+
     let filter = {
-      "meta": {
-        "apiVersion": "2.0"
+      meta: {
+        apiVersion: "2.0",
       },
-      "query": {
-        "filters": [],
-        "includeResultsetResponses": "HIT",
-        "testMode": false,
-        "requestedGranularity": "record",
-        "pagination": {
-          "skip": parseInt(`${(skipItems)}`),
-          "limit": parseInt(`${(rowsPerPage)}`)
-        },
-      }
-    }
+      query: {
+        filters: [],
+      },
+      includeResultsetResponses: "HIT",
+      pagination: {
+        skip: parseInt(`${(skipItems)}`),
+        limit: parseInt(`${(rowsPerPage)}`),
+      },
+      testMode: false,
+      requestedGranularity: "record",
+    };
 
     if(selectedFilter.length > 0) {
       let filterData = selectedFilter.map((item) =>
@@ -107,7 +247,7 @@ const ResultsTableModal = ({ open, subRow, onClose }) => {
     const fetchTableItems = async () => {
       try {
         setLoading(true);
-        const url = `${config.apiUrl}/${selectedPathSegment}/${subRow.id}/`;
+        const url = `${config.apiUrl}/${selectedPathSegment}`;
         setUrl(url);
         let query = queryBuilder(page);
 
@@ -120,7 +260,7 @@ const ResultsTableModal = ({ open, subRow, onClose }) => {
             query
           })
         };
-
+        
         const response = await fetch(url, requestOptions);
         const data = await response.json();
         const results = data.response?.resultSets;
@@ -130,9 +270,7 @@ const ResultsTableModal = ({ open, subRow, onClose }) => {
           const itemId = item.beaconId || item.id;
           return id === itemId;
         });
-
-        console.log("beacon: " , beacon);
-
+        
         const totalDatasetsPages = Math.ceil(beacon.resultsCount / rowsPerPage);
         
         setTotalItems(beacon.resultsCount);
@@ -183,66 +321,94 @@ const ResultsTableModal = ({ open, subRow, onClose }) => {
             </Typography>
           </Box>
           <Box>
-            <Box>
-              <Box>
-                { subRow.beaconId  && (
-                  <Box
-                    sx={{
-                      display: "flex"
-                    }}>
-                    <Typography sx={{
-                      color: "black",
-                      fontSize: "15px",
-                      paddingRight: "10px",
-                      color: `${ config.ui.colors.darkPrimary }`
-                    }}>
-                      Beacon:
-                    </Typography>
-                    <Typography sx={{
-                      color: "black",
-                      fontWeight: 700,
-                      fontSize: "15px",
-                      color: `${ config.ui.colors.darkPrimary }`
-                    }}>
-                      { subRow.beaconId }
-                    </Typography>
-                  </Box>
-                )}
-                { subRow.id  && (
-                  <Box
-                    sx={{
-                      display: "flex",
-                      paddingTop: "1px",
-                      paddingBottom: "10px"
-                    }}>
-                    <Typography sx={{
-                      color: `${ config.ui.colors.darkPrimary }`,
-                      fontSize: "15px",
-                      paddingRight: "10px",
-                    }}>
-                      Dataset:
-                    </Typography>
-                    <Typography sx={{
-                      color: `${ config.ui.colors.darkPrimary }`,
-                      fontWeight: 700,
-                      fontSize: "15px",
-                    }}>
-                      { subRow.id }
-                    </Typography>
-                  </Box>
-                )}
+            <Box sx={{
+                display: 'grid',
+                gridTemplateColumns: '1.5fr 0.5fr'
+              }}>
+              <Box >
+                <Box>
+                  { subRow.beaconId  && (
+                    <Box
+                      sx={{
+                        display: "flex"
+                      }}>
+                      <Typography sx={{
+                        color: "black",
+                        fontSize: "15px",
+                        paddingRight: "10px",
+                        color: `${ config.ui.colors.darkPrimary }`
+                      }}>
+                        Beacon:
+                      </Typography>
+                      <Typography sx={{
+                        color: "black",
+                        fontWeight: 700,
+                        fontSize: "15px",
+                        color: `${ config.ui.colors.darkPrimary }`
+                      }}>
+                        { subRow.beaconId }
+                      </Typography>
+                    </Box>
+                  )}
+                  { subRow.id  && (
+                    <Box
+                      sx={{
+                        display: "flex",
+                        paddingTop: "1px",
+                        paddingBottom: "10px"
+                      }}>
+                      <Typography sx={{
+                        color: `${ config.ui.colors.darkPrimary }`,
+                        fontSize: "15px",
+                        paddingRight: "10px",
+                      }}>
+                        Dataset:
+                      </Typography>
+                      <Typography sx={{
+                        color: `${ config.ui.colors.darkPrimary }`,
+                        fontWeight: 700,
+                        fontSize: "15px",
+                      }}>
+                        { subRow.id }
+                      </Typography>
+                    </Box>
+                  )}
+                </Box>
+                <Box sx={{ paddingBottom: "15px" }}>
+                  <Typography sx={{
+                    color: `${ config.ui.colors.darkPrimary }`,
+                    fontWeight: 700,
+                    fontSize: "13px",
+                    fontStyle: "italic"
+                  }}>
+                    <Link href={url} color="inherit" underline="hover" target="_blank" rel="noopener noreferrer">
+                      { url }
+                    </Link>
+                  </Typography>
+                </Box>
               </Box>
-              <Box sx={{ paddingBottom: "15px" }}>
-                <Typography sx={{
-                  color: `${ config.ui.colors.darkPrimary }`,
-                  fontWeight: 700,
-                  fontSize: "13px",
-                  fontStyle: "italic"
+              <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'end'
                 }}>
-                  <Link href={url} color="inherit" underline="hover" target="_blank" rel="noopener noreferrer">
-                    { url }
-                  </Link>
-                </Typography>
+                  { !loading &&
+                    <LoadingButton
+                        variant="contained"
+                        onClick={handleDownload}
+                        startIcon={<DownloadIcon />}
+                        aria-label="Download dataset"
+                        loading={loadingDownload}
+                        sx={{
+                          backgroundColor: config.ui.colors.darkPrimary,
+                          height: "30px",
+                          "&:hover": { backgroundColor: config.ui.colors.darkPrimary },
+                          "&:focus-visible": { outline: "2px solid #000", outlineOffset: 2 },
+                        }}
+                      >
+                        Download
+                    </LoadingButton>
+                  }
               </Box>
             </Box>
             <Box>
@@ -261,8 +427,6 @@ const ResultsTableModal = ({ open, subRow, onClose }) => {
                   />
                 </>
               )}
-            </Box>
-            <Box>
             </Box>
           </Box>
         </Box>

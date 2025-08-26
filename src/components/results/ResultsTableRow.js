@@ -16,13 +16,13 @@ import CalendarViewMonthIcon from '@mui/icons-material/CalendarViewMonth';
 import config from '../../config/config.json';
 
 export default function ResultsTableRow({ item, handleOpenModal }) {
-  console.log(item);
   return (
     <TableRow>
       <TableCell colSpan={6} sx={{
         backgroundColor: 'background.paper',
         borderTop: '1px solid',
-        borderColor: 'divider'
+        borderColor: 'divider',
+        p: 0
       }}>
         <Box sx={{ p: 0 }}>
           <TableContainer>
@@ -30,16 +30,6 @@ export default function ResultsTableRow({ item, handleOpenModal }) {
               <TableBody>
                 { item.items.map((dataset) => (
                   <TableRow key={dataset.id || dataset.dataset}>
-                    <TableCell style={{ width: BEACON_NETWORK_COLUMNS_EXPANDED.beacon_dataset }}></TableCell>
-                    <TableCell style={{ width: BEACON_NETWORK_COLUMNS_EXPANDED.beacon_dataset_name }}>
-                      <Box sx={{ display: 'flex'}}>
-                        <Typography sx={{ fontWeight: "bold" }} variant="body2">Dataset: </Typography>
-                        <Typography sx={{ paddingLeft: '5px' }} variant="body2">{ dataset.dataset } </Typography>
-                      </Box>
-                    </TableCell>
-                    <TableCell sx={{ fontWeight: "bold"  }}  style={{ width: BEACON_NETWORK_COLUMNS_EXPANDED.beacon_dataset_response }}>
-                      { item.totalResultsCount > 0 ? new Intl.NumberFormat(navigator.language, { useGrouping: true }).format(Number(item.totalResultsCount)) : '-' }
-                    </TableCell>
                     <TableCell 
                       style={{ 
                         width: BEACON_NETWORK_COLUMNS_EXPANDED.beacon_dataset_detail.width,
@@ -76,6 +66,16 @@ export default function ResultsTableRow({ item, handleOpenModal }) {
                         </Button>
                       </Tooltip>
                     </TableCell>
+                    <TableCell style={{ width: BEACON_NETWORK_COLUMNS_EXPANDED.beacon_dataset_name }}>
+                      <Box sx={{ display: 'flex'}}>
+                        <Typography sx={{ fontWeight: "bold" }} variant="body2">Dataset: </Typography>
+                        <Typography sx={{ paddingLeft: '5px' }} variant="body2">{ dataset.dataset } </Typography>
+                      </Box>
+                    </TableCell>
+                    <TableCell sx={{ fontWeight: "bold"  }}  style={{ width: BEACON_NETWORK_COLUMNS_EXPANDED.beacon_dataset_response }}>
+                      { item.totalResultsCount > 0 ? new Intl.NumberFormat(navigator.language, { useGrouping: true }).format(Number(item.totalResultsCount)) : '-' }
+                    </TableCell>
+                  
                   </TableRow>
                 ))}
               </TableBody>

@@ -7,13 +7,8 @@ import { useEffect, useRef } from "react";
 import { COMMON_MESSAGES } from "../common/CommonMessage";
 
 export default function ResultsContainer() {
-  const { loadingData, resultData, hasSearchResults, message } =
-    useSelectedEntry();
-
+  const { loadingData, resultData, hasSearchResults, message } = useSelectedEntry();
   const showBox = loadingData || hasSearchResults || message;
-
-  // console.log("message", message);
-
   const tableRef = useRef(null);
 
   useEffect(() => {
