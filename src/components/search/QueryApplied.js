@@ -1,7 +1,7 @@
 import { Box, Typography, Button } from "@mui/material";
 import { useSelectedEntry } from "../context/SelectedEntryContext";
 import QueryAppliedItems from "./QueryAppliedItems";
-import config from "../../config/config.json";
+//import config from "../../config/config.json";
 import deleteIcon from "../../assets/logos/delete.svg";
 
 export default function QueryApplied({ variant }) {
@@ -12,7 +12,7 @@ export default function QueryApplied({ variant }) {
     setHasSearchResult,
   } = useSelectedEntry();
 
-  const primaryDarkColor = config.ui.colors.darkPrimary;
+  const primaryDarkColor = CONFIG.ui.colors.darkPrimary;
 
   const handleFilterRemove = (item) => {
     // If something has change, reload filter
@@ -62,7 +62,7 @@ export default function QueryApplied({ variant }) {
           </Typography>
           <Box
             sx={{
-              color: config.ui.colors.primary,
+              color: CONFIG.ui.colors.primary,
             }}
           >
             <Button

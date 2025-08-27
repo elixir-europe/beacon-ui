@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import config from "../../config/config.json";
+//import config from "../../config/config.json";
 import SearchIcon from "@mui/icons-material/Search";
 import { useSelectedEntry } from "../context/SelectedEntryContext";
 import { COMMON_MESSAGES } from "../common/CommonMessage";
@@ -16,6 +16,7 @@ export default function SearchButton({ setSelectedTool }) {
     entryTypesConfig,
     setMessage,
     setHasSearchBeenTriggered,
+    loadingData,
     isLoaded,
     setIsLoaded
   } = useSelectedEntry();
@@ -39,13 +40,15 @@ export default function SearchButton({ setSelectedTool }) {
     setLoadingData(true);
     setResultData([]);
     setHasSearchBeenTriggered(true);
-    setIsLoaded(false);
 
     try {
-      const url = `${config.apiUrl}/${selectedPathSegment}`;
+      const url = `${CONFIG.apiUrl}/${selectedPathSegment}`;
       let response;
 
       const query = queryBuilder(selectedFilter);
+
+      console.log(query);
+      
       const requestOptions = {
         method: "POST",
         headers: {
@@ -60,7 +63,7 @@ export default function SearchButton({ setSelectedTool }) {
         console.error("Fetch failed:", response.status);
         setResultData([]);
         setHasSearchResult(true);
-        setIsLoaded(true);
+        setLoadingData(false);
         return;
       }
 
@@ -158,18 +161,18 @@ export default function SearchButton({ setSelectedTool }) {
         borderRadius: "999px",
         textTransform: "none",
         fontSize: "14px",
-        backgroundColor: config.ui.colors.primary,
-        border: `1px solid ${config.ui.colors.primary}`,
+        backgroundColor: CONFIG.ui.colors.primary,
+        border: `1px solid ${CONFIG.ui.colors.primary}`,
         boxShadow: "none",
         "&:hover": {
           backgroundColor: "white",
-          border: `1px solid ${config.ui.colors.primary}`,
-          color: config.ui.colors.primary,
+          border: `1px solid ${CONFIG.ui.colors.primary}`,
+          color: CONFIG.ui.colors.primary,
         },
       }}
       startIcon={<SearchIcon />}
       onClick={handleSearch}
-      disabled={!isLoaded}
+      disabled={!isLoaded || loadingData }
     >
       Search
     </Button>

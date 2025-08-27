@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Box, Typography, TextField } from "@mui/material";
-import config from "../../config/config.json";
+//import config from "../../config/config.json";
 import SearchIcon from "@mui/icons-material/Search";
 import { alpha } from "@mui/material/styles";
 import FilteringTermsTable from "./FilteringTermsTable";
@@ -20,8 +20,8 @@ export default function AllFilteringTermsComponent() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const primaryDarkColor = config.ui.colors.darkPrimary;
-  const primaryColor = config.ui.colors.primary;
+  const primaryDarkColor = CONFIG.ui.colors.darkPrimary;
+  const primaryColor = CONFIG.ui.colors.primary;
 
   const unselectedBorderColor = alpha(primaryColor, 0.15);
 
@@ -37,7 +37,7 @@ export default function AllFilteringTermsComponent() {
   useEffect(() => {
     const fetchFilteringTerms = async () => {
       try {
-        const res = await fetch(`${config.apiUrl}/filtering_terms`);
+        const res = await fetch(`${CONFIG.apiUrl}/filtering_terms`);
         //const res = await fetch("/api.json");
         const data = await res.json();
         setFilteringTerms(data);

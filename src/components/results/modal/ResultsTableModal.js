@@ -10,7 +10,7 @@ import Fade from '@mui/material/Fade';
 import DownloadIcon from '@mui/icons-material/Download';
 import LoadingButton from "@mui/lab/LoadingButton";
 import ResultsTableModalBody from './ResultsTableModalBody';
-import config from '../../../config/config.json';
+//import config from '../../../config/config.json';
 import CloseIcon from "@mui/icons-material/Close";
 import { InputAdornment, IconButton } from "@mui/material";
 import { useSelectedEntry } from "../../context/SelectedEntryContext";
@@ -85,7 +85,7 @@ const ResultsTableModal = ({ open, subRow, onClose }) => {
   async function buildDownloadRows(sortedHeaders, cleanAndParseInfo) {
     try {
       setLoadingDownload(true);
-      const url = `${config.apiUrl}/${selectedPathSegment}`;
+      const url = `${CONFIG.apiUrl}/${selectedPathSegment}`;
 
       let query = queryBuilder(page);
 
@@ -247,7 +247,7 @@ const headersSet = new Set();
     const fetchTableItems = async () => {
       try {
         setLoading(true);
-        const url = `${config.apiUrl}/${selectedPathSegment}`;
+        const url = `${CONFIG.apiUrl}/${selectedPathSegment}`;
         setUrl(url);
         let query = queryBuilder(page);
 
@@ -303,7 +303,7 @@ const headersSet = new Set();
               <IconButton
                 onClick={() => handleClose()}
                 size="small"
-                sx={{ color: config.ui.colors.darkPrimary }}
+                sx={{ color: CONFIG.ui.colors.darkPrimary }}
               >
                 <CloseIcon fontSize="small" />
               </IconButton>
@@ -315,7 +315,7 @@ const headersSet = new Set();
                 fontWeight: "bold",
                 fontSize: "17px",
                 paddingBottom: "10px",
-                color: `${ config.ui.colors.darkPrimary }`
+                color: `${ CONFIG.ui.colors.darkPrimary }`
               }}>
               Results detailed table
             </Typography>
@@ -336,7 +336,7 @@ const headersSet = new Set();
                         color: "black",
                         fontSize: "15px",
                         paddingRight: "10px",
-                        color: `${ config.ui.colors.darkPrimary }`
+                        color: `${ CONFIG.ui.colors.darkPrimary }`
                       }}>
                         Beacon:
                       </Typography>
@@ -344,7 +344,7 @@ const headersSet = new Set();
                         color: "black",
                         fontWeight: 700,
                         fontSize: "15px",
-                        color: `${ config.ui.colors.darkPrimary }`
+                        color: `${ CONFIG.ui.colors.darkPrimary }`
                       }}>
                         { subRow.beaconId }
                       </Typography>
@@ -358,14 +358,14 @@ const headersSet = new Set();
                         paddingBottom: "10px"
                       }}>
                       <Typography sx={{
-                        color: `${ config.ui.colors.darkPrimary }`,
+                        color: `${ CONFIG.ui.colors.darkPrimary }`,
                         fontSize: "15px",
                         paddingRight: "10px",
                       }}>
                         Dataset:
                       </Typography>
                       <Typography sx={{
-                        color: `${ config.ui.colors.darkPrimary }`,
+                        color: `${ CONFIG.ui.colors.darkPrimary }`,
                         fontWeight: 700,
                         fontSize: "15px",
                       }}>
@@ -376,7 +376,7 @@ const headersSet = new Set();
                 </Box>
                 <Box sx={{ paddingBottom: "15px" }}>
                   <Typography sx={{
-                    color: `${ config.ui.colors.darkPrimary }`,
+                    color: `${ CONFIG.ui.colors.darkPrimary }`,
                     fontWeight: 700,
                     fontSize: "13px",
                     fontStyle: "italic"
@@ -400,9 +400,9 @@ const headersSet = new Set();
                         aria-label="Download dataset"
                         loading={loadingDownload}
                         sx={{
-                          backgroundColor: config.ui.colors.darkPrimary,
+                          backgroundColor: CONFIG.ui.colors.darkPrimary,
                           height: "30px",
-                          "&:hover": { backgroundColor: config.ui.colors.darkPrimary },
+                          "&:hover": { backgroundColor: CONFIG.ui.colors.darkPrimary },
                           "&:focus-visible": { outline: "2px solid #000", outlineOffset: 2 },
                         }}
                       >
@@ -423,7 +423,7 @@ const headersSet = new Set();
                     totalPages={totalPages}
                     handleChangePage={handleChangePage}
                     handleChangeRowsPerPage={handleChangeRowsPerPage}
-                    primary={ config.ui.colors.primary }
+                    primary={ CONFIG.ui.colors.primary }
                   />
                 </>
               )}

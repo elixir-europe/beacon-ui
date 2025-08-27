@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Paper, List, ListItem, Box } from "@mui/material";
-import config from "../../config/config.json";
+//import config from "../../config/config.json";
 import { useSelectedEntry } from "../context/SelectedEntryContext";
 import CommonMessage, { COMMON_MESSAGES } from "../common/CommonMessage";
 import useFilteringTerms from "../../hooks/useFilteringTerms";
@@ -38,7 +38,7 @@ const FilteringTermsDropdownResults = ({ searchInput, onCloseDropdown }) => {
     };
   }, []);
 
-  const primaryDarkColor = config.ui.colors.darkPrimary;
+  const primaryDarkColor = CONFIG.ui.colors.darkPrimary;
 
   useEffect(() => {
     if (searchInput.length > 0 && filteringTerms.length > 0) {

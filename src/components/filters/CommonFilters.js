@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { useState } from "react";
-import config from "../../config/config.json";
+//import config from "../../config/config.json";
 import { useSelectedEntry } from "./../context/SelectedEntryContext";
 import CommonMessage, {
   COMMON_MESSAGES,
@@ -16,8 +16,8 @@ import { getDisplayLabelAndScope } from "../common/filteringTermsHelpers";
 import FilterLabelRemovable from "../styling/FilterLabelRemovable";
 
 export default function CommonFilters() {
-  const filterCategories = config.ui.commonFilters.filterCategories;
-  const filterLabels = config.ui.commonFilters.filterLabels;
+  const filterCategories = CONFIG.ui.commonFilters.filterCategories;
+  const filterLabels = CONFIG.ui.commonFilters.filterLabels;
   const {
     setSelectedFilter,
     setExtraFilter,

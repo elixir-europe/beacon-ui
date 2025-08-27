@@ -12,7 +12,7 @@ import {
   TablePagination
 } from "@mui/material";
 import { styled } from '@mui/material/styles';
-import config from '../../../config/config.json';
+//import config from '../../../config/config.json';
 import ResultsTableModalRow from './ResultsTableModalRow';
 
 const ResultsTableModalBody = ({ dataTable, totalItems, page, rowsPerPage, handleChangePage, handleChangeRowsPerPage }) => {
@@ -20,13 +20,13 @@ const ResultsTableModalBody = ({ dataTable, totalItems, page, rowsPerPage, handl
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-      backgroundColor: config.ui.colors.darkPrimary,
+      backgroundColor: CONFIG.ui.colors.darkPrimary,
       color: theme.palette.common.white,
     },
     [`&.${tableCellClasses.body}`]: {
       fontSize: 11,
     },
-    border: `1px solid ${config.ui.colors.darkPrimary}`,
+    border: `1px solid ${CONFIG.ui.colors.darkPrimary}`,
   }));
 
   const StyledTableRow = styled(TableRow)(({ theme }) => ({
@@ -34,7 +34,7 @@ const ResultsTableModalBody = ({ dataTable, totalItems, page, rowsPerPage, handl
       backgroundColor: theme.palette.action.hover,
     },
     '&:last-child td': {
-      border: `1px solid ${config.ui.colors.darkPrimary}`,
+      border: `1px solid ${CONFIG.ui.colors.darkPrimary}`,
     },
     '&:last-child th': {
       border: `1px solid white`,
@@ -42,7 +42,7 @@ const ResultsTableModalBody = ({ dataTable, totalItems, page, rowsPerPage, handl
   }));
 
   const headerCellStyle = {
-    backgroundColor: config.ui.colors.darkPrimary,
+    backgroundColor: CONFIG.ui.colors.darkPrimary,
     fontWeight: 700,
     color: "white"
   };

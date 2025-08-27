@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { alpha } from "@mui/material/styles";
 import { Box, Typography, Tabs, Tab, Link } from "@mui/material";
-import config from "../../config/config.json";
+//import config from "../../config/config.json";
 import { useSelectedEntry } from "../context/SelectedEntryContext";
 import Loader from "../common/Loader";
 
@@ -40,7 +40,7 @@ export default function SingleBeaconBanner() {
     async function fetchDatasets() {
       setLoading(true);
       try {
-        const res = await fetch(`${config.apiUrl}/datasets`);
+        const res = await fetch(`${CONFIG.apiUrl}/datasets`);
         const json = await res.json();
         const datasets = json.response?.collections || [];
         setLocalDatasets({ collections: datasets });
@@ -59,7 +59,7 @@ export default function SingleBeaconBanner() {
 
   if (loading) return <Loader />;
 
-  const baseBgColor = alpha(config.ui.colors.primary, 0.05);
+  const baseBgColor = alpha(CONFIG.ui.colors.primary, 0.05);
 
   return (
     <Box
@@ -450,12 +450,12 @@ export default function SingleBeaconBanner() {
                             borderRadius: "8px",
                             border:
                               selectedDataset?.id === ds.id
-                                ? `1px solid ${config.ui.colors.primary}`
+                                ? `1px solid ${CONFIG.ui.colors.primary}`
                                 : "1px solid transparent",
                             cursor: "pointer",
                             transition: "all 0.2s ease",
                             "&:hover": {
-                              border: `1px solid ${config.ui.colors.primary}`,
+                              border: `1px solid ${CONFIG.ui.colors.primary}`,
                             },
                           }}
                         >

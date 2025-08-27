@@ -1,10 +1,10 @@
-import config from "../../config/config.json";
+//import config from "../../config/config.json";
 import BeaconNetworkBanner from "./BeaconNetworkBanner";
 import SingleBeaconBanner from "./SingleBeaconBanner";
 import { Box } from "@mui/material";
 
 export default function BeaconTypeBanner() {
-  const beaconType = config.beaconType;
+  const beaconType = CONFIG.beaconType;
 
   const sharedStyles = {
     boxShadow: "0px 8px 11px 0px #9BA0AB24",

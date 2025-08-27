@@ -16,4 +16,6 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 COPY --from=build /app/build /usr/share/nginx/html
 
+RUN mkdir -p /usr/share/nginx/html/config
+
 EXPOSE 80

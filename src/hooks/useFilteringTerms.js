@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import config from "../config/config.json";
+//import config from "../config/config.json";
 
 export default function useFilteringTerms() {
   const [filteringTerms, setFilteringTerms] = useState([]);
@@ -10,8 +10,7 @@ export default function useFilteringTerms() {
     const fetchTerms = async () => {
       setLoading(true);
       try {
-        const response = await fetch(`${config.apiUrlNetwork}/filtering_terms`);
-        //const response = await fetch("/api.json");
+        const response = await fetch(`${CONFIG.apiUrlNetwork}/filtering_terms`);
         const data = await response.json();
         setFilteringTerms(data.response?.filteringTerms || []);
         setError(null);

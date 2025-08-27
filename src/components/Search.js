@@ -10,7 +10,6 @@ import {
   MenuItem,
 } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import config from "../config/config.json";
 import { darken, lighten } from "@mui/system";
 import SearchIcon from "@mui/icons-material/Search";
 import { useSelectedEntry } from "./context/SelectedEntryContext";
@@ -31,13 +30,14 @@ export default function Search({
   const { entryTypesConfig, setEntryTypesConfig } = useSelectedEntry();
   const { selectedFilter, setSelectedFilter } = useSelectedEntry();
   const { extraFilter, hasSearchResults } = useSelectedEntry();
+  const { selectedPathSegment, setSelectedPathSegment } = useSelectedEntry();
+  const { isLoaded, setIsLoaded } = useSelectedEntry();
+  
   const [loading, setLoading] = useState(true);
   const [activeInput, setActiveInput] = useState(null);
   const [searchInput, setSearchInput] = useState("");
-  const { selectedPathSegment, setSelectedPathSegment } = useSelectedEntry();
-  const [assembly, setAssembly] = useState(config.assemblyId[0]);
+  const [assembly, setAssembly] = useState(CONFIG.assemblyId[0]);
   const [open, setOpen] = useState(false);
-  const { isLoaded, setIsLoaded } = useSelectedEntry();
   const searchRef = useRef(null);
 
   useEffect(() => {
@@ -51,7 +51,7 @@ export default function Search({
     }
   }, [onHeightChange]);
 
-  const configuredOrder = config.ui.entryTypesOrder;
+  const configuredOrder = CONFIG.ui.entryTypesOrder;
   const sortEntries = (entries) =>
     configuredOrder?.length > 0 && entries.length > 1
       ? [...entries].sort(
@@ -85,7 +85,7 @@ export default function Search({
   useEffect(() => {
     const fetchEntryTypes = async () => {
       try {
-        const res = await fetch(`${config.apiUrl}/map`);
+        const res = await fetch(`${CONFIG.apiUrl}/map`);
         const data = await res.json();
         const endpointSets = data.response.endpointSets || {};
 
@@ -117,7 +117,7 @@ export default function Search({
 
   const fetchConfiguration = async () => {
     try {
-      const res = await fetch(`${config.apiUrl}/configuration`);
+      const res = await fetch(`${CONFIG.apiUrl}/configuration`);
       const data = await res.json();
       setEntryTypesConfig(data.response.entryTypes || {});
     } catch (err) {
@@ -136,7 +136,7 @@ export default function Search({
 
   const handleBeaconsInfo = async () => {
     try {
-      let url = `${config.apiUrl}/info`;
+      let url = `${CONFIG.apiUrl}/info`;
       let response = await fetch(url);
       const data = await response.json();
       let normalizedData = [];
@@ -192,8 +192,8 @@ export default function Search({
       : segment.charAt(0).toUpperCase() + segment.slice(1);
   };
 
-  const primaryColor = config.ui.colors.primary;
-  const primaryDarkColor = config.ui.colors.darkPrimary;
+  const primaryColor = CONFIG.ui.colors.primary;
+  const primaryDarkColor = CONFIG.ui.colors.darkPrimary;
   const selectedBgColor = lighten(primaryDarkColor, 0.9);
 
   const entryTypeDescriptions = {
@@ -260,7 +260,7 @@ export default function Search({
                 },
               }}
             >
-              {config.assemblyId.map((id) => (
+              {CONFIG.assemblyId.map((id) => (
                 <MenuItem key={id} value={id} sx={{ fontSize: "12px" }}>
                   {id}
                 </MenuItem>
