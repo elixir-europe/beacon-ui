@@ -11,7 +11,7 @@ services:
       - CHOKIDAR_USEPOLLING=true
       - WATCHPACK_POLLING=true
       - REACT_APP_KEYCLOAK_URL=http://localhost:8081/
-      - REACT_APP_KEYCLOAK_REALM=12694b43-09f0-424c-bc15-54291635337e5e0e74e6-68b8-4c25-ab09-2f6b65cc911a
+      - REACT_APP_KEYCLOAK_REALM=realm
       - REACT_APP_KEYCLOAK_CLIENT_ID=d3132b30-3a07-4a66-a065-512674fac86e
     volumes:
       - .:/app
