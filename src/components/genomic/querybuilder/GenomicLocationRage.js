@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Box, Typography } from "@mui/material";
-import config from "../../../config/config.json";
+//import config from "../../../config/config.json";
 import GenomicInputBox from "../GenomicInputBox";
 import { mainBoxTypography } from "../styling/genomicInputBoxStyling";
 
@@ -48,8 +48,8 @@ export default function GenomicLocationRage() {
             <GenomicInputBox
               name="assemblyId"
               label="Assembly ID"
-              placeholder={config.assemblyId[0]}
-              options={config.assemblyId}
+              placeholder={CONFIG.assemblyId[0]}
+              options={CONFIG.assemblyId}
               required={true}
             />
             <GenomicInputBox
@@ -125,8 +125,8 @@ export default function GenomicLocationRage() {
                 name="variationType"
                 label="Variation Type"
                 description="Select the Variation Type"
-                placeholder={config.variationType[0]}
-                options={config.variationType}
+                placeholder={CONFIG.variationType[0]}
+                options={CONFIG.variationType}
                 isSelectable
                 isSelected={selectedInput === "variationType"}
                 onSelect={() => setSelectedInput("variationType")}

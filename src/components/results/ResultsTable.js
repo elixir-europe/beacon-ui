@@ -23,7 +23,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import ReportProblemIcon from '@mui/icons-material/ReportProblem';
 import CalendarViewMonthIcon from '@mui/icons-material/CalendarViewMonth';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
-import config from '../../config/config.json';
+//import config from '../../config/config.json';
 
 import { useSelectedEntry } from "../context/SelectedEntryContext";
 import { lighten } from "@mui/system";
@@ -38,12 +38,12 @@ export default function ResultsTable() {
   const [modalOpen, setModalOpen] = useState(false);
 
   const headerCellStyle = {
-    backgroundColor: config.ui.colors.primary,
+    backgroundColor: CONFIG.ui.colors.primary,
     fontWeight: 700,
     color: "white",
     transition: "background-color 0.3s ease",
     "&:hover": {
-      backgroundColor: lighten(config.ui.colors.primary, 0.1),
+      backgroundColor: lighten(CONFIG.ui.colors.primary, 0.1),
     },
   };
 
@@ -56,11 +56,11 @@ export default function ResultsTable() {
   };
 
   let tableColumns =
-    config.beaconType === "singleBeacon"
+    CONFIG.beaconType === "singleBeacon"
       ? BEACON_SINGLE_COLUMNS
       : BEACON_NETWORK_COLUMNS;
 
-  const selectedBgColor = lighten(config.ui.colors.primary, 0.9);
+  const selectedBgColor = lighten(CONFIG.ui.colors.primary, 0.9);
 
   const handleRowClicked = (item) => {
     setSelectedSubRow(item);
@@ -81,7 +81,7 @@ export default function ResultsTable() {
 
   const findBeaconIcon = (beaconId) => {
     let beacon = {};
-    if (config.beaconType === "singleBeacon") {
+    if (CONFIG.beaconType === "singleBeacon") {
       beacon = beaconsInfo[0];
     } else {
       beacon = beaconsInfo.find((item) => {
@@ -98,7 +98,7 @@ export default function ResultsTable() {
 
   const findBeaconEmail = (beaconId) => {
     let beacon = {};
-    if (config.beaconType === "singleBeacon") {
+    if (CONFIG.beaconType === "singleBeacon") {
       beacon = beaconsInfo[0];
     } else {
       beacon = beaconsInfo.find((item) => {
@@ -181,7 +181,7 @@ export default function ResultsTable() {
                           { item.description &&
                             <Tooltip title={ item.description	 ? item.description	: item.name }>
                               <IconButton>
-                                <InfoIcon sx={{ color: config.ui.colors.primary }} />
+                                <InfoIcon sx={{ color: CONFIG.ui.colors.primary }} />
                               </IconButton>
                             </Tooltip>
                           }
@@ -206,7 +206,7 @@ export default function ResultsTable() {
                       <TableCell sx={{ fontWeight: "bold"  }} style={{ width: BEACON_NETWORK_COLUMNS[3].width }}>
                         {item.totalResultsCount>0 ?  new Intl.NumberFormat(navigator.language, { useGrouping: true }).format(Number(item.totalResultsCount)) : "-"}
                       </TableCell>
-                      { config.beaconType === 'singleBeacon' &&
+                      { CONFIG.beaconType === 'singleBeacon' &&
                       <TableCell 
                           style={{ width: BEACON_NETWORK_COLUMNS[3].width }}
                         >
@@ -230,7 +230,7 @@ export default function ResultsTable() {
                                 backgroundColor: "transparent",
                                 padding: 0,
                                 "&:hover": {
-                                  color: config.ui.colors.primary,
+                                  color: CONFIG.ui.colors.primary,
                                 },
                               }}
                             >
@@ -272,7 +272,7 @@ export default function ResultsTable() {
                                   padding: 0,
                                   transition: 'all 0.3s ease',
                                   "&:hover": {
-                                    color: config.ui.colors.primary,
+                                    color: CONFIG.ui.colors.primary,
                                     transform: 'scale(1.1)'
                                   },
                                 }}

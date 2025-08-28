@@ -12,7 +12,6 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import PropTypes from "prop-types";
-import config from "../config/config.json";
 import { Link } from "react-router-dom";
 
 export default function Navbar({ title, main, navItems }) {
@@ -36,7 +35,7 @@ export default function Navbar({ title, main, navItems }) {
         position="fixed"
         elevation={0}
         sx={{
-          backgroundColor: config.ui.colors.primary,
+          backgroundColor: CONFIG.ui.colors.primary,
           color: "white",
           px: 1,
           minHeight: "68px",
@@ -62,7 +61,6 @@ export default function Navbar({ title, main, navItems }) {
               },
             }}
           >
-            {/* Logo in Navbar only if width >= 386px */}
             <Box
               component="span"
               sx={{
@@ -184,7 +182,7 @@ export default function Navbar({ title, main, navItems }) {
               fontFamily: '"Open Sans", sans-serif',
               fontWeight: 700,
               fontSize: "16px",
-              color: config.ui.colors.primary,
+              color: CONFIG.ui.colors.primary,
             }}
           >
             {title}
@@ -208,7 +206,7 @@ export default function Navbar({ title, main, navItems }) {
                       fontFamily: '"Open Sans", sans-serif',
                       fontWeight: 400,
                       fontSize: "16px",
-                      color: config.ui.colors.primary,
+                      color: CONFIG.ui.colors.primary,
                     }}
                   >
                     {item.label}
@@ -226,7 +224,7 @@ export default function Navbar({ title, main, navItems }) {
                       fontFamily: '"Open Sans", sans-serif',
                       fontWeight: 400,
                       fontSize: "16px",
-                      color: config.ui.colors.primary,
+                      color: CONFIG.ui.colors.primary,
                     }}
                   >
                     {item.label}

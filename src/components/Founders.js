@@ -1,8 +1,8 @@
 import { Box } from "@mui/material";
-import config from "../config/config.json";
+//import config from "../config/config.json";
 
 export default function Founders() {
-  const founderLogos = config?.ui?.logos?.founders || [];
+  const founderLogos = CONFIG?.ui?.logos?.founders || [];
 
   return (
     <Box

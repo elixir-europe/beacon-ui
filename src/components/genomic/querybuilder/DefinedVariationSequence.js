@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import config from "../../../config/config.json";
+//import config from "../../../config/config.json";
 import GenomicInputBox from "../GenomicInputBox";
 import { mainBoxTypography } from "../styling/genomicInputBoxStyling";
 
@@ -51,9 +51,9 @@ export default function DefinedVariationSequence() {
           <GenomicInputBox
             name="assemblyId"
             label="Assembly ID"
-            placeholder={config.assemblyId[0]}
+            placeholder={CONFIG.assemblyId[0]}
             description={"Select your reference genome (Optional)"}
-            options={config.assemblyId}
+            options={CONFIG.assemblyId}
             required={false}
           />
           <GenomicInputBox

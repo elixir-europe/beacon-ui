@@ -1,8 +1,8 @@
 import { Button } from "@mui/material";
-import config from "../../../config/config.json";
+//import config from "../../../config/config.json";
 
 export default function StyledGenomicLabels({ label, selected, onClick }) {
-  const primaryDarkColor = config.ui.colors.darkPrimary;
+  const primaryDarkColor = CONFIG.ui.colors.darkPrimary;
   return (
     <Button
       onClick={onClick}

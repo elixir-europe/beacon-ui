@@ -5,7 +5,7 @@ import FiltersContainer from "../filters/FiltersContainer";
 import Search from "../Search";
 import AllFilteringTermsComponent from "../filters/AllFilteringTermsComponent";
 import ResultsContainer from "../results/ResultsContainer";
-import config from "../../config/config.json";
+//import config from "../../config/config.json";
 import BeaconTypeBanner from "../homepageBanner/BeaconTypeBanner";
 import { useSelectedEntry } from "../context/SelectedEntryContext";
 
@@ -15,12 +15,12 @@ export default function HomePage({ selectedTool, setSelectedTool }) {
   const { hasSearchBeenTriggered } = useSelectedEntry();
 
   const hasGenomicAnnotationsConfig =
-    !!config.ui?.genomicAnnotations?.visibleGenomicCategories;
+    !!CONFIG.ui?.genomicAnnotations?.visibleGenomicCategories;
 
   const hasCommonFiltersConfig =
-    !!config.ui?.commonFilters?.filterCategories?.length &&
-    !!config.ui?.commonFilters?.filterLabels &&
-    Object.keys(config.ui.commonFilters.filterLabels).length > 0;
+    !!CONFIG.ui?.commonFilters?.filterCategories?.length &&
+    !!CONFIG.ui?.commonFilters?.filterLabels &&
+    Object.keys(CONFIG.ui.commonFilters.filterLabels).length > 0;
 
   const shouldShowFilters =
     hasGenomicAnnotationsConfig || hasCommonFiltersConfig;

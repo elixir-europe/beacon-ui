@@ -1,10 +1,15 @@
 import { Button } from "@mui/material";
 import PropTypes from "prop-types";
-import config from "../../config/config.json";
 import { lighten } from "@mui/system";
 import { alpha } from "@mui/material/styles";
 
 export default function StyledButtons({ icon, label, selected, onClick }) {
+  const primaryColor = CONFIG.ui.colors.primary;
+  const unselectedBorderColor = alpha(primaryColor, 0.15);
+  const selectedBg = alpha(primaryColor, 0.15);
+  const primaryDarkColor = CONFIG.ui.colors.darkPrimary;
+  const selectedBgColor = lighten(primaryDarkColor, 0.9);
+
   return (
     <Button
       variant="outlined"
@@ -39,11 +44,7 @@ export default function StyledButtons({ icon, label, selected, onClick }) {
   );
 }
 
-const primaryColor = config.ui.colors.primary;
-const unselectedBorderColor = alpha(primaryColor, 0.15);
-const selectedBg = alpha(primaryColor, 0.15);
-const primaryDarkColor = config.ui.colors.darkPrimary;
-const selectedBgColor = lighten(primaryDarkColor, 0.9);
+
 
 StyledButtons.propTypes = {
   icon: PropTypes.element.isRequired,

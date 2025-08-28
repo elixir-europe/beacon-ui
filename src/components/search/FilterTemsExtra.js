@@ -11,7 +11,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { useState } from "react";
 import { useSelectedEntry } from "../context/SelectedEntryContext";
 import CommonMessage, { COMMON_MESSAGES } from "../common/CommonMessage";
-import config from "../../config/config.json";
+//import config from "../../config/config.json";
 
 export default function FilterTermsExtra() {
   const { extraFilter, setExtraFilter, setSelectedFilter } = useSelectedEntry();
@@ -72,7 +72,7 @@ export default function FilterTermsExtra() {
         <FormControl
           sx={{
             minWidth: 60,
-            border: `1px solid ${config.ui.colors.primary}`,
+            border: `1px solid ${CONFIG.ui.colors.primary}`,
             borderRadius: "10px",
             transition: "flex 0.3s ease",
             "& .MuiOutlinedInput-notchedOutline": {
@@ -110,7 +110,7 @@ export default function FilterTermsExtra() {
         sx={{
           display: "flex",
           alignItems: "center",
-          border: `1.5px solid ${config.ui.colors.primary}`,
+          border: `1.5px solid ${CONFIG.ui.colors.primary}`,
           borderRadius: "10px",
           backgroundColor: "#fff",
           transition: "flex 0.3s ease",
@@ -147,8 +147,8 @@ export default function FilterTermsExtra() {
             fontWeight: 400,
             fontFamily: '"Open Sans", sans-serif',
             backgroundColor: "white",
-            border: `1px solid ${config.ui.colors.primary}`,
-            color: config.ui.colors.primary,
+            border: `1px solid ${CONFIG.ui.colors.primary}`,
+            color: CONFIG.ui.colors.primary,
             borderRadius: "50%",
             width: "30px",
             height: "30px",
@@ -156,7 +156,7 @@ export default function FilterTermsExtra() {
             minHeight: "30px",
             padding: 0,
             "&:hover": {
-              backgroundColor: config.ui.colors.primary,
+              backgroundColor: CONFIG.ui.colors.primary,
               color: "white",
             },
           }}

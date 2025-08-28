@@ -10,7 +10,7 @@ import CommonMessage, {
 } from "../../components/common/CommonMessage";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { useState } from "react";
-import config from "../../config/config.json";
+//import config from "../../config/config.json";
 import { useSelectedEntry } from "./../context/SelectedEntryContext";
 import FilterLabelRemovable from "../styling/FilterLabelRemovable";
 export default function GenomicAnnotations() {
@@ -31,7 +31,7 @@ export default function GenomicAnnotations() {
   } = useSelectedEntry();
 
   const genomicVisibleCategories =
-    config.ui.genomicAnnotations?.visibleGenomicCategories || [];
+    CONFIG.ui.genomicAnnotations?.visibleGenomicCategories || [];
 
   const filterCategories = allGenomicCategories.filter((cat) =>
     genomicVisibleCategories.includes(cat)

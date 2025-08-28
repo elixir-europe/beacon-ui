@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { lighten } from "@mui/material/styles";
-import config from "../../config/config.json";
+//import config from "../../config/config.json";
 import { useSelectedEntry } from "../context/SelectedEntryContext";
 import Loader from "../common/Loader";
 import CommonMessage, { COMMON_MESSAGES } from "../common/CommonMessage";
@@ -62,7 +62,7 @@ export default function FilteringTermsTable({
     setSelectedScopes(defaults);
   }, [filteringTerms, defaultScope]);
 
-  const bgPrimary = lighten(config.ui.colors.primary, 0.8);
+  const bgPrimary = lighten(CONFIG.ui.colors.primary, 0.8);
 
   const allFilteringTerms = filteringTerms?.response?.filteringTerms ?? [];
 

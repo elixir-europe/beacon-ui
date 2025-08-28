@@ -1,0 +1,8 @@
+services:
+  web:
+    build: .
+    image: beacon-ui:latest
+    ports:
+      - "8080:80"
+    volumes:
+      - ./envs/default/config.json:/usr/share/nginx/html/envs/default/config.json:ro

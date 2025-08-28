@@ -1,6 +1,6 @@
 import { Box, TextField, Select, MenuItem, Typography } from "@mui/material";
 import { useField } from "formik";
-import config from "../../config/config.json";
+//import config from "../../config/config.json";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import {
   selectStyle,
@@ -30,7 +30,7 @@ export default function GenomicInputBox({
 }) {
   const [field, meta, helpers] = useField(name);
   const error = meta.touched && meta.error;
-  const primaryDarkColor = config.ui.colors.darkPrimary;
+  const primaryDarkColor = CONFIG.ui.colors.darkPrimary;
   const isDisabled = isSelectable && !isSelected;
 
   const renderFieldByType = () => {
@@ -63,7 +63,7 @@ export default function GenomicInputBox({
             "& .MuiSelect-select": {
               fontFamily: '"Open Sans", sans-serif',
               fontSize: "14px",
-              color: field.value ? config.ui.colors.darkPrimary : "#999",
+              color: field.value ? CONFIG.ui.colors.darkPrimary : "#999",
               padding: "12px 16px",
             },
           }}

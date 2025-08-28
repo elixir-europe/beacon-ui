@@ -1,4 +1,4 @@
-const config = require("./src/config/config.json");
+const config = require("./envs/default/config.json");
 
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],

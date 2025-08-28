@@ -1,7 +1,7 @@
 import { Typography, Button, Box, Divider } from "@mui/material";
 import { alpha } from "@mui/material/styles";
 import ClearIcon from "@mui/icons-material/Clear";
-import config from "../../config/config.json";
+//import config from "../../config/config.json";
 import { capitalize } from "../common/textFormatting";
 import { useEffect, useRef } from "react";
 import { getSelectableScopeStyles } from "../styling/selectableScopeStyles";
@@ -29,16 +29,16 @@ export default function FilterLabelRemovable({
 
   const baseBgColor =
     bgColor === "common"
-      ? alpha(config.ui.colors.primary, 0.05)
-      : alpha(config.ui.colors.secondary, 0.4);
+      ? alpha(CONFIG.ui.colors.primary, 0.05)
+      : alpha(CONFIG.ui.colors.secondary, 0.4);
 
   const hoverColor =
     bgColor === "common"
-      ? alpha(config.ui.colors.primary, 0.15)
-      : alpha(config.ui.colors.secondary, 0.6);
+      ? alpha(CONFIG.ui.colors.primary, 0.15)
+      : alpha(CONFIG.ui.colors.secondary, 0.6);
 
   const activeBgColor = stateSelected
-    ? alpha(config.ui.colors.primary, 0.25)
+    ? alpha(CONFIG.ui.colors.primary, 0.25)
     : baseBgColor;
 
   const finalBgColor = isSimple

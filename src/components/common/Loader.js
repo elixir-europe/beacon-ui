@@ -1,8 +1,8 @@
 import { Box, Typography, CircularProgress, Fade } from "@mui/material";
-import config from "../../config/config.json";
+//import config from "../../config/config.json";
 
 export default function Loader({ message, variant = "default" }) {
-  const loaderColor = config.ui.colors.primary;
+  const loaderColor = CONFIG.ui.colors.primary;
 
   const isInline = variant === "inline";
 

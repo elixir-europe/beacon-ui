@@ -1,6 +1,6 @@
 import { Box, Typography, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
-import config from "../../config/config.json";
+//import config from "../../config/config.json";
 import Loader from "../common/Loader";
 
 // This is a part of the initial homepage, for network beacons only
@@ -13,7 +13,7 @@ export default function BeaconNetworkBanner() {
     const fetchLogos = async () => {
       setLoading(true);
       try {
-        const res = await fetch(`${config.apiUrl}/`);
+        const res = await fetch(`${CONFIG.apiUrl}/`);
         const data = await res.json();
 
         const entries = data.responses || [];

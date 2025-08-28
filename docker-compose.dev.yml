@@ -11,10 +11,12 @@ services:
       - CHOKIDAR_USEPOLLING=true
       - WATCHPACK_POLLING=true
       - REACT_APP_KEYCLOAK_URL=http://localhost:8081/
-      - REACT_APP_KEYCLOAK_REALM=unicas
-      - REACT_APP_KEYCLOAK_CLIENT_ID=ui
+      - REACT_APP_KEYCLOAK_REALM=realm
+      - REACT_APP_KEYCLOAK_CLIENT_ID=keycloack
     volumes:
       - .:/app
       - node_modules:/app/node_modules
+      - ./envs/default/config.json:/app/public/envs/default/config.json:ro
+
 volumes:
   node_modules:
