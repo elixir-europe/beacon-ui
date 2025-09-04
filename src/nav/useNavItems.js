@@ -8,7 +8,6 @@ export default function useNavItems(CFG) {
       { label: "Network Members", url: "/network-members" },
       ...(UI.showAboutPage ? [{ label: "About", url: "/about" }] : []),
       ...(UI.showContactPage ? [{ label: "Contact", url: "/contact" }] : []),
-      { label: "Log in", url: "/login" },
     ];
 
     const filteredBase =

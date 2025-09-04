@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { Box } from "@mui/material";
-import Founders from "../Founders";
-import FiltersContainer from "../filters/FiltersContainer";
-import Search from "../Search";
-import AllFilteringTermsComponent from "../filters/AllFilteringTermsComponent";
-import ResultsContainer from "../results/ResultsContainer";
+import Founders from "../components/Founders";
+import FiltersContainer from "../components/filters/FiltersContainer";
+import Search from "../components/Search";
+import AllFilteringTermsComponent from "../components/filters/AllFilteringTermsComponent";
+import ResultsContainer from "../components/results/ResultsContainer";
 //import config from "../../config/config.json";
-import BeaconTypeBanner from "../homepageBanner/BeaconTypeBanner";
-import { useSelectedEntry } from "../context/SelectedEntryContext";
+import BeaconTypeBanner from "../components/homepageBanner/BeaconTypeBanner";
+import { useSelectedEntry } from "../components/context/SelectedEntryContext";
 
 export default function HomePage({ selectedTool, setSelectedTool }) {
   const [searchHeight, setSearchHeight] = useState(null);

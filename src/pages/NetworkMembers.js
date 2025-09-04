@@ -22,7 +22,7 @@ export default function NetworkMembers() {
     const ac = new AbortController();
     (async () => {
       try {
-        const res = await fetch(`${window.CONFIG.apiUrlNetwork}/info`, {
+        const res = await fetch(`${window.CONFIG.apiUrl}/info`, {
           cache: "no-store",
           signal: ac.signal,
         });

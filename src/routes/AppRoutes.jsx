@@ -1,10 +1,9 @@
-import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import HomePage from "../components/pages/HomePage";
-import NetworkMembers from "../components/pages/NetworkMembers";
-import About from "../components/pages/About";
-import Contact from "../components/pages/Contact";
-import Login from "../components/pages/Login";
+import HomePage from "../pages/HomePage";
+import NetworkMembers from "../pages/NetworkMembers";
+import About from "../pages/About";
+import Contact from "../pages/Contact";
+import Login from "../pages/Login";
 
 export default function AppRoutes({ selectedTool, setSelectedTool }) {
   const CFG = window.CONFIG ?? {};

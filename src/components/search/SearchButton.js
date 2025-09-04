@@ -1,10 +1,8 @@
 import { Button } from "@mui/material";
-//import config from "../../config/config.json";
 import SearchIcon from "@mui/icons-material/Search";
 import { useSelectedEntry } from "../context/SelectedEntryContext";
 import { COMMON_MESSAGES } from "../common/CommonMessage";
 import { PATH_SEGMENT_TO_ENTRY_ID } from "../../components/common/textFormatting";
-import LoupeIcon from '@mui/icons-material/Loupe';
 
 export default function SearchButton({ setSelectedTool }) {
   const {
@@ -27,7 +25,6 @@ export default function SearchButton({ setSelectedTool }) {
     const nonFilteredAllowed =
       configForEntry?.nonFilteredQueriesAllowed ?? true;
 
-
     if (!nonFilteredAllowed && selectedFilter.length === 0) {
       setMessage(COMMON_MESSAGES.addFilter);
       setResultData([]);
@@ -45,16 +42,14 @@ export default function SearchButton({ setSelectedTool }) {
       const url = `${CONFIG.apiUrl}/${selectedPathSegment}`;
       let response;
 
-      const query = queryBuilder(selectedFilter);
-
-      console.log(query);
+      const query = queryBuilder(selectedFilter, entryTypeId);
       
       const requestOptions = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ query }),
+        body: JSON.stringify(query),
       };
 
       response = await fetch(url, requestOptions);
@@ -116,21 +111,21 @@ export default function SearchButton({ setSelectedTool }) {
     }
   };
 
-  const queryBuilder = (params) => {
+  const queryBuilder = (params, entryId) => {
     let filter = {
       meta: {
         apiVersion: "2.0",
       },
       query: {
         filters: [],
+        includeResultsetResponses: "HIT",
+        pagination: {
+          skip: 0,
+          limit: 10,
+        },
+        testMode: false,
+        requestedGranularity: "record",
       },
-      includeResultsetResponses: "HIT",
-      pagination: {
-        skip: 0,
-        limit: 10,
-      },
-      testMode: false,
-      requestedGranularity: "record",
     };
 
     let filterData = params.map((item) => {
@@ -143,7 +138,7 @@ export default function SearchButton({ setSelectedTool }) {
       } else {
         return {
           id: item.key ?? item.id,
-          scope: selectedPathSegment,
+          scope: entryId,
         };
       }
     });

@@ -4,6 +4,10 @@
   "apiUrlNetwork": "https://beacon-network-backend-demo.ega-archive.org/beacon-network/v2.0.0",
   "apiUrlSingle": "https://beacon-spain.ega-archive.org/api",
   "assemblyId": ["GRCh38", "GRCh37", "NCBI36"],
+  "oidcUrl": "https://beacons.bsc.es/auth/realms/beacon-network",
+  "oidcClientId": "beacon-network-ui",
+  "loginRequired": false,
+  "appUrl": "https://beacons.bsc.es/",
 
   "variationType": [
     "DEL (Copy Number Loss)",
@@ -40,6 +44,7 @@
 
     "logos": {
       "main": "/assets/logos/main.svg",
+      "mainSecondary": "assets/logos/maingrey.svg",
       "founders": [
         "/assets/logos/founder1.svg",
         "/assets/logos/founder2.svg",

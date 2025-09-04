@@ -72,6 +72,7 @@ export default function Search({
   
     return {
       id: key,
+      entryType: value.entryType,
       pathSegment: normalizedSegment,
       originalPathSegment: originalSegment,
       rootUrl: value.rootUrl,
@@ -95,7 +96,7 @@ export default function Search({
           .filter(filterGenomicVariation)
           .map(mapEntry)
           .filter(isUniquePathSegment);
-  
+
         const sorted = sortEntries(entries);
         setEntryTypes(sorted);
   
