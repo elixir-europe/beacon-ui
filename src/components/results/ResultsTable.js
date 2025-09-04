@@ -23,7 +23,6 @@ import InfoIcon from '@mui/icons-material/Info';
 import ReportProblemIcon from '@mui/icons-material/ReportProblem';
 import CalendarViewMonthIcon from '@mui/icons-material/CalendarViewMonth';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
-//import config from '../../config/config.json';
 
 import { useSelectedEntry } from "../context/SelectedEntryContext";
 import { lighten } from "@mui/system";

@@ -5,7 +5,6 @@ import FiltersContainer from "../components/filters/FiltersContainer";
 import Search from "../components/Search";
 import AllFilteringTermsComponent from "../components/filters/AllFilteringTermsComponent";
 import ResultsContainer from "../components/results/ResultsContainer";
-//import config from "../../config/config.json";
 import BeaconTypeBanner from "../components/homepageBanner/BeaconTypeBanner";
 import { useSelectedEntry } from "../components/context/SelectedEntryContext";
 

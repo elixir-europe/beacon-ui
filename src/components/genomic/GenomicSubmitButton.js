@@ -1,7 +1,6 @@
 import { useFormikContext } from "formik";
 import { Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-//import config from "../../config/config.json";
 
 export default function GenomicSubmitButton() {
   const { isValid, dirty } = useFormikContext();

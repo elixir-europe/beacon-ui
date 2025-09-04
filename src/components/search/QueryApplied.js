@@ -1,7 +1,6 @@
 import { Box, Typography, Button } from "@mui/material";
 import { useSelectedEntry } from "../context/SelectedEntryContext";
 import QueryAppliedItems from "./QueryAppliedItems";
-//import config from "../../config/config.json";
 import deleteIcon from "../../assets/logos/delete.svg";
 
 export default function QueryApplied({ variant }) {

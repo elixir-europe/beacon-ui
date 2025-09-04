@@ -1,4 +1,6 @@
-const config = require("./envs/default/config.json");
+const path = require("path");
+
+const uiConfig = require(path.resolve(__dirname, "public/config/config.json"));
 
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
@@ -14,10 +16,10 @@ module.exports = {
       },
       colors: {
         primary: {
-          DEFAULT: config.ui.colors.primary,
+          DEFAULT: uiConfig.ui.colors.primary,
         },
         secondary: {
-          DEFAULT: config.ui.colors.secondary,
+          DEFAULT: uiConfig.ui.colors.secondary,
         },
       },
     },

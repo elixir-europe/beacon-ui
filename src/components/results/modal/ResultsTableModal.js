@@ -10,7 +10,6 @@ import Fade from '@mui/material/Fade';
 import DownloadIcon from '@mui/icons-material/Download';
 import LoadingButton from "@mui/lab/LoadingButton";
 import ResultsTableModalBody from './ResultsTableModalBody';
-//import config from '../../../config/config.json';
 import CloseIcon from "@mui/icons-material/Close";
 import { InputAdornment, IconButton } from "@mui/material";
 import { useSelectedEntry } from "../../context/SelectedEntryContext";

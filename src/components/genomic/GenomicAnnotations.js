@@ -10,7 +10,6 @@ import CommonMessage, {
 } from "../../components/common/CommonMessage";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { useState } from "react";
-//import config from "../../config/config.json";
 import { useSelectedEntry } from "./../context/SelectedEntryContext";
 import FilterLabelRemovable from "../styling/FilterLabelRemovable";
 export default function GenomicAnnotations() {

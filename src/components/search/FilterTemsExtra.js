@@ -11,7 +11,6 @@ import AddIcon from "@mui/icons-material/Add";
 import { useState } from "react";
 import { useSelectedEntry } from "../context/SelectedEntryContext";
 import CommonMessage, { COMMON_MESSAGES } from "../common/CommonMessage";
-//import config from "../../config/config.json";
 
 export default function FilterTermsExtra() {
   const { extraFilter, setExtraFilter, setSelectedFilter } = useSelectedEntry();

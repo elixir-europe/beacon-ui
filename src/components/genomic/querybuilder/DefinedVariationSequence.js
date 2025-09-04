@@ -1,5 +1,4 @@
 import { Box, Typography } from "@mui/material";
-//import config from "../../../config/config.json";
 import GenomicInputBox from "../GenomicInputBox";
 import { mainBoxTypography } from "../styling/genomicInputBoxStyling";
 
