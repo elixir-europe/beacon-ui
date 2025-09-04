@@ -98,9 +98,7 @@ const ResultsTableModal = ({ open, subRow, onClose }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          query
-        })
+        body: JSON.stringify(query)
       };
 
       const response = await fetch(url, requestOptions);
@@ -211,14 +209,14 @@ const headersSet = new Set();
       },
       query: {
         filters: [],
+        includeResultsetResponses: "HIT",
+        pagination: {
+          skip: parseInt(`${(skipItems)}`),
+          limit: parseInt(`${(rowsPerPage)}`),
+        },
+        testMode: false,
+        requestedGranularity: "record",
       },
-      includeResultsetResponses: "HIT",
-      pagination: {
-        skip: parseInt(`${(skipItems)}`),
-        limit: parseInt(`${(rowsPerPage)}`),
-      },
-      testMode: false,
-      requestedGranularity: "record",
     };
 
     if(selectedFilter.length > 0) {
