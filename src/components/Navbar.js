@@ -12,10 +12,21 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "react-oidc-context";
 
 export default function Navbar({ title, main, navItems }) {
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const navigate = useNavigate();
+  const auth = useAuth();
+  const isLogged = auth.isAuthenticated && !auth.user?.expired;
+
+  const cfg = globalThis.CONFIG ?? {};
+  const primary = cfg.ui?.colors?.primary || "#1976d2";
+
+  const filteredItems = navItems.filter(i => i?.label?.trim());
+  const hasItems = filteredItems.length > 0;
 
   const textStyle = {
     fontFamily: '"Open Sans", sans-serif',
@@ -29,54 +40,41 @@ export default function Navbar({ title, main, navItems }) {
     },
   };
 
+  const handleLogout = async() => {
+    try {
+      await auth.signoutRedirect({
+        post_logout_redirect_uri: window.location.origin + "/login"
+      });
+    } catch (e) {
+      console.error("signoutRedirect failed", e);
+      await auth.removeUser();
+      window.location.assign(window.location.origin + "/login");
+    }
+  }
+
+   const handleLogin = () => {
+    navigate("/login");
+  };
+
   return (
     <>
-      <AppBar
-        position="fixed"
-        elevation={0}
-        sx={{
-          backgroundColor: CONFIG.ui.colors.primary,
-          color: "white",
-          px: 1,
-          minHeight: "68px",
-        }}
-      >
-        <Toolbar
-          sx={{
-            justifyContent: "space-between",
-            gap: 2,
-            px: "9px",
-            minHeight: "68px",
-          }}
-        >
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 1.5,
-              minWidth: "fit-content",
-              flexShrink: 0,
-              "@media (min-width: 768px)": {
-                gap: 2.5,
-              },
-            }}
-          >
+      <AppBar position="fixed" elevation={0}
+        sx={{ backgroundColor: primary, color: "white", px: 1, minHeight: "68px" }}>
+        <Toolbar sx={{ justifyContent: "space-between", gap: 2, px: "9px", minHeight: "68px" }}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1.5, minWidth: "fit-content", flexShrink: 0,
+                     "@media (min-width: 768px)": { gap: 2.5 }}}>
             <Box
-              component="span"
-              sx={{
-                display: {
-                  xs: "block",
-                },
-                "@media (max-width: 385px)": {
-                  display: "none",
-                },
-              }}
+              component={Link}
+              to="/"
+              sx={{ display: { xs: "block" }, "@media (max-width: 385px)": { display: "none" } }}
             >
-              <img
-                src={main}
-                alt="Logo"
-                className="w-logo-w h-logo-h object-contain logo-small"
-              />
+              {main ? (
+                <img
+                  src={main}
+                  alt="Logo"
+                  className="w-logo-w h-logo-h object-contain logo-small"
+                />
+              ) : null}
             </Box>
 
             <Typography
@@ -90,15 +88,9 @@ export default function Navbar({ title, main, navItems }) {
                 cursor: "pointer",
                 fontSize: "15px",
                 whiteSpace: "nowrap",
-                "@media (max-width: 410px)": {
-                  fontSize: "14px",
-                },
-                "@media (min-width: 768px)": {
-                  fontSize: "16px",
-                },
-                "@media (max-width: 930px) and (min-width: 900px)": {
-                  fontSize: "15.7px",
-                },
+                "@media (max-width: 410px)": { fontSize: "14px" },
+                "@media (min-width: 768px)": { fontSize: "16px" },
+                "@media (max-width: 930px) and (min-width: 900px)": { fontSize: "15.7px" },
               }}
             >
               {title}
@@ -106,62 +98,57 @@ export default function Navbar({ title, main, navItems }) {
           </Box>
 
           <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
-            <IconButton
-              color="inherit"
-              edge="start"
-              onClick={() => setMobileOpen(!mobileOpen)}
-              sx={{
-                display: { md: "none" },
-                flexShrink: 0,
-              }}
-            >
-              <MenuIcon />
-            </IconButton>
+            {hasItems && (
+              <IconButton
+                color="inherit"
+                edge="start"
+                onClick={() => setMobileOpen(!mobileOpen)}
+                sx={{ display: { md: "none" }, flexShrink: 0 }}
+              >
+                <MenuIcon />
+              </IconButton>
+            )}
 
             <Box
               className="nav-items-box"
               sx={{
-                display: {
-                  xs: "none",
-                  sm: "none",
-                  md: "flex",
-                },
+                display: { xs: "none", sm: "none", md: "flex" },
                 gap: 2,
-                "@media (max-width: 968px) and (min-width: 900px)": {
-                  gap: 0,
-                },
+                "@media (max-width: 968px) and (min-width: 900px)": { gap: 0 },
               }}
             >
-              {navItems
-                .filter((item) => item.label && item.label.trim() !== "")
-                .map((item) =>
-                  item.url && item.url.startsWith("http") ? (
-                    <Button
-                      key={item.label}
-                      href={item.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      sx={{
-                        ...textStyle,
-                        textTransform: "none",
-                      }}
-                    >
-                      {item.label}
-                    </Button>
-                  ) : (
-                    <Button
-                      key={item.label}
-                      component={Link}
-                      to={item.url}
-                      sx={{
-                        ...textStyle,
-                        textTransform: "none",
-                      }}
-                    >
-                      {item.label}
-                    </Button>
-                  )
-                )}
+              {filteredItems.map(item =>
+                item.url?.startsWith("http") ? (
+                  <Button
+                    key={item.label}
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    sx={{ ...textStyle, textTransform: "none" }}
+                  >
+                    {item.label}
+                  </Button>
+                ) : (
+                  <Button
+                    key={item.label}
+                    component={Link}
+                    to={item.url}
+                    sx={{ ...textStyle, textTransform: "none" }}
+                  >
+                    {item.label}
+                  </Button>
+                )
+              )}
+
+              {isLogged ? (
+                <Button onClick={handleLogout} sx={{ ...textStyle, textTransform: "none" }}>
+                  Logout
+                </Button>
+              ) : (
+                <Button onClick={handleLogin} sx={{ ...textStyle, textTransform: "none" }}>
+                  Login
+                </Button>
+              )}
             </Box>
           </Box>
         </Toolbar>
@@ -175,63 +162,76 @@ export default function Navbar({ title, main, navItems }) {
         <List sx={{ width: 240, pt: 3 }}>
           <ListItem
             sx={{
-              px: 3,
-              py: 1,
-              justifyContent: "flex-start",
-              textTransform: "none",
-              fontFamily: '"Open Sans", sans-serif',
-              fontWeight: 700,
-              fontSize: "16px",
-              color: CONFIG.ui.colors.primary,
+              px: 3, py: 1, justifyContent: "flex-start", textTransform: "none",
+              fontFamily: '"Open Sans", sans-serif', fontWeight: 700, fontSize: "16px",
+              color: primary,
             }}
           >
             {title}
           </ListItem>
 
-          {navItems
-            .filter((item) => item.label && item.label.trim() !== "")
-            .map((item) => (
-              <ListItem key={item.label} disablePadding>
-                {item.url && item.url.startsWith("http") ? (
-                  <Button
-                    fullWidth
-                    href={item.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    sx={{
-                      px: 3,
-                      py: 1,
-                      justifyContent: "flex-start",
-                      textTransform: "none",
-                      fontFamily: '"Open Sans", sans-serif',
-                      fontWeight: 400,
-                      fontSize: "16px",
-                      color: CONFIG.ui.colors.primary,
-                    }}
-                  >
-                    {item.label}
-                  </Button>
-                ) : (
-                  <Button
-                    fullWidth
-                    component={Link}
-                    to={item.url}
-                    sx={{
-                      px: 3,
-                      py: 1,
-                      justifyContent: "flex-start",
-                      textTransform: "none",
-                      fontFamily: '"Open Sans", sans-serif',
-                      fontWeight: 400,
-                      fontSize: "16px",
-                      color: CONFIG.ui.colors.primary,
-                    }}
-                  >
-                    {item.label}
-                  </Button>
-                )}
-              </ListItem>
-            ))}
+          {filteredItems.map(item => (
+            <ListItem key={item.label} disablePadding>
+              {item.url?.startsWith("http") ? (
+                <Button
+                  fullWidth
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  sx={{
+                    px: 3, py: 1, justifyContent: "flex-start", textTransform: "none",
+                    fontFamily: '"Open Sans", sans-serif', fontWeight: 400, fontSize: "16px",
+                    color: primary,
+                  }}
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {item.label}
+                </Button>
+              ) : (
+                <Button
+                  fullWidth
+                  component={Link}
+                  to={item.url}
+                  sx={{
+                    px: 3, py: 1, justifyContent: "flex-start", textTransform: "none",
+                    fontFamily: '"Open Sans", sans-serif', fontWeight: 400, fontSize: "16px",
+                    color: primary,
+                  }}
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {item.label}
+                </Button>
+              )}
+            </ListItem>
+          ))}
+
+          <ListItem disablePadding>
+            {isLogged ? (
+              <Button
+                fullWidth
+                onClick={() => { setMobileOpen(false); handleLogout(); }}
+                sx={{
+                  px: 3, py: 1, justifyContent: "flex-start", textTransform: "none",
+                  fontFamily: '"Open Sans", sans-serif', fontWeight: 400, fontSize: "16px",
+                  color: primary,
+                }}
+              >
+                Logout
+              </Button>
+            ) : (
+              <Button
+                fullWidth
+                onClick={() => { setMobileOpen(false); handleLogin(); }}
+                sx={{
+                  px: 3, py: 1, justifyContent: "flex-start", textTransform: "none",
+                  fontFamily: '"Open Sans", sans-serif', fontWeight: 400, fontSize: "16px",
+                  color: primary,
+                }}
+              >
+                Login
+              </Button>
+            )}
+          </ListItem>
         </List>
       </Drawer>
     </>

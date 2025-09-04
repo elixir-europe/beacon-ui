@@ -4,5 +4,11 @@ services:
     image: beacon-ui:latest
     ports:
       - "8080:80"
+    environment:
+      - NODE_ENV=development
+      - HOST=0.0.0.0
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+      - GENERATE_SOURCEMAP=false
     volumes:
       - ./envs/default/config.json:/usr/share/nginx/html/envs/default/config.json:ro
