@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Box, Typography, TextField } from "@mui/material";
-//import config from "../../config/config.json";
 import SearchIcon from "@mui/icons-material/Search";
 import { alpha } from "@mui/material/styles";
 import FilteringTermsTable from "./FilteringTermsTable";

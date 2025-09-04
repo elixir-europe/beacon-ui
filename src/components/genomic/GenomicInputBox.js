@@ -1,6 +1,5 @@
 import { Box, TextField, Select, MenuItem, Typography } from "@mui/material";
 import { useField } from "formik";
-//import config from "../../config/config.json";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import {
   selectStyle,

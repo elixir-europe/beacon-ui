@@ -12,7 +12,6 @@ import {
   TablePagination
 } from "@mui/material";
 import { styled } from '@mui/material/styles';
-//import config from '../../../config/config.json';
 import ResultsTableModalRow from './ResultsTableModalRow';
 
 const ResultsTableModalBody = ({ dataTable, totalItems, page, rowsPerPage, handleChangePage, handleChangeRowsPerPage }) => {

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-//import config from "../config/config.json";
 
 export default function useFilteringTerms() {
   const [filteringTerms, setFilteringTerms] = useState([]);

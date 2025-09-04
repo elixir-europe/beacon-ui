@@ -13,7 +13,6 @@ import {
 } from "@mui/material";
 import { BEACON_NETWORK_COLUMNS_EXPANDED } from '../../lib/constants';
 import CalendarViewMonthIcon from '@mui/icons-material/CalendarViewMonth';
-//import config from '../../config/config.json';
 
 export default function ResultsTableRow({ item, handleOpenModal }) {
   return (

@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Paper, List, ListItem, Box } from "@mui/material";
-//import config from "../../config/config.json";
 import { useSelectedEntry } from "../context/SelectedEntryContext";
 import CommonMessage, { COMMON_MESSAGES } from "../common/CommonMessage";
 import useFilteringTerms from "../../hooks/useFilteringTerms";

@@ -10,5 +10,3 @@ services:
       - CHOKIDAR_USEPOLLING=true
       - WATCHPACK_POLLING=true
       - GENERATE_SOURCEMAP=false
-    volumes:
-      - ./envs/default/config.json:/usr/share/nginx/html/envs/default/config.json:ro
