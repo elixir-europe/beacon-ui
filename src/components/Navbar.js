@@ -9,24 +9,33 @@ import {
   List,
   ListItem,
   Typography,
+  Menu,
+  MenuItem,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import PropTypes from "prop-types";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "react-oidc-context";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 export default function Navbar({ title, main, navItems }) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [anchorElUser, setAnchorElUser] = useState(null);
 
   const navigate = useNavigate();
   const auth = useAuth();
   const isLogged = auth.isAuthenticated && !auth.user?.expired;
+
+  const userName = auth?.isAuthenticated ? auth.user?.profile?.given_name ?? "" : "";
+
 
   const cfg = globalThis.CONFIG ?? {};
   const primary = cfg.ui?.colors?.primary || "#1976d2";
 
   const filteredItems = navItems.filter(i => i?.label?.trim());
   const hasItems = filteredItems.length > 0;
+
+  console.log(auth.user)
 
   const textStyle = {
     fontFamily: '"Open Sans", sans-serif',
@@ -41,19 +50,28 @@ export default function Navbar({ title, main, navItems }) {
   };
 
   const handleLogout = async() => {
+    console.log("Login Out")
     try {
       await auth.signoutRedirect({
-        post_logout_redirect_uri: window.location.origin + "/login"
+        post_logout_redirect_uri: window.location.origin
       });
     } catch (e) {
       console.error("signoutRedirect failed", e);
       await auth.removeUser();
-      window.location.assign(window.location.origin + "/login");
+      window.location.assign(window.location.origin);
     }
   }
 
-   const handleLogin = () => {
+  const handleLogin = () => {
     navigate("/login");
+  };
+
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
   };
 
   return (
@@ -61,8 +79,7 @@ export default function Navbar({ title, main, navItems }) {
       <AppBar position="fixed" elevation={0}
         sx={{ backgroundColor: primary, color: "white", px: 1, minHeight: "68px" }}>
         <Toolbar sx={{ justifyContent: "space-between", gap: 2, px: "9px", minHeight: "68px" }}>
-          <Box sx={{ display: "flex", alignItems: "center", gap: 1.5, minWidth: "fit-content", flexShrink: 0,
-                     "@media (min-width: 768px)": { gap: 2.5 }}}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1.5, minWidth: "fit-content", flexShrink: 0,"@media (min-width: 768px)": { gap: 2.5 }}}>
             <Box
               component={Link}
               to="/"
@@ -141,9 +158,36 @@ export default function Navbar({ title, main, navItems }) {
               )}
 
               {isLogged ? (
-                <Button onClick={handleLogout} sx={{ ...textStyle, textTransform: "none" }}>
-                  Logout
-                </Button>
+                <>
+                  <IconButton
+                    onClick={handleOpenUserMenu}
+                    sx={{ p: 0, color: "white" }}
+                    aria-controls={anchorElUser ? "user-menu" : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={anchorElUser ? "true" : undefined}
+                  >
+                    <Box>
+                      { userName }
+                    </Box>
+                    <AccountCircleIcon />
+                  </IconButton>
+                  <Menu
+                    id="user-menu"
+                    anchorEl={anchorElUser}
+                    open={Boolean(anchorElUser)}
+                    onClose={handleCloseUserMenu}
+                    anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                    transformOrigin={{ vertical: "top", horizontal: "right" }}
+                    keepMounted
+                  >
+                    <MenuItem
+                      onClick={handleLogout}
+                      sx={{ fontFamily: '"Open Sans", sans-serif', fontSize: 14 }}
+                    >
+                      Log Out
+                    </MenuItem>
+                  </Menu>
+                </>
               ) : (
                 <Button onClick={handleLogin} sx={{ ...textStyle, textTransform: "none" }}>
                   Login
