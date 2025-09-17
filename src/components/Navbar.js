@@ -17,6 +17,7 @@ import PropTypes from "prop-types";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "react-oidc-context";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 export default function Navbar({ title, main, navItems }) {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -161,25 +162,61 @@ export default function Navbar({ title, main, navItems }) {
                 <>
                   <IconButton
                     onClick={handleOpenUserMenu}
-                    sx={{ p: 0, color: "white" }}
+                    sx={{ p: 0, color: "white", fontSize: "16px" }}
                     aria-controls={anchorElUser ? "user-menu" : undefined}
                     aria-haspopup="true"
                     aria-expanded={anchorElUser ? "true" : undefined}
                   >
-                    <Box>
+                    <AccountCircleIcon />
+                    <Box
+                      sx={{
+                        paddingLeft: '5px'
+                      }}>
                       { userName }
                     </Box>
-                    <AccountCircleIcon />
+                    <KeyboardArrowDownIcon />
                   </IconButton>
                   <Menu
                     id="user-menu"
                     anchorEl={anchorElUser}
                     open={Boolean(anchorElUser)}
                     onClose={handleCloseUserMenu}
-                    anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-                    transformOrigin={{ vertical: "top", horizontal: "right" }}
+                    transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                    anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                     keepMounted
+                    slotProps={{
+                      paper: {
+                        elevation: 0,
+                        sx: {
+                          overflow: 'visible',
+                          filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                          mt: 1.5,
+                          '& .MuiAvatar-root': {
+                            width: 32,
+                            height: 32,
+                            ml: -0.5,
+                            mr: 1,
+                          },
+                          '&::before': {
+                            content: '""',
+                            display: 'block',
+                            position: 'absolute',
+                            top: 0,
+                            right: 14,
+                            width: 10,
+                            height: 10,
+                            bgcolor: 'background.paper',
+                            transform: 'translateY(-50%) rotate(45deg)',
+                            zIndex: 0,
+                          },
+                        },
+                      },
+                    }}
                   >
+                    <MenuItem
+                      sx={{ fontFamily: '"Open Sans", sans-serif', fontSize: 14 }}>
+                      <Link to="/profile">Profile</Link>
+                    </MenuItem>
                     <MenuItem
                       onClick={handleLogout}
                       sx={{ fontFamily: '"Open Sans", sans-serif', fontSize: 14 }}
