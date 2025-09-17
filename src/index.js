@@ -12,16 +12,13 @@ import { AuthProvider } from "react-oidc-context";
     window.CONFIG  = cfg;
     globalThis.CONFIG = cfg; 
 
-    const isProd = window.location.hostname === "beacons.bsc.es";
-    const REDIRECT_URI = isProd
-      ? `${cfg.appUrl}login`
-      : "http://localhost:3000/login";
+    console.log(process.env)
 
     const oidcConfig = {
-      authority: cfg.oidcUrl,
-      client_id: cfg.oidcClientId,
-      redirect_uri: REDIRECT_URI,
-      post_logout_redirect_uri: isProd ? `${cfg.appUrl}` : "http://localhost:3000/",
+      authority: `${process.env.REACT_APP_BEACON_UI_OIDC_ENDPOINT}`,
+      client_id: `${process.env.REACT_APP_BEACON_UI_OIDC_CLIENT_ID}`,
+      redirect_uri: `https://beacons.bsc.es/`,
+      post_logout_redirect_uri: `https://beacons.bsc.es/`,
       response_type: "code",
       scope: "openid profile email offline_access",
       automaticSilentRenew: false,
@@ -32,6 +29,8 @@ import { AuthProvider } from "react-oidc-context";
         window.history.replaceState({}, document.title, to);
       },
     };
+
+    console.log(oidcConfig);
 
     root.render(
       <AuthProvider {...oidcConfig}>

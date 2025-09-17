@@ -1,5 +1,3 @@
-// src/pages/Login.jsx
-import React from "react";
 import { useAuth } from "react-oidc-context";
 import {
   useLocation,
@@ -7,6 +5,7 @@ import {
   Navigate,
   Link as RouterLink,
 } from "react-router-dom";
+
 import {
   Box,
   Paper,
@@ -15,14 +14,8 @@ import {
   Button,
   CircularProgress,
   Alert,
-  Divider,
   Fade,
 } from "@mui/material";
-
-const isProd = window.location.hostname === "beacons.bsc.es";
-const REDIRECT_URI = isProd
-  ? "https://beacons.bsc.es/login"
-  : "http://localhost:3000/login";
 
 export default function Login() {
   const auth = useAuth();
@@ -32,8 +25,12 @@ export default function Login() {
   const CFG = globalThis.CONFIG ?? {};
   const UI = CFG.ui ?? {};
   const LOGOS = UI.logos ?? {};
-  const primary = UI.colors?.primary || "#2563EB";
   const loginRequired = Boolean(CFG.loginRequired);
+
+  const isProd = window.location.hostname === `${process.env.BEACON_UI_PUBLIC_URL}`;
+  const REDIRECT_URI = isProd
+    ? `${process.env.BEACON_UI_OIDC_ENDPOINT}/login`
+    : "http://localhost:3000/login";
 
   const from = location.state?.from?.pathname || "/";
   const hasCallback = sp.has("code") || sp.has("error");

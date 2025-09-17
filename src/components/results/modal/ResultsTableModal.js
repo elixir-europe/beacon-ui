@@ -15,6 +15,8 @@ import { InputAdornment, IconButton } from "@mui/material";
 import { useSelectedEntry } from "../../context/SelectedEntryContext";
 import Loader from "../../common/Loader";
 import Papa from "papaparse";
+import { PATH_SEGMENT_TO_ENTRY_ID } from "../../common/textFormatting";
+
 
 const style = {
   position: 'absolute',
@@ -39,6 +41,7 @@ const ResultsTableModal = ({ open, subRow, onClose }) => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [dataTable, setDataTable] = useState([]);
   const [url, setUrl] = useState("");
+  const entryTypeId = PATH_SEGMENT_TO_ENTRY_ID[selectedPathSegment];
 
   const parseType = (item) => {
     switch(item) {
@@ -86,7 +89,7 @@ const ResultsTableModal = ({ open, subRow, onClose }) => {
       setLoadingDownload(true);
       const url = `${CONFIG.apiUrl}/${selectedPathSegment}`;
 
-      let query = queryBuilder(page);
+      let query = queryBuilder(page, entryTypeId);
 
       if (query?.pagination) {
         query.pagination.limit = 5000;
@@ -199,7 +202,7 @@ const headersSet = new Set();
     URL.revokeObjectURL(url);
   }
 
-  const queryBuilder = (page) => {
+  const queryBuilder = (page, entryTypeId) => {
     let skipItems = page * rowsPerPage;
 
     let filter = {
@@ -230,7 +233,7 @@ const headersSet = new Set();
           } else {
             return {
               id: item.key ?? item.id,
-              scope: selectedPathSegment
+              scope: entryTypeId
             }
           }
         }
@@ -246,16 +249,14 @@ const headersSet = new Set();
         setLoading(true);
         const url = `${CONFIG.apiUrl}/${selectedPathSegment}`;
         setUrl(url);
-        let query = queryBuilder(page);
+        let query = queryBuilder(page, entryTypeId);
 
         const requestOptions = {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({
-            query
-          })
+          body: JSON.stringify(query)
         };
         
         const response = await fetch(url, requestOptions);
