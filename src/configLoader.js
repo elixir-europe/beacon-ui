@@ -5,3 +5,11 @@ export async function loadConfig() {
   }
   return res.json();
 }
+
+export async function loadOIDCConfig() {
+  const res = await fetch("/config/config-oidc.json", { cache: "no-store" });
+  if (!res.ok) {
+    throw new Error("Can not load config.json: " + res.status);
+  }
+  return res.json();
+}

@@ -1,13 +1,14 @@
 import { createRoot } from "react-dom/client";
 import App from "./App";
 import "./index.css";
-import { loadConfig } from "./configLoader";
+import { loadConfig, loadOIDCConfig } from "./configLoader";
 import { AuthProvider } from "react-oidc-context";
 
 (async () => {
   const root = createRoot(document.getElementById('root'));
   try {
     const cfg = await loadConfig();
+    const OIDCCfg = await loadOIDCConfig();
     
     window.CONFIG  = cfg;
     globalThis.CONFIG = cfg; 
@@ -15,8 +16,8 @@ import { AuthProvider } from "react-oidc-context";
     console.log(process.env)
 
     const oidcConfig = {
-      authority: `${process.env.REACT_APP_BEACON_UI_OIDC_ENDPOINT}`,
-      client_id: `${process.env.REACT_APP_BEACON_UI_OIDC_CLIENT_ID}`,
+      authority: `${OIDCCfg.oidcUrl}`,
+      client_id: `${OIDCCfg.oidcClientId}`,
       redirect_uri: `https://beacons.bsc.es/`,
       post_logout_redirect_uri: `https://beacons.bsc.es/`,
       response_type: "code",
