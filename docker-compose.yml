@@ -11,9 +11,9 @@ services:
       WATCHPACK_POLLING: "true"
       GENERATE_SOURCEMAP: "false"
 
-      BEACON_UI_OIDC_ENDPOINT: ${BEACON_UI_OIDC_ENDPOINT:-https://login.aai.lifescience-ri.eu/oidc/}
-      BEACON_UI_OIDC_CLIENT_ID: ${BEACON_UI_OIDC_CLIENT_ID:-d3132b30-3a07-4a66-a065-512674fac86e}
-      BEACON_UI_OIDC_REDIRECT_URI: ${BEACON_UI_OIDC_REDIRECT_URI:-https://beacons.bsc.es/}
-      BEACON_UI_OIDC_LOGOUT_REDIRECT_URI: ${BEACON_UI_OIDC_LOGOUT_REDIRECT_URI:-https://beacons.bsc.es/}
-      BEACON_UI_API_BASE_URL: ${BEACON_UI_API_BASE_URL:-https://beacons.bsc.es/beacon-network/v2.0.0}
-      BEACON_UI_PUBLIC_URL: ${BEACON_UI_PUBLIC_URL:-https://beacons.bsc.es/}
+      REACT_APP_BEACON_UI_OIDC_ENDPOINT: ${BEACON_UI_OIDC_ENDPOINT:-https://login.aai.lifescience-ri.eu/oidc/}
+      REACT_APP_BEACON_UI_OIDC_CLIENT_ID: ${BEACON_UI_OIDC_CLIENT_ID:-d3132b30-3a07-4a66-a065-512674fac86e}
+      REACT_APP_BEACON_UI_OIDC_REDIRECT_URI: ${BEACON_UI_OIDC_REDIRECT_URI:-https://beacons.bsc.es/}
+      REACT_APP_BEACON_UI_OIDC_LOGOUT_REDIRECT_URI: ${BEACON_UI_OIDC_LOGOUT_REDIRECT_URI:-https://beacons.bsc.es/}
+      REACT_APP_BEACON_UI_API_BASE_URL: ${BEACON_UI_API_BASE_URL:-https://beacons.bsc.es/beacon-network/v2.0.0}
+      REACT_APP_BEACON_UI_PUBLIC_URL: ${BEACON_UI_PUBLIC_URL:-https://beacons.bsc.es/}
