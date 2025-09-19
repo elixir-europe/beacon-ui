@@ -27,7 +27,8 @@ export default function Login() {
   const LOGOS = UI.logos ?? {};
   const loginRequired = Boolean(CFG.loginRequired);
 
-  const isProd = window.location.hostname === `${CONFIG.appUrl}`;
+  const isProd = window.location.hostname === new URL(CONFIG.appUrl).hostname;
+
   console.log("is prod: " , isProd);
 
   const REDIRECT_URI = isProd
