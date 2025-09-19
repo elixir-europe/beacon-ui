@@ -29,10 +29,12 @@ export default function Login() {
 
   const isProd = window.location.hostname === `${CONFIG.appUrl}`;
   console.log("is prod: " , isProd);
-  
+
   const REDIRECT_URI = isProd
     ? `${CONFIG.appUrl}/login`
     : "http://localhost:3000/login";
+
+  console.log("REDIRECT_URI: ", REDIRECT_URI);
 
   const from = location.state?.from?.pathname || "/";
   const hasCallback = sp.has("code") || sp.has("error");
