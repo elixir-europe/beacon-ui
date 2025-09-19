@@ -13,6 +13,9 @@ import { AuthProvider } from "react-oidc-context";
     window.CONFIG  = cfg;
     globalThis.CONFIG = cfg; 
 
+    window.OIDCCfg  = OIDCCfg;
+    globalThis.OIDCCfg = OIDCCfg;
+
     console.log(process.env)
 
     console.log(OIDCCfg)
