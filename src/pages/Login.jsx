@@ -27,9 +27,11 @@ export default function Login() {
   const LOGOS = UI.logos ?? {};
   const loginRequired = Boolean(CFG.loginRequired);
 
-  const isProd = window.location.hostname === `${process.env.BEACON_UI_PUBLIC_URL}`;
+  const isProd = window.location.hostname === `${CONFIG.appUrl}`;
+  console.log("is prod: " , isProd);
+  
   const REDIRECT_URI = isProd
-    ? `${process.env.BEACON_UI_OIDC_ENDPOINT}/login`
+    ? `${CONFIG.appUrl}/login`
     : "http://localhost:3000/login";
 
   const from = location.state?.from?.pathname || "/";
