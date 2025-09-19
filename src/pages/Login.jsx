@@ -35,8 +35,8 @@ export default function Login() {
   console.log("is prod: " , isProd);
 
   const REDIRECT_URI = isProd
-    ? `${CONFIG.appUrl}/login`
-    : "http://localhost:3000/login";
+    ? `${CONFIG.appUrl}`
+    : "http://localhost:3000";
 
   console.log("REDIRECT_URI: ", REDIRECT_URI);
 
