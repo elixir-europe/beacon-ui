@@ -87,7 +87,7 @@ const ResultsTableModal = ({ open, subRow, onClose }) => {
   async function buildDownloadRows(sortedHeaders, cleanAndParseInfo) {
     try {
       setLoadingDownload(true);
-      const url = `${CONFIG.apiUrl}/${selectedPathSegment}`;
+      const url = `${CONFIG.apiUrl}/${tableType}/${subRow.id}/${selectedPathSegment}`;
 
       let query = queryBuilder(page, entryTypeId);
 

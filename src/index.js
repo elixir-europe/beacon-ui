@@ -15,6 +15,8 @@ import { AuthProvider } from "react-oidc-context";
 
     console.log(process.env)
 
+    console.log(OIDCCfg)
+
     const oidcConfig = {
       authority: `${OIDCCfg.oidcUrl}`,
       client_id: `${OIDCCfg.oidcClientId}`,
@@ -38,9 +40,8 @@ import { AuthProvider } from "react-oidc-context";
         <App />
       </AuthProvider>
     );
-    
+
   } catch (err) {
-    console.error("Failed to load config:", err);
     createRoot(document.getElementById("root")).render(
       <div style={{ padding: 16, color: "crimson" }}>
         Cannot load config: {err && err.message ? err.message : String(err)}
