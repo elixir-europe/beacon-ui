@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   useLocation,
   useSearchParams,
@@ -17,6 +17,11 @@ import {
   Typography,
   Menu,
   MenuItem,
+  Dialog,
+  DialogTitle,
+  DialogActions,
+  DialogContent,
+  DialogContentText
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import PropTypes from "prop-types";
@@ -28,22 +33,14 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 export default function Navbar({ title, main, navItems }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [error, setError] = useState(null);
+  const [errorDescription, setErrorDescription] = useState(null);
 
   const navigate = useNavigate();
   const auth = useAuth();
-  const location = useLocation();
-  const [sp] = useSearchParams();
 
   const CFG = globalThis.CONFIG ?? {};
-  const UI = CFG.ui ?? {};
-
-  const isProd = window.location.hostname === new URL(CONFIG.appUrl).hostname;
-
-  const REDIRECT_URI = isProd
-    ? `${CONFIG.appUrl}`
-    : "http://localhost:3000";
-
-  const from = location.state?.from?.pathname || "/";
 
   const isLogged = auth.isAuthenticated && !auth.user?.expired;
 
@@ -67,7 +64,6 @@ export default function Navbar({ title, main, navItems }) {
   };
 
   const handleLogout = async() => {
-    console.log("Login Out")
     try {
       await auth.signoutRedirect({
         post_logout_redirect_uri: window.location.origin
@@ -79,12 +75,8 @@ export default function Navbar({ title, main, navItems }) {
     }
   }
 
-  const handleLogin = () => {
-    navigate("/login");
-  };
-
   const startLogin = () => {
-    sessionStorage.setItem("returnTo", from);
+    const REDIRECT_URI = window.location.origin; 
     auth.signinRedirect({ redirect_uri: REDIRECT_URI });
   };
 
@@ -94,6 +86,46 @@ export default function Navbar({ title, main, navItems }) {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleClose = () => {
+    setOpen(false);  
+    setErrorDescription(null)
+  };
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    if (searchParams.has('error')) {
+      const error = searchParams.get('error');
+      const errorDescription = searchParams.get('error_description');
+      
+      setError(error);
+      setErrorDescription(errorDescription);
+      setOpen(true);
+      cleanUrl();
+    }
+    if (searchParams.has('code')) {
+      handleSuccessfulLogin();
+    }
+  }, []);
+
+  const cleanUrl = () => {
+    const url = new URL(window.location);
+    url.search = '';
+    window.history.replaceState({}, '', url);
+  };
+
+  const handleSuccessfulLogin = async () => {
+    try {
+      await auth.signinRedirectCallback();
+      cleanUrl();
+      navigate('/')
+    } catch (error) {
+      setError(error);
+      setErrorDescription(error.message);
+      setOpen(true);
+      cleanUrl();
+    }
   };
 
   return (
@@ -323,7 +355,7 @@ export default function Navbar({ title, main, navItems }) {
             ) : (
               <Button
                 fullWidth
-                onClick={() => { setMobileOpen(false); handleLogin(); }}
+                onClick={() => { setMobileOpen(false); startLogin(); }}
                 sx={{
                   px: 3, py: 1, justifyContent: "flex-start", textTransform: "none",
                   fontFamily: '"Open Sans", sans-serif', fontWeight: 400, fontSize: "16px",
@@ -336,6 +368,19 @@ export default function Navbar({ title, main, navItems }) {
           </ListItem>
         </List>
       </Drawer>
+      <Dialog onClose={handleClose} open={open}>
+        <DialogTitle>Login Error</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            {errorDescription || error}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} autoFocus>
+            OK
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 }
