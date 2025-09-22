@@ -74,7 +74,6 @@ export default function ResultsTableRow({ item, handleOpenModal }) {
                     <TableCell sx={{ fontWeight: "bold"  }}  style={{ width: BEACON_NETWORK_COLUMNS_EXPANDED.beacon_dataset_response }}>
                       { item.totalResultsCount > 0 ? new Intl.NumberFormat(navigator.language, { useGrouping: true }).format(Number(item.totalResultsCount)) : '-' }
                     </TableCell>
-                  
                   </TableRow>
                 ))}
               </TableBody>

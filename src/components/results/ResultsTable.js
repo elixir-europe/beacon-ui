@@ -203,9 +203,7 @@ export default function ResultsTable() {
                       <TableCell sx={{ fontWeight: "bold"  }} style={{ width: BEACON_NETWORK_COLUMNS[1].width }}>{item.exists ? "Production Beacon" : "Development"}</TableCell>
                       <TableCell sx={{ fontWeight: "bold"  }} style={{ width: BEACON_NETWORK_COLUMNS[2].width }}>{item.items.length>0 ?  item.items.length + " Datasets" : "-"}</TableCell>
                       <TableCell sx={{ fontWeight: "bold", width: BEACON_NETWORK_COLUMNS[3].width }}>
-                        {item.totalResultsCount > 0
-                          ? new Intl.NumberFormat(navigator.language).format(item.totalResultsCount)
-                          : "-"}
+                        { item.totalResultsCount > 0 ? new Intl.NumberFormat(navigator.language, { useGrouping: true }).format(Number(item.totalResultsCount)) : '-' }
                       </TableCell>
                       { CONFIG.beaconType === 'singleBeacon' &&
                       <TableCell 

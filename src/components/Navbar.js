@@ -1,5 +1,11 @@
 import { useState } from "react";
 import {
+  useLocation,
+  useSearchParams,
+  Navigate,
+  Link as RouterLink,
+} from "react-router-dom";
+import {
   AppBar,
   Box,
   Toolbar,
@@ -25,18 +31,28 @@ export default function Navbar({ title, main, navItems }) {
 
   const navigate = useNavigate();
   const auth = useAuth();
+  const location = useLocation();
+  const [sp] = useSearchParams();
+
+  const CFG = globalThis.CONFIG ?? {};
+  const UI = CFG.ui ?? {};
+
+  const isProd = window.location.hostname === new URL(CONFIG.appUrl).hostname;
+
+  const REDIRECT_URI = isProd
+    ? `${CONFIG.appUrl}`
+    : "http://localhost:3000";
+
+  const from = location.state?.from?.pathname || "/";
+
   const isLogged = auth.isAuthenticated && !auth.user?.expired;
 
   const userName = auth?.isAuthenticated ? auth.user?.profile?.given_name ?? "" : "";
 
-
-  const cfg = globalThis.CONFIG ?? {};
-  const primary = cfg.ui?.colors?.primary || "#1976d2";
+  const primary = CFG.ui?.colors?.primary || "#1976d2";
 
   const filteredItems = navItems.filter(i => i?.label?.trim());
   const hasItems = filteredItems.length > 0;
-
-  console.log(auth.user)
 
   const textStyle = {
     fontFamily: '"Open Sans", sans-serif',
@@ -65,6 +81,11 @@ export default function Navbar({ title, main, navItems }) {
 
   const handleLogin = () => {
     navigate("/login");
+  };
+
+  const startLogin = () => {
+    sessionStorage.setItem("returnTo", from);
+    auth.signinRedirect({ redirect_uri: REDIRECT_URI });
   };
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -226,8 +247,8 @@ export default function Navbar({ title, main, navItems }) {
                   </Menu>
                 </>
               ) : (
-                <Button onClick={handleLogin} sx={{ ...textStyle, textTransform: "none" }}>
-                  Login
+                <Button onClick={startLogin} sx={{ ...textStyle, textTransform: "none" }}>
+                  LogIn
                 </Button>
               )}
             </Box>
