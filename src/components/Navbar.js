@@ -77,6 +77,7 @@ export default function Navbar({ title, main, navItems }) {
 
   const startLogin = () => {
     const REDIRECT_URI = window.location.origin; 
+    console.log("REDIRECT_URI: ", REDIRECT_URI);
     auth.signinRedirect({ redirect_uri: REDIRECT_URI });
   };
 
