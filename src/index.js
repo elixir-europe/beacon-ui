@@ -16,10 +16,6 @@ import { AuthProvider } from "react-oidc-context";
     window.OIDCCfg  = OIDCCfg;
     globalThis.OIDCCfg = OIDCCfg;
 
-    console.log(process.env)
-
-    console.log(OIDCCfg)
-
     const oidcConfig = {
       authority: `${OIDCCfg.oidcUrl}`,
       client_id: `${OIDCCfg.oidcClientId}`,
@@ -35,8 +31,6 @@ import { AuthProvider } from "react-oidc-context";
         window.history.replaceState({}, document.title, to);
       },
     };
-
-    console.log(oidcConfig);
 
     root.render(
       <AuthProvider {...oidcConfig}>

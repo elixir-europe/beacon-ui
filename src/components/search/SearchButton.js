@@ -3,6 +3,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useSelectedEntry } from "../context/SelectedEntryContext";
 import { COMMON_MESSAGES } from "../common/CommonMessage";
 import { PATH_SEGMENT_TO_ENTRY_ID } from "../../components/common/textFormatting";
+import { useAuth } from "react-oidc-context";
 
 export default function SearchButton({ setSelectedTool }) {
   const {
@@ -19,12 +20,22 @@ export default function SearchButton({ setSelectedTool }) {
     setIsLoaded
   } = useSelectedEntry();
 
+  const auth = useAuth();
+
+  const isLogged = auth.isAuthenticated && !auth.user?.expired;
+
+  const token = isLogged ? auth.user?.access_token : null;
+
+  console.log("token", token);
+
+
   const handleSearch = async () => {
     const entryTypeId = PATH_SEGMENT_TO_ENTRY_ID[selectedPathSegment];
     const configForEntry = entryTypesConfig?.[entryTypeId];
     const nonFilteredAllowed =
       configForEntry?.nonFilteredQueriesAllowed ?? true;
 
+    
     if (!nonFilteredAllowed && selectedFilter.length === 0) {
       setMessage(COMMON_MESSAGES.addFilter);
       setResultData([]);
@@ -44,13 +55,17 @@ export default function SearchButton({ setSelectedTool }) {
 
       const query = queryBuilder(selectedFilter, entryTypeId);
       
-      const requestOptions = {
+      let requestOptions = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(query),
       };
+
+      if(token && token !== "undefined") {
+        requestOptions.headers.Authorization = `Bearer ${token}`
+      }
 
       response = await fetch(url, requestOptions);
 

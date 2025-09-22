@@ -29,16 +29,9 @@ export default function Login() {
 
   const isProd = window.location.hostname === new URL(CONFIG.appUrl).hostname;
 
-  console.log("window.location.hostname: ", window.location.hostname, window.location);
-  console.log("CONFIG.appUrl: ", CONFIG.appUrl, new URL(CONFIG.appUrl).hostname);
-
-  console.log("is prod: " , isProd);
-
   const REDIRECT_URI = isProd
     ? `${CONFIG.appUrl}`
     : "http://localhost:3000";
-
-  console.log("REDIRECT_URI: ", REDIRECT_URI);
 
   const from = location.state?.from?.pathname || "/";
   const hasCallback = sp.has("code") || sp.has("error");
