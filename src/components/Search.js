@@ -425,7 +425,7 @@ export default function Search({
         )}
 
         {loading || !isLoaded ? (
-          <CircularProgress />
+          <CircularProgress sx={{ color: `${CONFIG.ui.colors.secondary}` }} />
         ) : !isSingleEntryType ? (
           <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
             {entryTypes.map((entry) => (

@@ -4,7 +4,7 @@
   "apiUrlNetwork": "https://beacon-network-backend-demo.ega-archive.org/beacon-network/v2.0.0",
   "apiUrlSingle": "https://beacon-spain.ega-archive.org/api",
   "assemblyId": ["GRCh38", "GRCh37", "NCBI36"],
-  "oidcUrl": "https://beacons.bsc.es/auth/realms/beacon-network",
+  "oidcUrl": "https://beacons.bsc.es/auth/realms/beacon",
   "oidcClientId": "beacon-network-ui",
   "loginRequired": false,
   "appUrl": "https://beacons.bsc.es/",
@@ -16,7 +16,7 @@
     "BND"
   ],
   "ui": {
-    "title": "EGA Beacon Network Browser",
+    "title": "Elixir Beacon Network Browser",
     "entryTypesOrder": [
       "individuals",
       "g_variants",
@@ -36,14 +36,14 @@
     "showAboutPage": true,
     "showContactPage": true,
     "colors": {
-      "primary": "#3176B1",
-      "darkPrimary": "#173D5D",
-      "secondary": "#FFE4D4",
-      "tertiary": "#B1AC31"
+      "primary": "#023452",
+      "darkPrimary": "#023452",
+      "secondary": "#f47d20",
+      "tertiary": "#bebf32"
     },
 
     "logos": {
-      "main": "/assets/logos/main.svg",
+      "main": "/assets/logos/elixir.png",
       "mainSecondary": "assets/logos/maingrey.svg",
       "founders": [
         "/assets/logos/founder1.svg",

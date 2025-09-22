@@ -1,7 +1,7 @@
 import { Box, Typography, CircularProgress, Fade } from "@mui/material";
 
 export default function Loader({ message, variant = "default" }) {
-  const loaderColor = CONFIG.ui.colors.primary;
+  const loaderColor = CONFIG.ui.colors.secondary;
 
   const isInline = variant === "inline";
 

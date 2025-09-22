@@ -16,7 +16,7 @@ import { useSelectedEntry } from "../../context/SelectedEntryContext";
 import Loader from "../../common/Loader";
 import Papa from "papaparse";
 import { PATH_SEGMENT_TO_ENTRY_ID } from "../../common/textFormatting";
-
+import { useAuth } from "react-oidc-context";
 
 const style = {
   position: 'absolute',
@@ -41,7 +41,14 @@ const ResultsTableModal = ({ open, subRow, onClose }) => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [dataTable, setDataTable] = useState([]);
   const [url, setUrl] = useState("");
+
   const entryTypeId = PATH_SEGMENT_TO_ENTRY_ID[selectedPathSegment];
+
+  const auth = useAuth();
+  
+  const isLogged = auth.isAuthenticated && !auth.user?.expired;
+  
+  const token = isLogged ? auth.user?.access_token : null;
 
   const parseType = (item) => {
     switch(item) {
@@ -95,13 +102,17 @@ const ResultsTableModal = ({ open, subRow, onClose }) => {
         query.pagination.limit = 5000;
       }
 
-      const requestOptions = {
+      let requestOptions = {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(query)
       };
+
+      if(token && token !== "undefined") {
+        requestOptions.headers.Authorization = `Bearer ${token}`
+      }
 
       const response = await fetch(url, requestOptions);
       const data = await response.json();
@@ -259,6 +270,12 @@ const headersSet = new Set();
           body: JSON.stringify(query)
         };
         
+        if(token && token !== "undefined") {
+          requestOptions.headers.Authorization = `Bearer ${token}`
+        }
+
+        console.log("requestOptions", requestOptions);
+
         const response = await fetch(url, requestOptions);
         const data = await response.json();
         const results = data.response?.resultSets;
