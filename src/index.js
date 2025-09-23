@@ -22,9 +22,8 @@ import { AuthProvider } from "react-oidc-context";
       redirect_uri: `https://beacons.bsc.es/`,
       post_logout_redirect_uri: `https://beacons.bsc.es/`,
       response_type: "code",
-      scope: "openid profile email offline_access",
+      scope: "openid profile email",
       automaticSilentRenew: false,
-      loadUserInfo: true,
       onSigninCallback: () => {
         const to = sessionStorage.getItem("returnTo") || "/";
         sessionStorage.removeItem("returnTo");
