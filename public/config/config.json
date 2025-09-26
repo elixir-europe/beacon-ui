@@ -16,7 +16,7 @@
     "BND"
   ],
   "ui": {
-    "title": "Elixir Beacon Network Browser",
+    "title": "ELIXIR Beacon Network Browser",
     "entryTypesOrder": [
       "individuals",
       "g_variants",
@@ -52,7 +52,7 @@
       ]
     },
     "commonFilters": {
-      "filterCategories": ["Demographics", "Cancer", "Covid"],
+      "filterCategories": ["Demographics", "Cancer", "COVID"],
       "filterLabels": {
         "Demographics": [
           {
@@ -135,7 +135,7 @@
             "id": "NCIT:C65110"
           }
         ],
-        "Covid": [
+        "COVID": [
           {
             "key": "COVID-19",
             "label": "COVID-19",
