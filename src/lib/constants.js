@@ -1,19 +1,19 @@
 export const BEACON_NETWORK_COLUMNS = [
   {
     id: "beacon_dataset",
-    label: "Beacon > Dataset",
+    label: "Source Beacon x Dataset",
     align: "left",
     width: "30%",
   },
   {
     id: "maturity",
-    label: "Beacon Maturity",
+    label: "Maturity",
     align: "left",
     width: "20%",
   },
   {
     id: "datasets_count",
-    label: "nº of Datasets",
+    label: "Identified Datasets",
     align: "left",
     numeric: true,
     width: "20%",
@@ -40,13 +40,13 @@ export const BEACON_SINGLE_COLUMNS = [
   },
   {
     id: 'maturity',
-    label: "Beacon Maturity",
+    label: "Maturity",
     align: 'left',
     width: '20%'
   },
   {
     id: 'datasets_count',
-    label: "nº of Datasets",
+    label: "Identified Datasets",
     align: 'left',
     numeric: true,
     width: '20%'

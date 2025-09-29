@@ -75,7 +75,11 @@ export default function ResultsTable() {
   };
 
   const getErrors = (data) => {
-    return `error code: ${data.error.errorCode}; error message: ${data.error.errorMessage}`;
+    if(data.error) {
+      return `error code: ${data.error.errorCode}; error message: ${data.error.errorMessage}`;
+    } else {
+      return null;
+    }
   };
 
   const findBeaconIcon = (beaconId) => {

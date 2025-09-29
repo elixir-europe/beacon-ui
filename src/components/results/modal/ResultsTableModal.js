@@ -41,6 +41,7 @@ const ResultsTableModal = ({ open, subRow, onClose }) => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [dataTable, setDataTable] = useState([]);
   const [url, setUrl] = useState("");
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
 
   const entryTypeId = PATH_SEGMENT_TO_ENTRY_ID[selectedPathSegment];
 
@@ -71,9 +72,7 @@ const ResultsTableModal = ({ open, subRow, onClose }) => {
 
   const handleClose = () => {
     setPage(0);
-    setTotalPages(0);
-    setTotalItems(0);
-    setDataTable([]);
+    setRefreshTrigger(prev => prev + 1);
     onClose();
   };
 
@@ -150,7 +149,8 @@ const ResultsTableModal = ({ open, subRow, onClose }) => {
     }
   }
 
-const headersSet = new Set();
+  const headersSet = new Set();
+
   dataTable.forEach(obj => {
     Object.keys(obj).forEach(key => {
       headersSet.add(key);
@@ -274,8 +274,6 @@ const headersSet = new Set();
           requestOptions.headers.Authorization = `Bearer ${token}`
         }
 
-        console.log("requestOptions", requestOptions);
-
         const response = await fetch(url, requestOptions);
         const data = await response.json();
         const results = data.response?.resultSets;
@@ -299,7 +297,7 @@ const headersSet = new Set();
     }
 
     fetchTableItems();
-  }, [subRow, page, rowsPerPage]);
+  }, [subRow, page, rowsPerPage, refreshTrigger]);
 
   return (
     <Modal

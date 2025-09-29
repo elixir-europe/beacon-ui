@@ -2,7 +2,7 @@ import { Box, Typography, Link as MuiLink } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import maingrey from "../assets/logos/maingrey.svg";
 import crg from "../assets/logos/crg.svg";
-import bsc from "../assets/logos/bsc.svg";
+import bsc from "../assets/logos/bsc.png";
 
 export default function Footer({ navItems }) {
   return (
@@ -64,20 +64,19 @@ export default function Footer({ navItems }) {
           >
             <img src={maingrey} alt="EGA Logo" style={{ height: 34 }} />
           </MuiLink>
-
-          <MuiLink
-            href="https://www.crg.eu/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={crg} alt="CRG Logo" style={{ height: 34 }} />
-          </MuiLink>
           <MuiLink
             href="https://www.bsc.es/"
             target="_blank"
             rel="noopener noreferrer"
           >
             <img src={bsc} alt="BSC Logo" style={{ height: 34 }} />
+          </MuiLink>
+          <MuiLink
+            href="https://www.crg.eu/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src={crg} alt="CRG Logo" style={{ height: 34 }} />
           </MuiLink>
         </Box>
 
