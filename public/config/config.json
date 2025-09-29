@@ -26,13 +26,8 @@
       "cohorts",
       "datasets"
     ],
-    "showExternalNavBarLink": true,
-    "externalNavBarLink": [
-      {
-        "label": "AF Browser",
-        "url": "https://af-beacon.ega-archive.org/"
-      }
-    ],
+    "showExternalNavBarLink": false,
+
     "showAboutPage": true,
     "showContactPage": true,
     "colors": {

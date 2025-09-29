@@ -26,9 +26,6 @@ export default function SearchButton({ setSelectedTool }) {
 
   const token = isLogged ? auth.user?.access_token : null;
 
-  console.log("token", token);
-
-
   const handleSearch = async () => {
     const entryTypeId = PATH_SEGMENT_TO_ENTRY_ID[selectedPathSegment];
     const configForEntry = entryTypesConfig?.[entryTypeId];
