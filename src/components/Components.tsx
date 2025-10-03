@@ -17,6 +17,7 @@ import {
   alpha,
 } from "@mui/material";
 
+import { Link as RouterLink } from "react-router-dom";
 import WidgetsIcon from "@mui/icons-material/Widgets";
 import SearchIcon from "@mui/icons-material/Search";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
@@ -165,7 +166,7 @@ export default function Components() {
                 </Button>
                 {c.source && (
                   <Tooltip title="Source on GitHub">
-                    <MUILink href={c.source} target="_blank" rel="noreferrer" sx={{ lineHeight: 0 }}>
+                    <MUILink component={RouterLink} to="/components"  target="_blank" rel="noreferrer" sx={{ lineHeight: 0 }}>
                       <OpenInNewIcon fontSize="small" />
                     </MUILink>
                   </Tooltip>

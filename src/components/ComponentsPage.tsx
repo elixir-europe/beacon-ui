@@ -13,6 +13,7 @@ import {
   Button,
   Grid
 } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
 import { alpha } from "@mui/material/styles";
 import WidgetsIcon from "@mui/icons-material/Widgets";
 import SearchIcon from "@mui/icons-material/Search";
@@ -163,7 +164,7 @@ export default function ComponentsPage() {
                 </Typography>
               </CardContent>
               <CardActions sx={{ justifyContent: "space-between", px: 2, pb: 2 }}>
-                <Button size="small" variant="contained" href={c.href}>
+                <Button size="small" variant="contained" component={RouterLink} to={c.href}>
                   Open docs
                 </Button>
                 {c.source && (
