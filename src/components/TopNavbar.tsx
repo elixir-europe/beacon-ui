@@ -68,7 +68,7 @@ export default function TopNavbar({
             />
           )}
           <Typography variant="h6" sx={{ fontWeight: 800, letterSpacing: 0.2 }}>
-            ELIXR Beacon <Box component="span" sx={{ color: "primary.main" }}>UI</Box> Docs
+            ELIXIR Beacon <Box component="span" sx={{ color: "primary.main" }}>UI</Box> Docs
           </Typography>
         </Box>
 

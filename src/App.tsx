@@ -29,7 +29,6 @@ export default function App() {
     localStorage.setItem("beacon-docs-mode", mode);
   }, [mode]);
 
-  // Match your AppBar/Toolbar height. 64–68px is typical desktop.
   const HEADER_HEIGHT = 88;
 
   const theme = useMemo(
