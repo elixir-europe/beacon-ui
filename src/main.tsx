@@ -7,7 +7,10 @@ const root = createRoot(document.getElementById("root")!);
 
 (async () => {
   try {
-    const cfgRes = await fetch("/config/config.json", { cache: "no-store" });
+    const base = import.meta.env.BASE_URL; 
+    const url = `${base}config/config.json`;
+
+    const cfgRes = await fetch(url, { cache: "no-store" });
     if (!cfgRes.ok) throw new Error(`config.json ${cfgRes.status}`);
     const cfg = await cfgRes.json();
 
