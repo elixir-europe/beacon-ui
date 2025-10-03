@@ -35,6 +35,8 @@ export default function TopNavbar({
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const isOpen = Boolean(anchorEl);
 
+  const BASE = import.meta.env.BASE_URL; 
+
   return (
     <AppBar
       position="fixed"

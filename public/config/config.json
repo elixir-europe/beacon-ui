@@ -38,12 +38,12 @@
     },
 
     "logos": {
-      "main": "/assets/logos/elixir.png",
+      "main": "assets/logos/elixir.png",
       "mainSecondary": "assets/logos/maingrey.svg",
       "founders": [
-        "/assets/logos/founder1.svg",
-        "/assets/logos/founder2.svg",
-        "/assets/logos/founder3.svg"
+        "assets/logos/founder1.svg",
+        "assets/logos/founder2.svg",
+        "assets/logos/founder3.svg"
       ]
     },
     "commonFilters": {
