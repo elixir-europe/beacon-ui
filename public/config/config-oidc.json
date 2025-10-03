@@ -1,0 +1,4 @@
+{
+  "oidcUrl": "https://test.beacons.bsc.es/auth/realms/beacon-network",
+  "oidcClientId": "beacon-network-ui"
+}
