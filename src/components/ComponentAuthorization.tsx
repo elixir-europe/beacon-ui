@@ -45,7 +45,7 @@ export default function ComponentAuthorizationDocs() {
       </Stack>
 
       <Typography variant="h3" sx={{ fontWeight:800 }} gutterBottom>
-        Sign‑in (OIDC) and permissions — explained for non‑developers
+        Sign‑in (OIDC) and permissions
       </Typography>
       <Typography color="text.secondary" paragraph>
         Beacon‑UI can ask users to sign in using an identity provider (IdP) via the OpenID Connect (OIDC) standard. After a
