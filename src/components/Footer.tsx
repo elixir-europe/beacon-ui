@@ -1,6 +1,3 @@
-// components/Footer.tsx
-import React from "react";
-
 export default function Footer() {
   return (
     <footer style={{ width: "100%", borderTop: "1px solid rgba(0,0,0,0.12)" }}>

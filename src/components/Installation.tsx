@@ -1,4 +1,3 @@
-import React from "react";
 import { Box, Typography, Stack, Chip, Alert, Link as MUILink } from "@mui/material";
 import LinkIcon from "@mui/icons-material/Link";
 

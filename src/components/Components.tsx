@@ -1,5 +1,4 @@
-// src/components/Components.tsx
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import {
   Box,
   Container,
@@ -132,7 +131,7 @@ export default function Components() {
 
       <Grid container spacing={2} sx={{ mt: 1 }}>
         {items.map((c) => (
-          <Grid item xs={12} sm={6} md={4} key={c.id}>
+          <Grid size={{ xs: 12, sm: 6, md: 4 }}  key={c.id}>
             <Card
               variant="outlined"
               sx={{

@@ -58,7 +58,6 @@ export default function App() {
 
   const CFG: any = (globalThis as any).CONFIG ?? {};
   const UI = CFG.ui ?? {};
-  const title = UI.title || "ELIXIR Beacon UI Docs";
   const logoUrl = UI.logos?.main;
   const githubUrl = "https://github.com/elixir-europe/beacon-ui";
 
@@ -74,7 +73,6 @@ export default function App() {
       <CssBaseline />
 
       <TopNavbar
-        title={title}
         logoUrl={logoUrl}
         navItems={navItems}
         mode={mode}

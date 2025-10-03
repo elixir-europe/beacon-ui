@@ -135,7 +135,7 @@ export default function ComponentAuthorizationDocs() {
                 {s.icon}
               </Box>
               <Box>
-                <Typography sx={{ fontWeight: 700 }} sx={{ lineHeight: 1.4 }}>
+                <Typography sx={{ fontWeight: 700, lineHeight: 1.4 }}>
                   {idx + 1}. {s.title}
                 </Typography>
                 <Typography color="text.secondary" sx={{ mt: 0.5 }}>

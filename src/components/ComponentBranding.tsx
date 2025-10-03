@@ -162,10 +162,10 @@ export default function ComponentBranding() {
       </Typography>
 
       <Grid container spacing={2} sx={{ mb: 2 }}>
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <Card variant="outlined">
             <CardContent>
-              <Stack direction="row" spacing={1} alignItems="center" mb={1}>
+              <Stack direction="row" spacing={1} sx={{ alignItems: "center", mb: 1 }}>
                 <PaletteIcon fontSize="small" />
                 <Typography sx={{ fontWeight: 700 }}>Preview</Typography>
               </Stack>
@@ -178,7 +178,7 @@ export default function ComponentBranding() {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <Alert severity="info">
             Update these values in <code>config.json</code> to change the theme
             without code changes.
@@ -197,7 +197,7 @@ export default function ComponentBranding() {
       </Typography>
 
       <Grid container spacing={2} sx={{ mb: 2 }}>
-        <Grid item xs={12} md={7}>
+        <Grid size={{ xs: 12, md: 7 }}>
           <Card variant="outlined">
             <CardContent>
               <Stack direction="row" spacing={1} alignItems="center" mb={1}>
@@ -257,7 +257,7 @@ export default function ComponentBranding() {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={12} md={5}>
+        <Grid size={{ xs: 12, md: 5 }}>
           <Typography color="text.secondary" sx={{ mb: 1 }}>
             Example snippet:
           </Typography>

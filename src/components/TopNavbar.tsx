@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -20,14 +20,12 @@ import Brightness7Icon from "@mui/icons-material/Brightness7";
 type NavItem = { label: string; to: string };
 
 export default function TopNavbar({
-  title = "ELIXIR Beacon UI Docs",
   logoUrl,
   navItems,
   mode,
   onToggleMode,
   githubUrl,
 }: {
-  title?: string;
   logoUrl?: string;
   navItems: NavItem[];
   mode: "light" | "dark";
