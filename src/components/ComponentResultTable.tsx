@@ -1,4 +1,3 @@
-import React from "react";
 import { Box, Container, Typography, Stack, Chip, Divider, Alert, Link as MUILink } from "@mui/material";
 import TableChartIcon from "@mui/icons-material/TableChart";
 
@@ -28,7 +27,7 @@ export default function ComponentResultTable() {
         <Chip icon={<TableChartIcon />} label="Component: Results Table" color="primary" />
       </Stack>
 
-      <Typography variant="h3" fontWeight={800} gutterBottom>
+      <Typography variant="h3" sx={{ fontWeight: 800 }} gutterBottom>
         Results Table — what it shows
       </Typography>
       <Typography color="text.secondary" paragraph>

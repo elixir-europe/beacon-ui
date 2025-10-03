@@ -1,4 +1,3 @@
-import React from "react";
 import { Box, Container, Typography, Stack, Chip, Divider, Alert, Link as MUILink } from "@mui/material";
 import NavigationIcon from "@mui/icons-material/Navigation";
 
@@ -28,7 +27,7 @@ export default function ComponentNavbarDocs() {
         <Chip icon={<NavigationIcon />} label="Component: Navbar" color="primary" />
       </Stack>
 
-      <Typography variant="h3" fontWeight={800} gutterBottom>
+      <Typography variant="h3" sx={{ fontWeight: 800 }} gutterBottom>
         Navbar — what it is
       </Typography>
       <Typography color="text.secondary" paragraph>

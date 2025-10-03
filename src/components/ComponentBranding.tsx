@@ -90,7 +90,7 @@ export default function ComponentBranding() {
         <Chip icon={<BrushIcon />} label="Branding" color="primary" />
       </Stack>
 
-      <Typography variant="h3" fontWeight={800} gutterBottom>
+      <Typography variant="h3" sx={{ fontWeight: 800 }} gutterBottom>
         Branding — where it comes from and how to change it
       </Typography>
       <Typography color="text.secondary" paragraph>
@@ -167,7 +167,7 @@ export default function ComponentBranding() {
             <CardContent>
               <Stack direction="row" spacing={1} alignItems="center" mb={1}>
                 <PaletteIcon fontSize="small" />
-                <Typography fontWeight={700}>Preview</Typography>
+                <Typography sx={{ fontWeight: 700 }}>Preview</Typography>
               </Stack>
               <Stack spacing={1.25}>
                 <Swatch label="primary" value={colors.primary} />
@@ -202,7 +202,7 @@ export default function ComponentBranding() {
             <CardContent>
               <Stack direction="row" spacing={1} alignItems="center" mb={1}>
                 <ImageIcon fontSize="small" />
-                <Typography fontWeight={700}>Preview</Typography>
+                <Typography sx={{ fontWeight: 700 }}>Preview</Typography>
               </Stack>
 
               <Stack spacing={2}>
@@ -244,15 +244,9 @@ export default function ComponentBranding() {
                     <strong>Founders / partners</strong>{" "}
                     (<code>ui.logos.founders[]</code>)
                   </Typography>
-                  <Stack direction="row" spacing={2} flexWrap="wrap">
+                  <Stack direction="row" spacing={2} sx={{ flexWrap: "wrap" }}>
                     {(logos.founders || []).map((src: string) => (
-                      <Box
-                        key={src}
-                        component="img"
-                        src={src}
-                        alt="Founder logo"
-                        sx={{ height: 36, objectFit: "contain" }}
-                      />
+                      <Box key={src} component="img" src={src} alt="Founder logo" sx={{ height: 36, objectFit: "contain" }} />
                     ))}
                     {(!logos.founders || logos.founders.length === 0) && (
                       <Typography color="text.secondary">— empty —</Typography>

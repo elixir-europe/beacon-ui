@@ -27,7 +27,7 @@ export default function ComponentGenomicAnnotations() {
         <Chip icon={<BiotechIcon />} label="Component: Genomic Annotations" color="primary" />
       </Stack>
 
-      <Typography variant="h3" fontWeight={800} gutterBottom>
+      <Typography variant="h3" sx={{ fontWeight: 800 }} gutterBottom>
         Genomic Annotations — quick variant shortcuts
       </Typography>
       <Typography color="text.secondary" paragraph>

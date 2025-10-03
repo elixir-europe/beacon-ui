@@ -106,7 +106,7 @@ export default function Components() {
         <Chip icon={<WidgetsIcon />} label="Components" color="primary" />
       </Stack>
 
-      <Typography variant="h3" fontWeight={800} gutterBottom>
+      <Typography variant="h3" sx={{ fontWeight: 800 }} gutterBottom>
         Components
       </Typography>
       <Typography color="text.secondary" paragraph>
@@ -145,7 +145,7 @@ export default function Components() {
             >
               <CardContent sx={{ flexGrow: 1 }}>
                 <Stack direction="row" spacing={1} alignItems="center" mb={0.5}>
-                  <Typography variant="h6" fontWeight={700}>
+                  <Typography variant="h6" sx={{ fontWeight: 700 }}>
                     {c.title}
                   </Typography>
                   <Chip

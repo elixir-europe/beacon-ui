@@ -29,7 +29,7 @@ export default function Installation() {
         <Chip label="Docker" variant="outlined" />
       </Stack>
 
-      <Typography variant="h3" fontWeight={800} gutterBottom>
+      <Typography variant="h3" sx={{ fontWeight: 800 }} gutterBottom>
         Beacon-UI · Installation
       </Typography>
 

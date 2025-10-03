@@ -1,4 +1,3 @@
-import React from "react";
 import { Box, Container, Typography, Stack, Chip, Divider, Alert, Link as MUILink } from "@mui/material";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 
@@ -28,7 +27,7 @@ export default function ComponentCommonFilters() {
         <Chip icon={<FilterAltIcon />} label="Component: Common Filters" color="primary" />
       </Stack>
 
-      <Typography variant="h3" fontWeight={800} gutterBottom>
+      <Typography variant="h3" sx={{ fontWeight: 800 }} gutterBottom>
         Common Filters — quick, curated filters
       </Typography>
       <Typography color="text.secondary" paragraph>

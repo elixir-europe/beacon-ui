@@ -29,7 +29,7 @@ export default function ComponentSearchBoxDocs() {
         <Chip icon={<SearchIcon />} label="Component: Search Box" color="primary" />
       </Stack>
 
-      <Typography variant="h3" fontWeight={800} gutterBottom>
+      <Typography variant="h3" sx={´{ fontWeight: 800 }} gutterBottom>
         Search Box — how it works
       </Typography>
       <Typography color="text.secondary" paragraph>

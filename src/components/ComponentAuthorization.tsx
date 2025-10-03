@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Box,
   Container,
@@ -45,7 +44,7 @@ export default function ComponentAuthorizationDocs() {
         <Chip icon={<LockIcon />} label="Authentication & Authorization" color="primary" />
       </Stack>
 
-      <Typography variant="h3" fontWeight={800} gutterBottom>
+      <Typography variant="h3" sx={{ fontWeight:800 }} gutterBottom>
         Sign‑in (OIDC) and permissions — explained for non‑developers
       </Typography>
       <Typography color="text.secondary" paragraph>
@@ -136,7 +135,7 @@ export default function ComponentAuthorizationDocs() {
                 {s.icon}
               </Box>
               <Box>
-                <Typography fontWeight={700} sx={{ lineHeight: 1.4 }}>
+                <Typography sx={{ fontWeight: 700 }} sx={{ lineHeight: 1.4 }}>
                   {idx + 1}. {s.title}
                 </Typography>
                 <Typography color="text.secondary" sx={{ mt: 0.5 }}>

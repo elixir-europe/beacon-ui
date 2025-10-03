@@ -9,7 +9,7 @@ export default function Introduction() {
         <Chip icon={<InfoIcon />} label="Introduction" color="primary" />
       </Stack>
 
-      <Typography variant="h3" fontWeight={800} gutterBottom>
+      <Typography variant="h3" sx={{ fontWeight: 800 }} gutterBottom>
         What is Beacon-UI?
       </Typography>
 

@@ -1,4 +1,3 @@
-import React from "react";
 import { Box, Container, Typography, Stack, Chip, Divider, Alert, Link as MUILink } from "@mui/material";
 import HubIcon from "@mui/icons-material/Hub";
 
@@ -28,7 +27,7 @@ export default function ComponentBeaconNetworkBanner() {
         <Chip icon={<HubIcon />} label="Component: Beacon Network Banner" color="primary" />
       </Stack>
 
-      <Typography variant="h3" fontWeight={800} gutterBottom>
+      <Typography variant="h3" sx={{ fontWeight: 800 }} gutterBottom>
         Beacon Network Banner — who’s in the network
       </Typography>
       <Typography color="text.secondary" paragraph>
