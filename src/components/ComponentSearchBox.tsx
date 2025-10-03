@@ -1,4 +1,3 @@
-import React from "react";
 import { Box, Container, Typography, Stack, Chip, Divider, Alert, Link as MUILink } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
@@ -29,7 +28,7 @@ export default function ComponentSearchBoxDocs() {
         <Chip icon={<SearchIcon />} label="Component: Search Box" color="primary" />
       </Stack>
 
-      <Typography variant="h3" sx={´{ fontWeight: 800 }} gutterBottom>
+      <Typography variant="h3" sx={{ fontWeight: 800 }} gutterBottom>
         Search Box — how it works
       </Typography>
       <Typography color="text.secondary" paragraph>
@@ -39,7 +38,6 @@ export default function ComponentSearchBoxDocs() {
 
       <Divider sx={{ my: 3 }} />
 
-      {/* 1. Where data comes from */}
       <Typography variant="h5" gutterBottom>
         1) Where does it get its options and send queries?
       </Typography>
@@ -67,7 +65,6 @@ export default function ComponentSearchBoxDocs() {
         (network). The Search Box sends requests to these, appending the selected path like <code>/individuals</code> or <code>/g_variants</code>.
       </Alert>
 
-      {/* 2. The result type step */}
       <Typography variant="h5" gutterBottom sx={{ mt: 1 }}>
         2) Choosing a <em>Result type</em>
       </Typography>
@@ -119,7 +116,6 @@ export default function ComponentSearchBoxDocs() {
         </li>
       </Box>
 
-      {/* 4. Where it actually searches */}
       <Typography variant="h5" gutterBottom sx={{ mt: 3 }}>
         Filtering terms — data source & how to use
       </Typography>
@@ -172,7 +168,6 @@ export default function ComponentSearchBoxDocs() {
         </li>
       </Box>
 
-      {/* 5. Example request */}
       <Typography variant="h5" gutterBottom sx={{ mt: 3 }}>
         5) Example request (Individuals filtered by <code>female</code>)
       </Typography>
@@ -200,7 +195,6 @@ export default function ComponentSearchBoxDocs() {
         .
       </Typography>
 
-      {/* 6. Run the search */}
       <Typography variant="h5" gutterBottom sx={{ mt: 3 }}>
         6) Run the search & see results
       </Typography>
