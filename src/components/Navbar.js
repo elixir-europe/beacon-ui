@@ -69,7 +69,6 @@ export default function Navbar({ title, main, navItems }) {
         post_logout_redirect_uri: window.location.origin
       });
     } catch (e) {
-      console.error("signoutRedirect failed", e);
       await auth.removeUser();
       window.location.assign(window.location.origin);
     }

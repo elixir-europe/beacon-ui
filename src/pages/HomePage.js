@@ -24,7 +24,6 @@ export default function HomePage({ selectedTool, setSelectedTool }) {
   const hasOMOPFilters = CONFIG.omop;
 
   useEffect(() => {
-    console.log("1- hasOMOPFilters: ", hasOMOPFilters);
     if (hasOMOPFilters) setSearchHeight(420);
   }, [hasOMOPFilters]);
 
