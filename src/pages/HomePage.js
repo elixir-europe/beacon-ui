@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Box } from "@mui/material";
 import Founders from "../components/Founders";
 import FiltersContainer from "../components/filters/FiltersContainer";
@@ -20,6 +20,13 @@ export default function HomePage({ selectedTool, setSelectedTool }) {
     !!CONFIG.ui?.commonFilters?.filterCategories?.length &&
     !!CONFIG.ui?.commonFilters?.filterLabels &&
     Object.keys(CONFIG.ui.commonFilters.filterLabels).length > 0;
+
+  const hasOMOPFilters = CONFIG.omop;
+
+  useEffect(() => {
+    console.log("1- hasOMOPFilters: ", hasOMOPFilters);
+    if (hasOMOPFilters) setSearchHeight(420);
+  }, [hasOMOPFilters]);
 
   const shouldShowFilters =
     hasGenomicAnnotationsConfig || hasCommonFiltersConfig;
@@ -45,7 +52,15 @@ export default function HomePage({ selectedTool, setSelectedTool }) {
         >
           <Founders />
           <Search
-            onHeightChange={setSearchHeight}
+            onHeightChange={(h) => {
+             // acepta sólo números; si viene un objeto, intenta sacarlo
+              const n =
+                typeof h === "number"
+                  ? h
+                  : Number(h?.height ?? h?.lg ?? h?.md ?? h?.value);
+              if (Number.isFinite(n)) setSearchHeight(n);
+              // si no es número, ignóralo (no guardes objetos en state)
+            }}
             selectedTool={selectedTool}
             setSelectedTool={setSelectedTool}
           />
@@ -59,12 +74,7 @@ export default function HomePage({ selectedTool, setSelectedTool }) {
               mt: { xs: "0px", md: "42px" },
               mb: { xs: "25px", lg: "0px" },
               alignSelf: "flex-start",
-              height: {
-                lg: `${searchHeight}px`,
-                md: `${searchHeight}px`,
-                sm: "auto",
-                xs: "auto",
-              },
+              height: hasOMOPFilters ? 520 : "auto",
               p: 0,
               borderRadius: "12px",
               display: "flex",
@@ -73,9 +83,10 @@ export default function HomePage({ selectedTool, setSelectedTool }) {
             }}
           >
             <FiltersContainer
-              searchHeight={searchHeight}
+              searchHeight={hasOMOPFilters ? 485 : searchHeight}
               hasCommonFiltersConfig={hasCommonFiltersConfig}
               hasGenomicAnnotationsConfig={hasGenomicAnnotationsConfig}
+              hasOMOPFilters={hasOMOPFilters}
             />
           </Box>
         )}
@@ -100,7 +111,7 @@ export default function HomePage({ selectedTool, setSelectedTool }) {
       </Box>
       <Box
         sx={{
-          marginTop: { lg: "-30px", md: "-30px", sm: "20px", xs: "0px" },
+          marginTop: { lg: hasOMOPFilters ? "10px" :"-30px", md: hasOMOPFilters ? "10px" :"-30px", sm: hasOMOPFilters ? "10px" :"200px", xs: hasOMOPFilters ? "10px" :"20px" },
           marginBottom: "30px",
         }}
       >

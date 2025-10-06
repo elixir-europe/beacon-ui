@@ -32,7 +32,7 @@ const style = {
 };
 
 const ResultsTableModal = ({ open, subRow, onClose }) => {
-  const { selectedPathSegment, selectedFilter } = useSelectedEntry();
+  const { selectedPathSegment, selectedFilter, omopFilters } = useSelectedEntry();
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
@@ -95,7 +95,7 @@ const ResultsTableModal = ({ open, subRow, onClose }) => {
       setLoadingDownload(true);
       const url = `${CONFIG.apiUrl}/${tableType}/${subRow.id}/${selectedPathSegment}`;
 
-      let query = queryBuilder(page, entryTypeId);
+      let query = queryBuilder(page, omopFilters, entryTypeId);
 
       if (query?.pagination) {
         query.pagination.limit = 5000;
@@ -213,7 +213,7 @@ const ResultsTableModal = ({ open, subRow, onClose }) => {
     URL.revokeObjectURL(url);
   }
 
-  const queryBuilder = (page, entryTypeId) => {
+  const queryBuilder = (classicParams, omopParams, entryTypeId) => {
     let skipItems = page * rowsPerPage;
 
     let filter = {
@@ -232,25 +232,65 @@ const ResultsTableModal = ({ open, subRow, onClose }) => {
       },
     };
 
-    if(selectedFilter.length > 0) {
-      let filterData = selectedFilter.map((item) =>
-      {
-          if(item.operator) {
-            return {
-              id: item.field,
-              operator: item.operator,
-              value: item.value
-            }
-          } else {
-            return {
-              id: item.key ?? item.id,
-              scope: entryTypeId
-            }
-          }
+    const classicSrc = Array.isArray(classicParams) ? classicParams.filter(Boolean) : [];
+    const omopSrc    = Array.isArray(omopParams)    ? omopParams.filter(Boolean)    : [];
+
+    const classic = classicSrc.flatMap((item, idx) => {
+      try {
+        if (item && item.operator) {
+          const out = { id: item.field, operator: item.operator, value: item.value };
+          return [out];
         }
-      );
-      filter.query.filters = filterData;
-    }
+        const id = item?.key ?? item?.id;
+        if (!id) {
+          console.warn("[QB] classic without id", idx, item);
+          return [];
+        }
+        const out = { id, scope: entryId };
+        return [out];
+      } catch (e) {
+        console.error("[QB] classic error", idx, item, e);
+        return [];
+      }
+    });
+
+    const omop = omopSrc.flatMap((f, idx) => {
+      try {
+        const id = f?.id ?? f?.code;
+        if (!id) {
+          return [];
+        }
+        const t = String(f?.uiType || "checkbox").toLowerCase();
+
+        if (t === "checkbox" || f?.value === true) {
+          const out = { id, "includeDescendantTerms": true };
+          return [out];
+        }
+
+        if (t === "range") {
+          const min = f?.value?.min;
+          const max = f?.value?.max;
+          const parts = [];
+          if (min != null && String(min) !== "") parts.push({ id, operator: ">", value: Number(min) });
+          if (max != null && String(max) !== "") parts.push({ id, operator: "<", value: Number(max) });
+          return parts;
+        }
+
+        if (f?.value != null && String(f.value).trim() !== "") {
+          const out = { id, operator: "=", value: f.value };
+          return [out];
+        }
+
+        return [];
+      } catch (e) {
+        console.error("[QB] omop error", idx, f, e);
+        return [];
+      }
+    });
+
+    const all = [...classic, ...omop];
+
+    filter.query.filters = all;
     return filter;
   }
 

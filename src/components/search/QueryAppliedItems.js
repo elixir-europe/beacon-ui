@@ -10,7 +10,7 @@ export default function QueryAppliedItems({
   handleFilterRemove,
   variant = "removable",
 }) {
-  const { selectedFilter, setSelectedFilter } = useSelectedEntry();
+  const { selectedFilter, setSelectedFilter, omopFilters, setOmopFilters } = useSelectedEntry();
 
   const [expandedKey, setExpandedKey] = useState(false);
   const [message, setMessage] = useState(null);
@@ -37,6 +37,28 @@ export default function QueryAppliedItems({
     );
 
     setExpandedKey(null);
+  };
+
+  const formatOmopLabel = (f) => {
+    const [onto, code] = String(f.id || "").split(":");
+    const t = (f.uiType || "checkbox").toLowerCase();
+    if (t === "range") {
+      const min = f.value?.min;
+      const max = f.value?.max;
+      const parts = [];
+      if (min != null && min !== "") parts.push(`>${min}`);
+      if (max != null && max !== "") parts.push(`<${max}`);
+      return `${onto || "TERM"}:${code || ""}${parts.length ? " • " + parts.join(", ") : ""}`;
+    }
+    if (t === "text" || t === "select") {
+      return `${onto || "TERM"}:${code || ""}${f.value ? ` • = ${f.value}` : ""}`;
+    }
+    // checkbox
+    return `${onto || "TERM"}:${code || ""}`;
+  };
+
+  const removeOmop = (f) => {
+    setOmopFilters((prev) => prev.filter((x) => x.id !== f.id));
   };
 
   return (
@@ -76,6 +98,25 @@ export default function QueryAppliedItems({
               onDelete={() => handleFilterRemove(filter)}
               onScopeChange={handleScopeChange}
               bgColor={filter.bgColor || "common"}
+              expandedKey={expandedKey}
+              setExpandedKey={setExpandedKey}
+              variant={variant}
+            />
+          );
+        })}
+
+        {omopFilters.map((f) => {
+          const keyValue = `${f.id}__omop`;
+          return (
+            <FilterLabelRemovable
+              key={keyValue}
+              keyValue={keyValue}
+              label={formatOmopLabel(f)}
+              scope={null}
+              scopes={[]}
+              onDelete={() => removeOmop(f)}
+              onScopeChange={undefined}
+              bgColor={"omop"}
               expandedKey={expandedKey}
               setExpandedKey={setExpandedKey}
               variant={variant}

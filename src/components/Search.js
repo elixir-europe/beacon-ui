@@ -32,7 +32,8 @@ export default function Search({
   const { extraFilter, hasSearchResults } = useSelectedEntry();
   const { selectedPathSegment, setSelectedPathSegment } = useSelectedEntry();
   const { isLoaded, setIsLoaded } = useSelectedEntry();
-  
+  const { omopFilters } = useSelectedEntry();
+
   const [loading, setLoading] = useState(true);
   const [activeInput, setActiveInput] = useState(null);
   const [searchInput, setSearchInput] = useState("");
@@ -519,8 +520,9 @@ export default function Search({
           )}
         </Box>
         {extraFilter && <FilterTermsExtra />}
-        {selectedFilter.length > 0 && <QueryApplied />}
-
+      {((selectedFilter?.length ?? 0) > 0 || (omopFilters?.length ?? 0) > 0) && (
+        <QueryApplied />
+      )}
         <Box
           sx={{
             mt: 5,

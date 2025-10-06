@@ -11,7 +11,6 @@ export default function ResultsFilters() {
   } = useSelectedEntry();
 
   const handleFilterRemove = (item) => {
-    // If something has change, reload filter
     setLoadingData(false);
     setResultData([]);
     setHasSearchResult(false);

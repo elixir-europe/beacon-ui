@@ -5,6 +5,8 @@ import { Box } from "@mui/material";
 export default function BeaconTypeBanner() {
   const beaconType = CONFIG.beaconType;
 
+  const isOMOP = CONFIG.omop;
+
   const sharedStyles = {
     boxShadow: "0px 8px 11px 0px #9BA0AB24",
     minHeight: "218px",
@@ -15,6 +17,10 @@ export default function BeaconTypeBanner() {
     mb: 3,
     borderRadius: "8px",
   };
+
+  if(isOMOP) {
+    sharedStyles.marginTop = { lg: "35px", md: "35px", sm: "0px", xs: "0px" };
+  }
 
   let content = null;
 

@@ -15,6 +15,8 @@ export const SelectedEntryProvider = ({ children }) => {
   const [message, setMessage] = useState(null);
   const [hasSearchBeenTriggered, setHasSearchBeenTriggered] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [omopFilters, setOmopFilters] = useState([]);
+  const [searchJSON, setSearchJSON] = useState(null);
 
   return (
     <SelectedEntryContext.Provider
@@ -42,7 +44,11 @@ export const SelectedEntryProvider = ({ children }) => {
         hasSearchBeenTriggered,
         setHasSearchBeenTriggered,
         isLoaded,
-        setIsLoaded
+        setIsLoaded,
+        omopFilters,
+        setOmopFilters,
+        searchJSON,
+        setSearchJSON
       }}
     >
       {children}

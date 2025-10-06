@@ -1,6 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import ResultsFilters from "./ResultsFilters";
 import ResultsTable from "./ResultsTable";
+import ResultsQuery from "./ResultsQuery";
 
 export default function ResultsBox() {
   return (
@@ -12,6 +13,7 @@ export default function ResultsBox() {
       <Box
         sx={{
           pb: "5px",
+          display: "flex"
         }}
       >
         <Typography
@@ -24,7 +26,14 @@ export default function ResultsBox() {
           }}
         >
           Results
+          
         </Typography>
+        <Box
+            sx={{
+              paddingLeft: "20px",
+            }}>
+          <ResultsQuery />
+        </Box>
       </Box>
       <Box>
         <ResultsFilters />

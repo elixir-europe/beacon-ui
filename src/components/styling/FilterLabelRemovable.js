@@ -26,13 +26,19 @@ export default function FilterLabelRemovable({
   const isRemovable = variant === "removable";
   const isExpandable = isRemovable && scopes.length > 1;
 
+  const OMOP_BG = "#D9E9CF";
+
   const baseBgColor =
-    bgColor === "common"
+    bgColor === "omop"
+      ? OMOP_BG
+      : bgColor === "common"
       ? alpha(CONFIG.ui.colors.primary, 0.05)
       : alpha(CONFIG.ui.colors.secondary, 0.4);
 
   const hoverColor =
-    bgColor === "common"
+    bgColor === "omop"
+      ? OMOP_BG
+      : bgColor === "common"
       ? alpha(CONFIG.ui.colors.primary, 0.15)
       : alpha(CONFIG.ui.colors.secondary, 0.6);
 

@@ -17,7 +17,9 @@ export default function SearchButton({ setSelectedTool }) {
     setHasSearchBeenTriggered,
     loadingData,
     isLoaded,
-    setIsLoaded
+    setIsLoaded,
+    omopFilters,
+    setSearchJSON
   } = useSelectedEntry();
 
   const auth = useAuth();
@@ -32,8 +34,7 @@ export default function SearchButton({ setSelectedTool }) {
     const nonFilteredAllowed =
       configForEntry?.nonFilteredQueriesAllowed ?? true;
 
-    
-    if (!nonFilteredAllowed && selectedFilter.length === 0) {
+    if (!nonFilteredAllowed && selectedFilter.length === 0 && omopFilters.length === 0) {
       setMessage(COMMON_MESSAGES.addFilter);
       setResultData([]);
       setHasSearchResult(true);
@@ -50,8 +51,8 @@ export default function SearchButton({ setSelectedTool }) {
       const url = `${CONFIG.apiUrl}/${selectedPathSegment}`;
       let response;
 
-      const query = queryBuilder(selectedFilter, entryTypeId);
-      
+      const query = queryBuilder(selectedFilter, omopFilters, entryTypeId);
+
       let requestOptions = {
         method: "POST",
         headers: {
@@ -59,6 +60,8 @@ export default function SearchButton({ setSelectedTool }) {
         },
         body: JSON.stringify(query),
       };
+
+      setSearchJSON(requestOptions);
 
       if(token && token !== "undefined") {
         requestOptions.headers.Authorization = `Bearer ${token}`
@@ -123,40 +126,77 @@ export default function SearchButton({ setSelectedTool }) {
     }
   };
 
-  const queryBuilder = (params, entryId) => {
-    let filter = {
-      meta: {
-        apiVersion: "2.0",
-      },
+  const queryBuilder = (classicParams, omopParams, entryId) => {
+    const filter = {
+      meta: { apiVersion: "2.0" },
       query: {
         filters: [],
         includeResultsetResponses: "HIT",
-        pagination: {
-          skip: 0,
-          limit: 10,
-        },
+        pagination: { skip: 0, limit: 10 },
         testMode: false,
         requestedGranularity: "record",
       },
     };
 
-    let filterData = params.map((item) => {
-      if (item.operator) {
-        return {
-          id: item.field,
-          operator: item.operator,
-          value: item.value,
-        };
-      } else {
-        return {
-          id: item.key ?? item.id,
-          scope: entryId,
-        };
+    const classicSrc = Array.isArray(classicParams) ? classicParams.filter(Boolean) : [];
+    const omopSrc    = Array.isArray(omopParams)    ? omopParams.filter(Boolean)    : [];
+
+    const classic = classicSrc.flatMap((item, idx) => {
+      try {
+        if (item && item.operator) {
+          const out = { id: item.field, operator: item.operator, value: item.value };
+          return [out];
+        }
+        const id = item?.key ?? item?.id;
+        if (!id) {
+          console.warn("[QB] classic without id", idx, item);
+          return [];
+        }
+        const out = { id, scope: entryId };
+        return [out];
+      } catch (e) {
+        console.error("[QB] classic error", idx, item, e);
+        return [];
       }
     });
 
-    filter.query.filters = filterData;
+    const omop = omopSrc.flatMap((f, idx) => {
+      try {
+        const id = f?.id ?? f?.code;
+        if (!id) {
+          return [];
+        }
+        const t = String(f?.uiType || "checkbox").toLowerCase();
 
+        if (t === "checkbox" || f?.value === true) {
+          const out = { id, "includeDescendantTerms": true };
+          return [out];
+        }
+
+        if (t === "range") {
+          const min = f?.value?.min;
+          const max = f?.value?.max;
+          const parts = [];
+          if (min != null && String(min) !== "") parts.push({ id, operator: ">", value: Number(min) });
+          if (max != null && String(max) !== "") parts.push({ id, operator: "<", value: Number(max) });
+          return parts;
+        }
+
+        if (f?.value != null && String(f.value).trim() !== "") {
+          const out = { id, operator: "=", value: f.value };
+          return [out];
+        }
+
+        return [];
+      } catch (e) {
+        console.error("[QB] omop error", idx, f, e);
+        return [];
+      }
+    });
+
+    const all = [...classic, ...omop];
+
+    filter.query.filters = all;
     return filter;
   };
 

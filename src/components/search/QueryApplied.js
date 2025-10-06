@@ -9,9 +9,11 @@ export default function QueryApplied({ variant }) {
     setLoadingData,
     setResultData,
     setHasSearchResult,
+    omopFilters,
   } = useSelectedEntry();
 
   const primaryDarkColor = CONFIG.ui.colors.darkPrimary;
+
 
   const handleFilterRemove = (item) => {
     // If something has change, reload filter

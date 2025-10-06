@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import ResultsTableModalRow from './ResultsTableModalRow';
+import { BigArrayCell } from './BigArrayCell';
 
 const ResultsTableModalBody = ({ dataTable, totalItems, page, rowsPerPage, handleChangePage, handleChangeRowsPerPage }) => {
   const [expandedRow, setExpandedRow] = useState(null);
@@ -141,7 +142,11 @@ const ResultsTableModalBody = ({ dataTable, totalItems, page, rowsPerPage, handl
 
   function renderCellContent(item, column) {
     const value = item[column];
-    if (!value) return "-";
+    if (value == null) return "-";
+
+    if (Array.isArray(value)) {
+      return <BigArrayCell items={value} title={formatHeaderName(column)} />;
+    }
 
     return summarizeValue(value);
   }

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Box, Tabs, Tab, Typography } from "@mui/material";
 import CommonFilters from "./CommonFilters";
 import GenomicAnnotations from "../genomic/GenomicAnnotations";
+import OmopFilters from './OmopFilters.js'
 import { useSelectedEntry } from "../context/SelectedEntryContext";
 
 function TabPanel(props) {
@@ -28,6 +29,7 @@ export default function FiltersContainer({
   searchHeight,
   hasGenomicAnnotationsConfig,
   hasCommonFiltersConfig,
+  hasOMOPFilters
 }) {
   const { selectedPathSegment, entryTypes } = useSelectedEntry();
   const [tabValue, setTabValue] = useState(0);
@@ -43,7 +45,11 @@ export default function FiltersContainer({
   const hasGenomic = entryTypes.some(
     (entry) => entry.pathSegment === "g_variants"
   );
+
   const isGenomicSelected = selectedPathSegment === "g_variants";
+
+  const isOmopSelected = hasOMOPFilters;
+
 
   let tabs = [];
 
@@ -87,7 +93,18 @@ export default function FiltersContainer({
       });
     }
   }
+
+  if (isOmopSelected) {
+    tabs.unshift({
+      key: "omop",
+      label: "OMOP Filters",
+      component: <OmopFilters />,
+      title: "OMOP Filters",
+    });
+  }
+
   if (tabs.length === 0) return null;
+
 
   return (
     <Box>
