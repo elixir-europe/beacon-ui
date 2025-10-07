@@ -17,6 +17,7 @@ import ComponentBeaconNetworkBanner from "./components/ComponentBeaconNetworkBan
 import ComponentConfiguration from "./components/ComponentConfiguration";
 import ComponentAuthorization from "./components/ComponentAuthorization";
 import ComponentBranding from "./components/ComponentBranding";
+import ComponentOmop from "./components/ComponentOmop";
 
 export default function App() {
   const prefersDark = useMediaQuery("(prefers-color-scheme: dark)");
@@ -58,13 +59,14 @@ export default function App() {
   const CFG: any = (globalThis as any).CONFIG ?? {};
   const UI = CFG.ui ?? {};
   const logoUrl = UI.logos?.main;
-  const githubUrl = "https://github.com/elixir-europe/beacon-ui";
+  const githubUrl = "https://github.com/elixir-europe/beacon-ui/tree/dev";
 
   const navItems = [
     { label: "Configuration", to: "/configuration" },
     { label: "Components", to: "/components" },
     { label: "Authorization", to: "/authorization" },
     { label: "Branding", to: "/branding" },
+    { label: "OMOP", to: "/omop" },
   ];
 
   return (
@@ -103,6 +105,7 @@ export default function App() {
               <Route path="/configuration" element={<ComponentConfiguration />} />
               <Route path="/authorization" element={<ComponentAuthorization />} />
               <Route path="/branding" element={<ComponentBranding />} />
+              <Route path="/omop" element={<ComponentOmop />} />
 
               <Route path="*" element={<div>Not found</div>} />
             </Routes>

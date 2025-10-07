@@ -17,6 +17,8 @@ import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import VpnKeyIcon from "@mui/icons-material/VpnKey";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import PersonIcon from "@mui/icons-material/Person";
+import Zoom from 'react-medium-image-zoom';
+import 'react-medium-image-zoom/dist/styles.css';
 
 function CodeBlock({ code, lang = "ts" }: { code: string; lang?: string }) {
   return (
@@ -53,6 +55,20 @@ export default function ComponentAuthorizationDocs() {
         calling protected API endpoints (so users can see data they are allowed to see).
       </Typography>
 
+      <Box 
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+        }}>
+        <Zoom>
+          <img 
+            src={`${import.meta.env.BASE_URL}assets/images/navbar_login.png`}
+            width={600}
+            alt="Search" 
+          />
+        </Zoom>
+      </Box>
+
       <Alert severity="info" sx={{ my: 2 }}>
         <strong>Where is the login configuration?</strong> In <code>public/config/config-oidc.json</code> (served at
         <code> /config/config-oidc.json</code>). It contains the IdP URL and the client ID. <em>These are not passwords</em> — they are
@@ -60,7 +76,7 @@ export default function ComponentAuthorizationDocs() {
       </Alert>
 
       <Typography variant="h5" gutterBottom>
-        2) How the login flow works (what users see)
+        How the login flow works (what users see)
       </Typography>
       <Box
         sx={{

@@ -12,7 +12,7 @@ export default function Footer() {
           }}
         >
           <span style={{ opacity: 0.7 }}>
-            © {new Date().getFullYear()} Beacon-UI
+            © {new Date().getFullYear()} ELIXIR Europe
           </span>
           <nav style={{ display: "flex", gap: 16 }}>
             <a href="/privacy" style={{ textDecoration: "none", opacity: 0.85 }}>

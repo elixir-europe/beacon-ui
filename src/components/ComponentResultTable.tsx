@@ -1,5 +1,7 @@
 import { Box, Container, Typography, Stack, Chip, Divider, Alert, Link as MUILink } from "@mui/material";
 import TableChartIcon from "@mui/icons-material/TableChart";
+import Zoom from 'react-medium-image-zoom';
+import 'react-medium-image-zoom/dist/styles.css';
 
 function CodeBlock({ code, lang = "json" }: { code: string; lang?: string }) {
   return (
@@ -34,7 +36,20 @@ export default function ComponentResultTable() {
         The Results Table displays the outcome of your search. Each row summarizes results for a beacon (in a Beacon Network)
         or for your single service (single‑beacon deployments). You can expand rows for details and open a modal when available.
       </Typography>
-
+      <Box 
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+        }}>
+        <Zoom>
+          <img 
+            src={`${import.meta.env.BASE_URL}assets/images/results.png`}
+            width={600}
+            alt="Results" 
+          />
+        </Zoom>
+      </Box>
+    
       <Divider sx={{ my: 3 }} />
 
       {/* Data sources */}
@@ -94,11 +109,28 @@ export default function ComponentResultTable() {
         For single‑beacon deployments the exact set of columns may differ, as defined in <code>BEACON_SINGLE_COLUMNS</code>.
       </Typography>
 
-      {/* Interactions */}
       <Typography variant="h5" gutterBottom sx={{ mt: 3 }}>
         How to interact with the table
       </Typography>
       <Box component="ul" sx={{ pl: 3, color: "text.secondary" }}>
+        <li>
+          <strong>View Query JSON</strong> — click the <em>“View Query JSON”</em> button to see
+            the exact request body the UI will send to the Beacon API. This is useful if you want
+            to reproduce the search in tools like Postman or <code>curl</code>. The modal lets you <em>Copy</em> the JSON to the clipboard.
+          <Box 
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+            }}>
+            <Zoom>
+              <img 
+                src={`${import.meta.env.BASE_URL}assets/images/results_query.png`}
+                width={600}
+                alt="Results" 
+              />
+            </Zoom>
+          </Box>
+        </li>
         <li>
           <strong>Expand a row</strong> — click a row to toggle details (arrow icon up/down). This shows per‑dataset or per‑entry information
           using the nested view.
@@ -106,6 +138,19 @@ export default function ComponentResultTable() {
         <li>
           <strong>Open details modal</strong> — when available, click the grid icon to open a modal with a richer view of the selected row
           (lazy‑loaded for performance). In the provided implementation this is primarily used in single‑beacon mode.
+          <Box 
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+            }}>
+            <Zoom>
+              <img 
+                src={`${import.meta.env.BASE_URL}assets/images/results_modal.png`}
+                width={600}
+                alt="Results" 
+              />
+            </Zoom>
+          </Box>
         </li>
         <li>
           <strong>Contact a beacon</strong> — click the mail icon to open an email to the beacon’s contact address.
@@ -220,6 +265,19 @@ export default function ComponentResultTable() {
         <li>
           <strong>CSV download</strong>: exports the currently fetched records; the implementation requests up to 5,000 rows per download to
           keep files manageable.
+          <Box 
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+            }}>
+            <Zoom>
+              <img 
+                src={`${import.meta.env.BASE_URL}assets/images/results_modal_csv.png`}
+                width={600}
+                alt="Results" 
+              />
+            </Zoom>
+          </Box>
         </li>
         <li>
           <strong>Provenance</strong>: the modal shows the exact endpoint URL it queried so users can reproduce the call.
@@ -253,7 +311,7 @@ export default function ComponentResultTable() {
         <MUILink href="https://beacons.bsc.es/beacon-network/v2.0.0/info" target="_blank" rel="noreferrer">
           /info (organization logo / contact)
         </MUILink>
-        <MUILink href="https://beacons.bsc.es/beacon-network/v2.0.0/individuals" target="_blank" rel="noreferrer">
+        <MUILink href="https://beacons.bsc.es/beacon-network/v2.0.0" target="_blank" rel="noreferrer">
           Example results endpoint
         </MUILink>
       </Stack>

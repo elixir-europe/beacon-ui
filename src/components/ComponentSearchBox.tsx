@@ -1,5 +1,7 @@
 import { Box, Container, Typography, Stack, Chip, Divider, Alert, Link as MUILink } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import Zoom from 'react-medium-image-zoom';
+import 'react-medium-image-zoom/dist/styles.css';
 
 function CodeBlock({ code, lang = "text" }: { code: string; lang?: string }) {
   return (
@@ -22,6 +24,7 @@ ${code}`}</code>
 }
 
 export default function ComponentSearchBoxDocs() {
+  
   return (
     <Container maxWidth="lg" id="component-search-box" sx={{ scrollMarginTop: 96 }}>
       <Stack direction="row" spacing={1} alignItems="center" mb={1}>
@@ -35,7 +38,19 @@ export default function ComponentSearchBoxDocs() {
         The Search Box is the starting point for finding data in Beacon‑UI. It guides you through three steps and
         automatically adapts to your deployment (single Beacon or Beacon Network) and to the result type you choose.
       </Typography>
-
+      <Box 
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+        }}>
+        <Zoom>
+          <img 
+            src={`${import.meta.env.BASE_URL}assets/images/search.png`}
+            width={600}
+            alt="Search" 
+          />
+        </Zoom>
+      </Box>
       <Divider sx={{ my: 3 }} />
 
       <Typography variant="h5" gutterBottom>
@@ -69,10 +84,20 @@ export default function ComponentSearchBoxDocs() {
         2) Choosing a <em>Result type</em>
       </Typography>
       <Typography color="text.secondary" paragraph>
-        The first step is picking <em>what</em> you want to search. Beacon‑UI reads your available categories from
-        <code>GET MY_API_URL/map</code> and turns them into buttons. We show friendly names (e.g., “Genomic Variants” instead
+        The first step is picking <em>what</em> you want to search. Beacon‑UI reads your available categories 
+        from  <code>GET MY_API_URL/map</code> and turns them into buttons. We show friendly names (e.g., “Genomic Variants” instead
         of technical IDs) and, if you configured a preferred order, we follow it.
       </Typography>
+      <Box
+        sx={{ display: "flex", justifyContent: "center" }}>
+        <Zoom>
+            <img 
+              src={`${import.meta.env.BASE_URL}assets/images/search_endpoint.png`}
+              width={500}
+              alt="Search" 
+            />
+        </Zoom>
+      </Box>
       <Box component="ul" sx={{ pl: 3, color: "text.secondary" }}>
         <li><strong>Genomic Variants</strong> — variant‑centric results across individuals.</li>
         <li><strong>Individuals</strong> — person‑level records (age, sex, phenotypes, etc.).</li>
@@ -105,6 +130,16 @@ export default function ComponentSearchBoxDocs() {
       <Typography color="text.secondary" paragraph>
         Depending on the selected result type, you’ll see one or two inputs:
       </Typography>
+      <Box
+        sx={{ display: "flex", justifyContent: "center" }}>
+        <Zoom>
+            <img 
+              src={`${import.meta.env.BASE_URL}assets/images/search_filters.png`}
+              width={500}
+              alt="Search" 
+            />
+        </Zoom>
+      </Box>
       <Box component="ul" sx={{ pl: 3, color: "text.secondary" }}>
         <li>
           <strong>Genomic query</strong> (only when Genomic Variants is available): lets you specify genome assembly and a region
@@ -125,6 +160,16 @@ export default function ComponentSearchBoxDocs() {
         In network deployments this may come from the network base URL (often configured separately), for example:
         <MUILink href="https://beacons.bsc.es/beacon-network/v2.0.0/filtering_terms" target="_blank" rel="noreferrer">/beacon-network/v2.0.0/filtering_terms</MUILink>.
       </Typography>
+      <Box
+        sx={{ display: "flex", justifyContent: "center" }}>
+        <Zoom>
+            <img 
+              src={`${import.meta.env.BASE_URL}assets/images/search_filterings.png`}
+              width={500}
+              alt="Search" 
+            />
+        </Zoom>
+      </Box>
       <Box component="ul" sx={{ pl: 3, color: "text.secondary" }}>
         <li><strong>Type‑ahead suggestions:</strong> start typing and you’ll see matching terms. Each suggestion shows a friendly name and the internal ID.</li>
         <li><strong>Click to add:</strong> selecting a term adds it to your active filters. You can add multiple terms.</li>
@@ -198,6 +243,16 @@ export default function ComponentSearchBoxDocs() {
       <Typography variant="h5" gutterBottom sx={{ mt: 3 }}>
         6) Run the search & see results
       </Typography>
+      <Box
+        sx={{ display: "flex", justifyContent: "center" }}>
+        <Zoom>
+            <img 
+              src={`${import.meta.env.BASE_URL}assets/images/search_query.png`}
+              width={500}
+              alt="Search" 
+            />
+        </Zoom>
+      </Box>
       <Typography color="text.secondary" paragraph>
         Press <strong>Search</strong>. Beacon‑UI calls the endpoint and shows the table of results underneath with paging and counts.
         You can add/remove filters and run again to refine.

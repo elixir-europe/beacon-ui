@@ -1,5 +1,7 @@
 import { Box, Container, Typography, Stack, Chip, Divider, Alert, Link as MUILink } from "@mui/material";
 import HubIcon from "@mui/icons-material/Hub";
+import Zoom from 'react-medium-image-zoom';
+import 'react-medium-image-zoom/dist/styles.css';
 
 function CodeBlock({ code, lang = "json" }: { code: string; lang?: string }) {
   return (
@@ -35,7 +37,19 @@ export default function ComponentBeaconNetworkBanner() {
         page load, deduplicates logos, and displays them in a responsive row so users can quickly recognize participating
         organizations.
       </Typography>
-
+      <Box 
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+        }}>
+        <Zoom>
+          <img 
+            src={`${import.meta.env.BASE_URL}assets/images/beacon_members.png`}
+            width={600}
+            alt="Search" 
+          />
+        </Zoom>
+      </Box>
       <Divider sx={{ my: 3 }} />
 
       {/* Data source */}

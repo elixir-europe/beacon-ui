@@ -21,6 +21,7 @@ function CodeBlock({ code, lang = "json" }: { code: string; lang?: string }) {
 }
 
 export default function ComponentNavbarDocs() {
+
   return (
     <Container maxWidth="lg" id="component-navbar" sx={{ scrollMarginTop: 96 }}>
       <Stack direction="row" spacing={1} alignItems="center" mb={1}>
@@ -33,7 +34,14 @@ export default function ComponentNavbarDocs() {
       <Typography color="text.secondary" paragraph>
         The Navbar is the top bar of Beacon‑UI. It shows the project name and a small set of links. On phones it collapses into a menu.
       </Typography>
-
+      <div>
+        <Box
+          component="img"
+          src={`${import.meta.env.BASE_URL}assets/images/navbar.png`}
+          alt="Navbar" 
+          width="100%">
+        </Box>
+      </div>
       <Divider sx={{ my: 3 }} />
 
       <Typography variant="h5" gutterBottom>

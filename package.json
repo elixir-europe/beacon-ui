@@ -17,6 +17,7 @@
     "@mui/material": "^7.3.3",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "react-medium-image-zoom": "^5.4.0",
     "react-router-dom": "^7.9.3"
   },
   "devDependencies": {

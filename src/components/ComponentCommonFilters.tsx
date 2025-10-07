@@ -1,5 +1,7 @@
 import { Box, Container, Typography, Stack, Chip, Divider, Alert, Link as MUILink } from "@mui/material";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
+import Zoom from 'react-medium-image-zoom';
+import 'react-medium-image-zoom/dist/styles.css';
 
 function CodeBlock({ code, lang = "json" }: { code: string; lang?: string }) {
   return (
@@ -35,7 +37,19 @@ export default function ComponentCommonFilters() {
         <em> Cancer</em>, <em>COVID</em>). They are defined by your configuration and appear as clickable labels. Use them to
         start a search quickly — you can still add more precise filters using the Search Box.
       </Typography>
-
+      <Box 
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+        }}>
+        <Zoom>
+          <img 
+            src={`${import.meta.env.BASE_URL}assets/images/common_filters.png`}
+            width={350}
+            alt="Results" 
+          />
+        </Zoom>
+      </Box>
       <Divider sx={{ my: 3 }} />
 
       {/* Where options come from */}

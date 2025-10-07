@@ -8,7 +8,7 @@
   "oidcClientId": "beacon-network-ui",
   "loginRequired": false,
   "appUrl": "https://beacons.bsc.es/",
-
+  "omop": true,
   "variationType": [
     "DEL (Copy Number Loss)",
     "SNP (Single Nucleotide Polymorphism)",

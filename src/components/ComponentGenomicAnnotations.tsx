@@ -1,5 +1,7 @@
 import { Box, Container, Typography, Stack, Chip, Divider, Alert, Link as MUILink } from "@mui/material";
 import BiotechIcon from "@mui/icons-material/Biotech";
+import Zoom from 'react-medium-image-zoom';
+import 'react-medium-image-zoom/dist/styles.css';
 
 function CodeBlock({ code, lang = "json" }: { code: string; lang?: string }) {
   return (
@@ -36,6 +38,19 @@ export default function ComponentGenomicAnnotations() {
         quickly seed a variant‑centric search, then refine with additional filters.
       </Typography>
 
+      <Box 
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+        }}>
+        <Zoom>
+          <img 
+            src={`${import.meta.env.BASE_URL}assets/images/genomic_notation.png`}
+            width={350}
+            alt="Search" 
+          />
+        </Zoom>
+      </Box>
       <Divider sx={{ my: 3 }} />
 
       {/* Source of categories */}
