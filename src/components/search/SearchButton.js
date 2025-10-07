@@ -140,7 +140,6 @@ export default function SearchButton({ setSelectedTool }) {
 
     const classicSrc = Array.isArray(classicParams) ? classicParams.filter(Boolean) : [];
     const omopSrc    = Array.isArray(omopParams)    ? omopParams.filter(Boolean)    : [];
-
     const classic = classicSrc.flatMap((item, idx) => {
       try {
         if (item && item.operator) {

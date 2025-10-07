@@ -213,7 +213,7 @@ const ResultsTableModal = ({ open, subRow, onClose }) => {
     URL.revokeObjectURL(url);
   }
 
-  const queryBuilder = (classicParams, omopParams, entryTypeId) => {
+  const queryBuilder = (page, classicParams, omopParams, entryTypeId) => {
     let skipItems = page * rowsPerPage;
 
     let filter = {
@@ -234,7 +234,6 @@ const ResultsTableModal = ({ open, subRow, onClose }) => {
 
     const classicSrc = Array.isArray(classicParams) ? classicParams.filter(Boolean) : [];
     const omopSrc    = Array.isArray(omopParams)    ? omopParams.filter(Boolean)    : [];
-
     const classic = classicSrc.flatMap((item, idx) => {
       try {
         if (item && item.operator) {
@@ -246,7 +245,7 @@ const ResultsTableModal = ({ open, subRow, onClose }) => {
           console.warn("[QB] classic without id", idx, item);
           return [];
         }
-        const out = { id, scope: entryId };
+        const out = { id, scope: entryTypeId };
         return [out];
       } catch (e) {
         console.error("[QB] classic error", idx, item, e);
@@ -300,7 +299,7 @@ const ResultsTableModal = ({ open, subRow, onClose }) => {
         setLoading(true);
         const url = `${CONFIG.apiUrl}/${selectedPathSegment}`;
         setUrl(url);
-        let query = queryBuilder(page, entryTypeId);
+        let query = queryBuilder(page, selectedFilter, omopFilters, entryTypeId);
 
         const requestOptions = {
           method: 'POST',
@@ -313,7 +312,6 @@ const ResultsTableModal = ({ open, subRow, onClose }) => {
         if(token && token !== "undefined") {
           requestOptions.headers.Authorization = `Bearer ${token}`
         }
-
         const response = await fetch(url, requestOptions);
         const data = await response.json();
         const results = data.response?.resultSets;

@@ -19,7 +19,7 @@ export default function BeaconTypeBanner() {
   };
 
   if(isOMOP) {
-    sharedStyles.marginTop = { lg: "35px", md: "35px", sm: "0px", xs: "0px" };
+    sharedStyles.marginTop = { lg: "-4px", md: "-4px", sm: "0px", xs: "0px" };
   }
 
   let content = null;
