@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Box,
   Typography,
@@ -41,7 +40,6 @@ function CodeBlock({ code, lang = "json" }: { code: string; lang?: string }) {
 export default function ComponentOmop() {
   const CFG: any = (globalThis as any).CONFIG ?? {};
   const omopEnabled = CFG?.omop === true;
-  const primary = CFG?.ui?.colors?.primary ?? "#023452";
 
   return (
     <Box id="component-omop" sx={{ scrollMarginTop: 96 }}>
