@@ -9,73 +9,51 @@
       "label": "Other analytes",
       "filters": [
         {
-          "concept_id": 3041095,
-          "code": "LOINC:3041095",
-          "vocabulary": "LOINC",
-          "label": "Allelic state",
-          "ui_type": "checkbox"
-        },
-        {
-          "concept_id": 3015235,
-          "code": "LOINC:3015235",
+          "concept_id": "1961-2",
+          "code": "LOINC:1961-2",
           "vocabulary": "LOINC",
           "label": "Bicarbonate [Moles/volume] in Capillary blood",
           "ui_type": "range"
         },
         {
-          "concept_id": 21495021,
-          "code": "LOINC:21495021",
-          "vocabulary": "LOINC",
-          "label": "Complex variant type",
-          "ui_type": "checkbox"
-        },
-        {
-          "concept_id": 3051825,
-          "code": "LOINC:3051825",
+          "concept_id": "38483-4",
+          "code": "LOINC:38483-4",
           "vocabulary": "LOINC",
           "label": "Creatinine [Mass/volume] in Blood",
           "ui_type": "range"
         },
         {
-          "concept_id": 3039641,
-          "code": "LOINC:3039641",
-          "vocabulary": "LOINC",
-          "label": "Genetic variation clinical significance [Imp]",
-          "ui_type": "range"
-        },
-        {
-          "concept_id": 3000483,
-          "code": "LOINC:3000483",
+          "concept_id": "2339-0",
+          "code": "LOINC:2339-0",
           "vocabulary": "LOINC",
           "label": "Glucose [Mass/volume] in Blood",
           "ui_type": "range"
         },
         {
-          "concept_id": 3016838,
-          "code": "LOINC:3016838",
+          "concept_id": "17386-4",
+          "code": "LOINC:17386-4",
           "vocabulary": "LOINC",
           "label": "Organic acids [Units/volume] in Blood",
           "ui_type": "range"
         },
         {
-          "concept_id": 3011048,
-          "code": "LOINC:3011048",
+          "concept_id": "14121-8",
+          "code": "LOINC:14121-8",
           "vocabulary": "LOINC",
           "label": "Pyruvate [Moles/volume] in Blood",
           "ui_type": "range"
-        },
+        }
+      ]
+    },
+    {
+      "group_id": "family-history",
+      "label": "Family history",
+      "filters": [
         {
-          "concept_id": 21495047,
-          "code": "LOINC:21495047",
-          "vocabulary": "LOINC",
-          "label": "Structural variant [Type]",
-          "ui_type": "select"
-        },
-        {
-          "concept_id": 42529133,
-          "code": "LOINC:42529133",
-          "vocabulary": "LOINC",
-          "label": "Variant category",
+          "concept_id": 160475008,
+          "code": "SNOMED:160475008",
+          "vocabulary": "SNOMED",
+          "label": "Family history of consanguinity",
           "ui_type": "checkbox"
         }
       ]
@@ -85,141 +63,141 @@
       "label": "CSF analytes",
       "filters": [
         {
-          "concept_id": 3023604,
-          "code": "LOINC:3023604",
+          "concept_id": "22657-1",
+          "code": "LOINC:22657-1",
           "vocabulary": "LOINC",
           "label": "Alanine [Moles/volume] in Cerebral spinal fluid",
           "ui_type": "range"
         },
         {
-          "concept_id": 3009453,
-          "code": "LOINC:3009453",
+          "concept_id": "22656-3",
+          "code": "LOINC:22656-3",
           "vocabulary": "LOINC",
           "label": "Arginine [Moles/volume] in Cerebral spinal fluid",
           "ui_type": "range"
         },
         {
-          "concept_id": 3027600,
-          "code": "LOINC:3027600",
+          "concept_id": "26603-1",
+          "code": "LOINC:26603-1",
           "vocabulary": "LOINC",
           "label": "Asparagine [Moles/volume] in Cerebral spinal fluid",
           "ui_type": "range"
         },
         {
-          "concept_id": 3012328,
-          "code": "LOINC:3012328",
+          "concept_id": "22655-5",
+          "code": "LOINC:22655-5",
           "vocabulary": "LOINC",
           "label": "Aspartate [Moles/volume] in Cerebral spinal fluid",
           "ui_type": "range"
         },
         {
-          "concept_id": 3011594,
-          "code": "LOINC:3011594",
+          "concept_id": "22653-0",
+          "code": "LOINC:22653-0",
           "vocabulary": "LOINC",
           "label": "Cystine [Moles/volume] in Cerebral spinal fluid",
           "ui_type": "range"
         },
         {
-          "concept_id": 3022548,
-          "code": "LOINC:3022548",
+          "concept_id": "2342-4",
+          "code": "LOINC:2342-4",
           "vocabulary": "LOINC",
           "label": "Glucose [Mass/volume] in Cerebral spinal fluid",
           "ui_type": "range"
         },
         {
-          "concept_id": 3025292,
-          "code": "LOINC:3025292",
+          "concept_id": "22652-2",
+          "code": "LOINC:22652-2",
           "vocabulary": "LOINC",
           "label": "Glutamate [Moles/volume] in Cerebral spinal fluid",
           "ui_type": "range"
         },
         {
-          "concept_id": 3007244,
-          "code": "LOINC:3007244",
+          "concept_id": "22641-5",
+          "code": "LOINC:22641-5",
           "vocabulary": "LOINC",
           "label": "Glutamine [Moles/volume] in Cerebral spinal fluid",
           "ui_type": "range"
         },
         {
-          "concept_id": 3023929,
-          "code": "LOINC:3023929",
+          "concept_id": "22650-6",
+          "code": "LOINC:22650-6",
           "vocabulary": "LOINC",
           "label": "Glycine [Moles/volume] in Cerebral spinal fluid",
           "ui_type": "range"
         },
         {
-          "concept_id": 3014035,
-          "code": "LOINC:3014035",
+          "concept_id": "9453-2",
+          "code": "LOINC:9453-2",
           "vocabulary": "LOINC",
           "label": "Histidine [Moles/volume] in Cerebral spinal fluid",
           "ui_type": "range"
         },
         {
-          "concept_id": 3020420,
-          "code": "LOINC:3020420",
+          "concept_id": "22659-7",
+          "code": "LOINC:22659-7",
           "vocabulary": "LOINC",
           "label": "Isoleucine [Moles/volume] in Cerebral spinal fluid",
           "ui_type": "range"
         },
         {
-          "concept_id": 3035999,
-          "code": "LOINC:3035999",
+          "concept_id": "2520-5",
+          "code": "LOINC:2520-5",
           "vocabulary": "LOINC",
           "label": "Lactate [Moles/volume] in Cerebral spinal fluid",
           "ui_type": "range"
         },
         {
-          "concept_id": 3012113,
-          "code": "LOINC:3012113",
+          "concept_id": "9412-8",
+          "code": "LOINC:9412-8",
           "vocabulary": "LOINC",
           "label": "Leucine [Moles/volume] in Cerebral spinal fluid",
           "ui_type": "range"
         },
         {
-          "concept_id": 3024455,
-          "code": "LOINC:3024455",
+          "concept_id": "22651-4",
+          "code": "LOINC:22651-4",
           "vocabulary": "LOINC",
           "label": "Lysine [Moles/volume] in Cerebral spinal fluid",
           "ui_type": "range"
         },
         {
-          "concept_id": 3010840,
-          "code": "LOINC:3010840",
+          "concept_id": "22648-0",
+          "code": "LOINC:22648-0",
           "vocabulary": "LOINC",
           "label": "Methionine [Moles/volume] in Cerebral spinal fluid",
           "ui_type": "range"
         },
         {
-          "concept_id": 3024391,
-          "code": "LOINC:3024391",
+          "concept_id": "22646-4",
+          "code": "LOINC:22646-4",
           "vocabulary": "LOINC",
           "label": "Phenylalanine [Moles/volume] in Cerebral spinal fluid",
           "ui_type": "range"
         },
         {
-          "concept_id": 3028452,
-          "code": "LOINC:3028452",
+          "concept_id": "22645-6",
+          "code": "LOINC:22645-6",
           "vocabulary": "LOINC",
           "label": "Proline [Moles/volume] in Cerebral spinal fluid",
           "ui_type": "range"
         },
         {
-          "concept_id": 3026778,
-          "code": "LOINC:3026778",
+          "concept_id": "22643-1",
+          "code": "LOINC:22643-1",
           "vocabulary": "LOINC",
           "label": "Threonine [Moles/volume] in Cerebral spinal fluid",
           "ui_type": "range"
         },
         {
-          "concept_id": 3026516,
-          "code": "LOINC:3026516",
+          "concept_id": "26602-3",
+          "code": "LOINC:26602-3",
           "vocabulary": "LOINC",
           "label": "Tryptophan [Moles/volume] in Cerebral spinal fluid",
           "ui_type": "range"
         },
         {
-          "concept_id": 3011679,
-          "code": "LOINC:3011679",
+          "concept_id": "22649-8",
+          "code": "LOINC:22649-8",
           "vocabulary": "LOINC",
           "label": "Valine [Moles/volume] in Cerebral spinal fluid",
           "ui_type": "range"
@@ -231,8 +209,8 @@
       "label": "Stool analytes",
       "filters": [
         {
-          "concept_id": 40758939,
-          "code": "LOINC:40758939",
+          "concept_id": "55818-9",
+          "code": "LOINC:55818-9",
           "vocabulary": "LOINC",
           "label": "Organic acids [Moles/mass] in Stool",
           "ui_type": "range"
@@ -244,64 +222,64 @@
       "label": "Urine analytes",
       "filters": [
         {
-          "concept_id": 3014724,
-          "code": "LOINC:3014724",
+          "concept_id": "14684-5",
+          "code": "LOINC:14684-5",
           "vocabulary": "LOINC",
           "label": "Creatinine [Moles/time] in 24 hour Urine",
           "ui_type": "range"
         },
         {
-          "concept_id": 3009508,
-          "code": "LOINC:3009508",
+          "concept_id": "14683-7",
+          "code": "LOINC:14683-7",
           "vocabulary": "LOINC",
           "label": "Creatinine [Moles/volume] in Urine",
           "ui_type": "range"
         },
         {
-          "concept_id": 40758722,
-          "code": "LOINC:40758722",
+          "concept_id": "55593-8",
+          "code": "LOINC:55593-8",
           "vocabulary": "LOINC",
           "label": "Creatinine [Moles/volume] in Urine collected for unspecified duration",
           "ui_type": "range"
         },
         {
-          "concept_id": 3000361,
-          "code": "LOINC:3000361",
+          "concept_id": "15077-1",
+          "code": "LOINC:15077-1",
           "vocabulary": "LOINC",
           "label": "Glucose [Moles/time] in 24 hour Urine",
           "ui_type": "range"
         },
         {
-          "concept_id": 3005570,
-          "code": "LOINC:3005570",
+          "concept_id": "15076-3",
+          "code": "LOINC:15076-3",
           "vocabulary": "LOINC",
           "label": "Glucose [Moles/volume] in Urine",
           "ui_type": "range"
         },
         {
-          "concept_id": 3011639,
-          "code": "LOINC:3011639",
+          "concept_id": "17385-6",
+          "code": "LOINC:17385-6",
           "vocabulary": "LOINC",
           "label": "Organic acids [Units/volume] in Urine",
           "ui_type": "range"
         },
         {
-          "concept_id": 3036525,
-          "code": "LOINC:3036525",
+          "concept_id": "25550-5",
+          "code": "LOINC:25550-5",
           "vocabulary": "LOINC",
           "label": "Urea [Moles/time] in 24 hour Urine",
           "ui_type": "range"
         },
         {
-          "concept_id": 3012898,
-          "code": "LOINC:3012898",
+          "concept_id": "22700-9",
+          "code": "LOINC:22700-9",
           "vocabulary": "LOINC",
           "label": "Urea [Moles/volume] in Urine",
           "ui_type": "range"
         },
         {
-          "concept_id": 3029305,
-          "code": "LOINC:3029305",
+          "concept_id": "50560-2",
+          "code": "LOINC:50560-2",
           "vocabulary": "LOINC",
           "label": "pH of Urine by Automated test strip",
           "ui_type": "range"
@@ -313,225 +291,225 @@
       "label": "Serum / Plasma analytes",
       "filters": [
         {
-          "concept_id": 3009172,
-          "code": "LOINC:3009172",
+          "concept_id": "20636-7",
+          "code": "LOINC:20636-7",
           "vocabulary": "LOINC",
           "label": "Alanine [Moles/volume] in Serum or Plasma",
           "ui_type": "range"
         },
         {
-          "concept_id": 3027388,
-          "code": "LOINC:3027388",
+          "concept_id": "1744-2",
+          "code": "LOINC:1744-2",
           "vocabulary": "LOINC",
           "label": "Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma by No addition of P-5'-P",
           "ui_type": "range"
         },
         {
-          "concept_id": 3023183,
-          "code": "LOINC:3023183",
+          "concept_id": "1845-7",
+          "code": "LOINC:1845-7",
           "vocabulary": "LOINC",
           "label": "Ammonium ion [Moles/volume] in Plasma",
           "ui_type": "range"
         },
         {
-          "concept_id": 3014399,
-          "code": "LOINC:3014399",
+          "concept_id": "20637-5",
+          "code": "LOINC:20637-5",
           "vocabulary": "LOINC",
           "label": "Arginine [Moles/volume] in Serum or Plasma",
           "ui_type": "range"
         },
         {
-          "concept_id": 3009010,
-          "code": "LOINC:3009010",
+          "concept_id": "20638-3",
+          "code": "LOINC:20638-3",
           "vocabulary": "LOINC",
           "label": "Asparagine [Moles/volume] in Serum or Plasma",
           "ui_type": "range"
         },
         {
-          "concept_id": 3015546,
-          "code": "LOINC:3015546",
+          "concept_id": "20639-1",
+          "code": "LOINC:20639-1",
           "vocabulary": "LOINC",
           "label": "Aspartate [Moles/volume] in Serum or Plasma",
           "ui_type": "range"
         },
         {
-          "concept_id": 3013721,
-          "code": "LOINC:3013721",
+          "concept_id": "1920-8",
+          "code": "LOINC:1920-8",
           "vocabulary": "LOINC",
           "label": "Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma",
           "ui_type": "range"
         },
         {
-          "concept_id": 3007220,
-          "code": "LOINC:3007220",
+          "concept_id": "2157-6",
+          "code": "LOINC:2157-6",
           "vocabulary": "LOINC",
           "label": "Creatine kinase [Enzymatic activity/volume] in Serum or Plasma",
           "ui_type": "range"
         },
         {
-          "concept_id": 3020564,
-          "code": "LOINC:3020564",
+          "concept_id": "14682-9",
+          "code": "LOINC:14682-9",
           "vocabulary": "LOINC",
           "label": "Creatinine [Moles/volume] in Serum or Plasma",
           "ui_type": "range"
         },
         {
-          "concept_id": 3005335,
-          "code": "LOINC:3005335",
+          "concept_id": "22672-0",
+          "code": "LOINC:22672-0",
           "vocabulary": "LOINC",
           "label": "Cystine [Moles/volume] in Serum or Plasma",
           "ui_type": "range"
         },
         {
-          "concept_id": 3028531,
-          "code": "LOINC:3028531",
+          "concept_id": "15060-7",
+          "code": "LOINC:15060-7",
           "vocabulary": "LOINC",
           "label": "Enolase.neuron specific [Mass/volume] in Serum or Plasma",
           "ui_type": "range"
         },
         {
-          "concept_id": 36304852,
-          "code": "LOINC:36304852",
+          "concept_id": "87832-2",
+          "code": "LOINC:87832-2",
           "vocabulary": "LOINC",
           "label": "Fibroblast growth factor 21.intact [Mass/volume] in Serum or Plasma",
           "ui_type": "range"
         },
         {
-          "concept_id": 3026910,
-          "code": "LOINC:3026910",
+          "concept_id": "2324-2",
+          "code": "LOINC:2324-2",
           "vocabulary": "LOINC",
           "label": "Gamma glutamyl transferase [Enzymatic activity/volume] in Serum or Plasma",
           "ui_type": "range"
         },
         {
-          "concept_id": 3013826,
-          "code": "LOINC:3013826",
+          "concept_id": "14749-6",
+          "code": "LOINC:14749-6",
           "vocabulary": "LOINC",
           "label": "Glucose [Moles/volume] in Serum or Plasma",
           "ui_type": "range"
         },
         {
-          "concept_id": 3011793,
-          "code": "LOINC:3011793",
+          "concept_id": "20642-5",
+          "code": "LOINC:20642-5",
           "vocabulary": "LOINC",
           "label": "Glutamate [Moles/volume] in Serum or Plasma",
           "ui_type": "range"
         },
         {
-          "concept_id": 3015049,
-          "code": "LOINC:3015049",
+          "concept_id": "20643-3",
+          "code": "LOINC:20643-3",
           "vocabulary": "LOINC",
           "label": "Glutamine [Moles/volume] in Serum or Plasma",
           "ui_type": "range"
         },
         {
-          "concept_id": 3008575,
-          "code": "LOINC:3008575",
+          "concept_id": "20644-1",
+          "code": "LOINC:20644-1",
           "vocabulary": "LOINC",
           "label": "Glycine [Moles/volume] in Serum or Plasma",
           "ui_type": "range"
         },
         {
-          "concept_id": 37020363,
-          "code": "LOINC:37020363",
+          "concept_id": "92665-9",
+          "code": "LOINC:92665-9",
           "vocabulary": "LOINC",
           "label": "Growth and differentiation factor 15 [Mass/volume] in Serum or Plasma by Immunoassay",
           "ui_type": "range"
         },
         {
-          "concept_id": 3016115,
-          "code": "LOINC:3016115",
+          "concept_id": "20645-8",
+          "code": "LOINC:20645-8",
           "vocabulary": "LOINC",
           "label": "Histidine [Moles/volume] in Serum or Plasma",
           "ui_type": "range"
         },
         {
-          "concept_id": 3004254,
-          "code": "LOINC:3004254",
+          "concept_id": "3004254",
+          "code": "LOINC:20648-2",
           "vocabulary": "LOINC",
           "label": "Isoleucine [Moles/volume] in Serum or Plasma",
           "ui_type": "range"
         },
         {
-          "concept_id": 3014111,
-          "code": "LOINC:3014111",
+          "concept_id": "2524-7",
+          "code": "LOINC:2524-7",
           "vocabulary": "LOINC",
           "label": "Lactate [Moles/volume] in Serum or Plasma",
           "ui_type": "range"
         },
         {
-          "concept_id": 3006889,
-          "code": "LOINC:3006889",
+          "concept_id": "20649-0",
+          "code": "LOINC:20649-0",
           "vocabulary": "LOINC",
           "label": "Leucine [Moles/volume] in Serum or Plasma",
           "ui_type": "range"
         },
         {
-          "concept_id": 3008377,
-          "code": "LOINC:3008377",
+          "concept_id": "20650-8",
+          "code": "LOINC:20650-8",
           "vocabulary": "LOINC",
           "label": "Lysine [Moles/volume] in Serum or Plasma",
           "ui_type": "range"
         },
         {
-          "concept_id": 3017085,
-          "code": "LOINC:3017085",
+          "concept_id": "20651-6",
+          "code": "LOINC:20651-6",
           "vocabulary": "LOINC",
           "label": "Methionine [Moles/volume] in Serum or Plasma",
           "ui_type": "range"
         },
         {
-          "concept_id": 3037045,
-          "code": "LOINC:3037045",
+          "concept_id": "38172-3",
+          "code": "LOINC:38172-3",
           "vocabulary": "LOINC",
           "label": "Organic acids [Moles/volume] in Serum or Plasma",
           "ui_type": "range"
         },
         {
-          "concept_id": 3022813,
-          "code": "LOINC:3022813",
+          "concept_id": "14875-9",
+          "code": "LOINC:14875-9",
           "vocabulary": "LOINC",
           "label": "Phenylalanine [Moles/volume] in Serum or Plasma",
           "ui_type": "range"
         },
         {
-          "concept_id": 3007854,
-          "code": "LOINC:3007854",
+          "concept_id": "20655-7",
+          "code": "LOINC:20655-7",
           "vocabulary": "LOINC",
           "label": "Proline [Moles/volume] in Serum or Plasma",
           "ui_type": "range"
         },
         {
-          "concept_id": 3024821,
-          "code": "LOINC:3024821",
+          "concept_id": "20658-1",
+          "code": "LOINC:20658-1",
           "vocabulary": "LOINC",
           "label": "Threonine [Moles/volume] in Serum or Plasma",
           "ui_type": "range"
         },
         {
-          "concept_id": 3009201,
-          "code": "LOINC:3009201",
+          "concept_id": "3016-3",
+          "code": "LOINC:3016-3",
           "vocabulary": "LOINC",
           "label": "Thyrotropin [Units/volume] in Serum or Plasma",
           "ui_type": "range"
         },
         {
-          "concept_id": 3024802,
-          "code": "LOINC:3024802",
+          "concept_id": "20659-9",
+          "code": "LOINC:20659-9",
           "vocabulary": "LOINC",
           "label": "Tryptophan [Moles/volume] in Serum or Plasma",
           "ui_type": "range"
         },
         {
-          "concept_id": 3020779,
-          "code": "LOINC:3020779",
+          "concept_id": "22664-7",
+          "code": "LOINC:22664-7",
           "vocabulary": "LOINC",
           "label": "Urea [Moles/volume] in Serum or Plasma",
           "ui_type": "range"
         },
         {
-          "concept_id": 3007430,
-          "code": "LOINC:3007430",
+          "concept_id": "20661-5",
+          "code": "LOINC:20661-5",
           "vocabulary": "LOINC",
           "label": "Valine [Moles/volume] in Serum or Plasma",
           "ui_type": "range"
@@ -543,29 +521,29 @@
       "label": "Venous blood analytes",
       "filters": [
         {
-          "concept_id": 3027273,
-          "code": "LOINC:3027273",
+          "concept_id": "14627-4",
+          "code": "LOINC:14627-4",
           "vocabulary": "LOINC",
           "label": "Bicarbonate [Moles/volume] in Venous blood",
           "ui_type": "range"
         },
         {
-          "concept_id": 3007628,
-          "code": "LOINC:3007628",
+          "concept_id": "19232-8",
+          "code": "LOINC:19232-8",
           "vocabulary": "LOINC",
           "label": "Bicarbonate [Moles/volume] standard in Venous blood",
           "ui_type": "range"
         },
         {
-          "concept_id": 3008037,
-          "code": "LOINC:3008037",
+          "concept_id": "2519-7",
+          "code": "LOINC:2519-7",
           "vocabulary": "LOINC",
           "label": "Lactate [Moles/volume] in Venous blood",
           "ui_type": "range"
         },
         {
-          "concept_id": 3012544,
-          "code": "LOINC:3012544",
+          "concept_id": "2746-6",
+          "code": "LOINC:2746-6",
           "vocabulary": "LOINC",
           "label": "pH of Venous blood",
           "ui_type": "range"
@@ -573,63 +551,105 @@
       ]
     },
     {
-      "group_id": "cognitive-scales",
-      "label": "Cognitive scales",
+      "group_id": "development-neuropsychology",
+      "label": "Developmental and neuropsychological assessment",
       "filters": [
         {
-          "concept_id": 4165605,
-          "code": "SNOMED:4165605",
+          "concept_id": 273918007,
+          "code": "SNOMED:273918007",
           "vocabulary": "SNOMED",
           "label": "Wechsler intelligence scale for children",
           "ui_type": "checkbox"
         },
         {
-          "concept_id": 4169502,
-          "code": "SNOMED:4169502",
+          "concept_id": 273922002,
+          "code": "SNOMED:273922002",
           "vocabulary": "SNOMED",
           "label": "Wechsler pre-school and primary scale of intelligence",
+          "ui_type": "checkbox"
+        },
+        {
+          "concept_id": 273305007,
+          "code": "SNOMED:273305007",
+          "vocabulary": "SNOMED",
+          "label": "Bayley scale of infant development",
           "ui_type": "checkbox"
         }
       ]
     },
     {
-      "group_id": "genetics",
-      "label": "Genetics",
+      "group_id": "genetic-data",
+      "label": "Genetic data",
       "filters": [
         {
-          "concept_id": 3049805,
-          "code": "LOINC:3049805",
+          "concept_id": "48005-3",
+          "code": "LOINC:48005-3",
           "vocabulary": "LOINC",
           "label": "Amino acid change (pHGVS)",
           "ui_type": "text"
         },
         {
-          "concept_id": 3052700,
-          "code": "LOINC:3052700",
+          "concept_id": "48018-6",
+          "code": "LOINC:48018-6",
           "vocabulary": "LOINC",
           "label": "Gene studied [ID]",
           "ui_type": "text"
         },
         {
-          "concept_id": 21495048,
-          "code": "LOINC:21495048",
+          "concept_id": "81290-9",
+          "code": "LOINC:81290-9",
           "vocabulary": "LOINC",
           "label": "Genomic DNA change (gHGVS)",
           "ui_type": "text"
         },
         {
-          "concept_id": 36660406,
-          "code": "LOINC:36660406",
+          "concept_id": "94186-4",
+          "code": "LOINC:94186-4",
           "vocabulary": "LOINC",
           "label": "Origin of germline genetic variant [Type]",
           "ui_type": "select"
         },
         {
-          "concept_id": 3040215,
-          "code": "LOINC:3040215",
+          "concept_id": "51958-7",
+          "code": "LOINC:51958-7",
           "vocabulary": "LOINC",
           "label": "Transcript reference sequence [ID]",
           "ui_type": "text"
+        },
+        {
+          "concept_id": "83005-9",
+          "code": "LOINC:83005-9",
+          "vocabulary": "LOINC",
+          "label": "Variant category",
+          "ui_type": "checkbox"
+        },
+        {
+          "concept_id": "53037-8",
+          "code": "LOINC:53037-8",
+          "vocabulary": "LOINC",
+          "label": "Genetic variation clinical significance [Imp]",
+          "ui_type": "range"
+        },
+        {
+          "concept_id": "53034-5",
+          "code": "LOINC:53034-5",
+          "vocabulary": "LOINC",
+          "label": "Allelic state",
+          "ui_type": "checkbox"
+        },
+        {
+          "concept_id": "81263-6",
+          "code": "LOINC:81263-6",
+          "vocabulary": "LOINC",
+          "label": "Complex variant type",
+          "ui_type": "checkbox"
+        },
+        {
+          "concept_id": "81263-6",
+          "code": "LOINC:81263-6",
+          "vocabulary": "LOINC",
+          "label": "Structural variant [Type]",
+          "ui_type": "select"
         }
       ]
     },
@@ -638,44 +658,24 @@
       "label": "Anthropometric measures",
       "filters": [
         {
-          "concept_id": 607590,
-          "code": "SNOMED:607590",
+          "concept_id": 1153637007,
+          "code": "SNOMED:1153637007",
           "vocabulary": "SNOMED",
           "label": "Body height",
           "ui_type": "checkbox"
         },
         {
-          "concept_id": 4099154,
-          "code": "SNOMED:4099154",
+          "concept_id": 27113001,
+          "code": "SNOMED:27113001",
           "vocabulary": "SNOMED",
           "label": "Body weight",
           "ui_type": "checkbox"
         },
         {
-          "concept_id": 4179846,
-          "code": "SNOMED:4179846",
+          "concept_id": 363811000,
+          "code": "SNOMED:363811000",
           "vocabulary": "SNOMED",
           "label": "Head circumference measure",
-          "ui_type": "checkbox"
-        }
-      ]
-    },
-    {
-      "group_id": "snomed-other",
-      "label": "SNOMED (other)",
-      "filters": [
-        {
-          "concept_id": 4164673,
-          "code": "SNOMED:4164673",
-          "vocabulary": "SNOMED",
-          "label": "Bayley scale of infant development",
-          "ui_type": "checkbox"
-        },
-        {
-          "concept_id": 4052921,
-          "code": "SNOMED:4052921",
-          "vocabulary": "SNOMED",
-          "label": "Family history of consanguinity",
           "ui_type": "checkbox"
         }
       ]
