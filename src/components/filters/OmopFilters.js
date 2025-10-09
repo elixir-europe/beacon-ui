@@ -6,13 +6,11 @@ import {
   Select,
   MenuItem,
   TextField,
-  Checkbox,
-  FormControlLabel,
-  Slider,
   Typography,
   Button,
   Tooltip,
-  Chip
+  Chip,
+  Divider
 } from "@mui/material";
 import { useSelectedEntry } from "../context/SelectedEntryContext";
 
@@ -41,8 +39,6 @@ export default function OmopFilters({ data, onChange }) {
     .replace(/Moles/i, "mol")
     .replace(/Units/i, "U")
     .replace(/volume/i, "vol");
-
-  const val = Array.isArray(value) ? value : [0, 0];
 
   useEffect(() => {
     if (data) return;
@@ -81,12 +77,15 @@ export default function OmopFilters({ data, onChange }) {
   const normalizeValueForContext = (uiType, value) => {
     const t = (uiType || "checkbox").toLowerCase();
     if (t === "checkbox") return true;
+
     if (t === "range") {
-      const [minRaw, maxRaw] = Array.isArray(value) ? value : [null, null];
-      const min = Number.isFinite(minRaw) ? Number(minRaw) : undefined;
-      const max = Number.isFinite(maxRaw) ? Number(maxRaw) : undefined;
-      if (min == null && max == null) return null;
-      return { min, max };
+      const op = value?.op || "<";
+      const raw = value?.num;
+      if (raw === "" || raw == null || isNaN(Number(raw))) return null;
+      const n = Number(raw);
+      if (op === "<")  return { min: undefined, max: n };
+      if (op === ">")  return { min: n, max: undefined };
+      return { min: n, max: n };
     }
 
     if (value == null || String(value).trim() === "") return null;
@@ -97,8 +96,8 @@ export default function OmopFilters({ data, onChange }) {
     const t = (uiType || "checkbox").toLowerCase();
     if (t === "checkbox") return true;
     if (t === "range") {
-      const [a, b] = Array.isArray(value) ? value : [null, null];
-      return Number.isFinite(a) || Number.isFinite(b);
+      const num = value?.num;
+      return num !== "" && num != null && !isNaN(Number(num));
     }
     return value != null && String(value).trim() !== "";
   };
@@ -121,7 +120,7 @@ export default function OmopFilters({ data, onChange }) {
   };
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", gap: 3, maxWidth: 400 }}>
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 3, maxWidth: 400, paddingTop: 1 }}>
       <FormControl fullWidth size="small">
         <InputLabel>Group</InputLabel>
         <Select
@@ -133,16 +132,16 @@ export default function OmopFilters({ data, onChange }) {
             setValue(null);
           }}
           sx={{
-                "& .MuiSelect-select": {
-                  paddingTop: "5px",
-                  paddingBottom: "5px",
-                  paddingLeft: "12px",
-                  paddingRight: "32px",
-                },
-                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                  borderColor: CONFIG.ui.colors.primary,
-                },
-              }}
+            "& .MuiSelect-select": {
+              paddingTop: "5px",
+              paddingBottom: "5px",
+              paddingLeft: "12px",
+              paddingRight: "32px",
+            },
+            "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+              borderColor: CONFIG.ui.colors.primary,
+            },
+          }}
         >
           <MenuItem value="">
             <em>Select a group</em>
@@ -193,128 +192,150 @@ export default function OmopFilters({ data, onChange }) {
 
       {selectedFilter && (
         <Box sx={{ p: 2, border: "1px solid #e0e0e0", borderRadius: 2 }}>
-          <Typography variant="subtitle1" sx={{ mb: 1, fontWeight: 500 }}>
+          <Typography variant="subtitle1"
+            sx={{
+              mb: 1,
+              fontWeight: 600,
+              fontSize: 13
+            }}>
             {selectedFilter.label}
           </Typography>
+          <Box>
+            {unitFull && (
+              <Box sx={{ display: "flex", justifyContent: "start", with: "100%", paddingBottom: "7px" }}>
+                <Tooltip title={unitFull} arrow>
+                  <Chip
+                    size="small"
+                    variant="outlined"
+                    label={unitShort}
+                    sx={{ fontSize: "0.75rem", height: 28 }}
+                  />
+                </Tooltip>
+              </Box>
+            )}
+          </Box>
 
-          {(() => {
-            const type = (selectedFilter.ui_type || "checkbox").toLowerCase();
+          <Box sx={{ mt: 1 }}>
+            {(() => {
+              const type = (selectedFilter.ui_type || "checkbox").toLowerCase();
 
-            if (type === "checkbox") {
-              return (
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={!!value}
-                      onChange={(e) => setValue(e.target.checked)}
+              if (type === "range") {
+                const op = value?.op || "<";
+                const num = value?.num ?? "";
+                const opLabelId = "op-label";
+
+                return (
+                  <Box
                       sx={{
-                        color: primary,
-                        '&.Mui-checked': { color: primary },
+                        display: "grid",
+                        gridTemplateColumns: "auto 1fr auto",
+                        gap: 1,
+                        alignItems: "center",
+                      }}
+                    >
+                    <FormControl variant="outlined" size="small" sx={{ minWidth: 76, maxWidth: 86 }}>
+                      <InputLabel id={opLabelId}>Op</InputLabel>
+                      <Select
+                        labelId={opLabelId}
+                        id={`${opLabelId}-select`}
+                        label="Op"
+                        value={op}
+                        onChange={(e) => setValue({ op: e.target.value, num })}
+                        sx={{
+                          height: 30,
+                          "& .MuiSelect-select": {
+                            display: "flex",
+                            alignItems: "center",
+                            height: "100%",
+                            padding: "0 12px",
+                          },
+                          "& .MuiOutlinedInput-notchedOutline": { borderColor: "rgba(0,0,0,0.23)" },
+                          "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: primary },
+                          "& .MuiSelect-icon": { color: primary },
+                        }}
+                      >
+                        <MenuItem value="<">&lt;</MenuItem>
+                        <MenuItem value=">">&gt;</MenuItem>
+                        <MenuItem value="=">=</MenuItem>
+                      </Select>
+                    </FormControl>
+
+                    <TextField
+                      fullWidth
+                      variant="outlined"
+                      size="small"
+                      type="text"
+                      label="Value"
+                      placeholder="Value"
+                      value={num ?? ""}
+                      InputLabelProps={{ shrink: true }}
+                      onChange={(e) => setValue({ op, num: e.target.value })}
+                      sx={{
+                        "& .MuiInputBase-root": {
+                          height: 30,
+                        },
+                        "& .MuiOutlinedInput-input": {
+                          height: "100%",
+                          padding: "0 12px",
+                          display: "flex",
+                          alignItems: "center",
+                        },
+                        "& .MuiOutlinedInput-notchedOutline": { borderColor: "rgba(0,0,0,0.23)" },
+                        "& .Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: primary },
                       }}
                     />
-                  }
-                  label="Activate"
-                />
-              );
-            }
+                  </Box>
+                );
+              }
 
-            if (type === "range") {
-              return (
-                <Box
-                  sx={{ paddingTop: '30px' }}>
-                  <Slider
-                    value={val}
-                    onChange={(_, newVal) => setValue(newVal)}
-                    valueLabelDisplay="on"
-                    valueLabelFormat={(v) => `${v}`}
-                    step={1}
-                    min={0}
-                    max={100}
-                    marks={[
-                      { value: 0, label: "0" },
-                      { value: 50, label: "50" },
-                      { value: 100, label: "100" },
-                    ]}
+              if (type === "text") {
+                return (
+                  <TextField
+                    fullWidth
+                    label="Valor"
+                    value={value || ""}
+                    onChange={(e) => setValue(e.target.value)}
                     sx={{
-                      color: primary,
-                      ".MuiSlider-markLabel": {
-                        fontSize: "0.75rem",
-                        whiteSpace: "nowrap",
+                      '& label.Mui-focused': {
+                        color: primary,
                       },
-                      "& .MuiSlider-valueLabel": {
-                        top: "auto",
-                        bottom: 5, 
-                        fontSize: "0.65rem",
+                      '& .MuiOutlinedInput-root': {
+                        '&.Mui-focused fieldset': {
+                          borderColor: primary,
+                        },
                       },
                     }}
                   />
-                    <Box sx={{ display: "flex", justifyContent: "space-between", mt: 0.5 }}>
-                      <Typography variant="caption">Min: {val[0]}</Typography>
-                      <Typography variant="caption">Max: {val[1]}</Typography>
-                    </Box>
+                );
+              }
 
-                    {unitFull && (
-                      <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 0.5 }}>
-                        <Tooltip title={unitFull} arrow>
-                          <Chip
-                            size="small"
-                            variant="outlined"
-                            label={unitShort}
-                            sx={{ fontSize: "0.75rem", height: 22 }}
-                          />
-                        </Tooltip>
-                      </Box>
-                    )}
-                </Box>
-              );
-            }
+              if (type === "select") {
+                return (
+                  <FormControl fullWidth>
+                    <InputLabel sx={{ color: primary }}>Valor</InputLabel>
+                    <Select
+                      value={value || ''}
+                      onChange={(e) => setValue(e.target.value)}
+                      sx={{
+                        '.MuiOutlinedInput-notchedOutline': { borderColor: primary },
+                        '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                          borderColor: primary,
+                        },
+                        '& .MuiSelect-icon': { color: primary },
+                      }}
+                    >
+                      <MenuItem value=""><em>Select…</em></MenuItem>
+                      <MenuItem value="Yes">Yes</MenuItem>
+                      <MenuItem value="No">No</MenuItem>
+                    </Select>
+                  </FormControl>
+                );
+              }
 
-            if (type === "text") {
-              return (
-                <TextField
-                  fullWidth
-                  label="Valor"
-                  value={value || ""}
-                  onChange={(e) => setValue(e.target.value)}
-                  sx={{
-                    '& label.Mui-focused': {
-                      color: primary,
-                    },
-                    '& .MuiOutlinedInput-root': {
-                      '&.Mui-focused fieldset': {
-                        borderColor: primary,
-                      },
-                    },
-                  }}
-                />
-              );
-            }
-
-            if (type === "select") {
-              return (
-                <FormControl fullWidth>
-                  <InputLabel sx={{ color: primary }}>Valor</InputLabel>
-                  <Select
-                    value={value || ''}
-                    onChange={(e) => setValue(e.target.value)}
-                    sx={{
-                      '.MuiOutlinedInput-notchedOutline': { borderColor: primary },
-                      '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                        borderColor: primary,
-                      },
-                      '& .MuiSelect-icon': { color: primary },
-                    }}
-                  >
-                    <MenuItem value=""><em>Select…</em></MenuItem>
-                    <MenuItem value="Yes">Yes</MenuItem>
-                    <MenuItem value="No">No</MenuItem>
-                  </Select>
-                </FormControl>
-              );
-            }
-
-            return null;
-          })()}
+              return null;
+            })()}
+          </Box>
+          
           <Box>
             <Button 
               variant="outlined"

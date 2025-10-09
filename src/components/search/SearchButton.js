@@ -143,7 +143,7 @@ export default function SearchButton({ setSelectedTool }) {
     const classic = classicSrc.flatMap((item, idx) => {
       try {
         if (item && item.operator) {
-          const out = { id: item.field, operator: item.operator, value: item.value };
+          const out = { id: item.field, operator: item.operator, value: parseFloat(item.value) || item.value };
           return [out];
         }
         const id = item?.key ?? item?.id;

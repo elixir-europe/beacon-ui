@@ -93,9 +93,9 @@ const ResultsTableModal = ({ open, subRow, onClose }) => {
   async function buildDownloadRows(sortedHeaders, cleanAndParseInfo) {
     try {
       setLoadingDownload(true);
-      const url = `${CONFIG.apiUrl}/${tableType}/${subRow.id}/${selectedPathSegment}`;
+      const url = `${CONFIG.apiUrl}/${selectedPathSegment}`;
 
-      let query = queryBuilder(page, omopFilters, entryTypeId);
+      let query = queryBuilder(0, omopFilters, entryTypeId);
 
       if (query?.pagination) {
         query.pagination.limit = 5000;
@@ -204,7 +204,9 @@ const ResultsTableModal = ({ open, subRow, onClose }) => {
     const csv = Papa.unparse(rows);
     const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
     const url = URL.createObjectURL(blob);
-    const fileName = `${subRow.beaconId}___${subRow.id}.csv`;
+    const beaconName = subRow.beaconId ?? 'beacon';
+
+    const fileName = `${beaconName}___${subRow.id}.csv`;
 
     const a = document.createElement("a");
     a.href = url;
@@ -214,7 +216,16 @@ const ResultsTableModal = ({ open, subRow, onClose }) => {
   }
 
   const queryBuilder = (page, classicParams, omopParams, entryTypeId) => {
-    let skipItems = page * rowsPerPage;
+    let skip = 0;
+    let limit = 10;
+    if(page == 0) {
+      limit = totalItems;
+    } else {
+      let skipItems = page * rowsPerPage;
+      skip = parseInt(`${(skipItems)}`);
+      limit = parseInt(`${(rowsPerPage)}`)
+    }
+
 
     let filter = {
       meta: {
@@ -224,8 +235,8 @@ const ResultsTableModal = ({ open, subRow, onClose }) => {
         filters: [],
         includeResultsetResponses: "HIT",
         pagination: {
-          skip: parseInt(`${(skipItems)}`),
-          limit: parseInt(`${(rowsPerPage)}`),
+          skip: skip,
+          limit: limit,
         },
         testMode: false,
         requestedGranularity: "record",
@@ -237,7 +248,7 @@ const ResultsTableModal = ({ open, subRow, onClose }) => {
     const classic = classicSrc.flatMap((item, idx) => {
       try {
         if (item && item.operator) {
-          const out = { id: item.field, operator: item.operator, value: item.value };
+          const out = { id: item.field, operator: item.operator, value: parseFloat(item.value) || item.value };
           return [out];
         }
         const id = item?.key ?? item?.id;

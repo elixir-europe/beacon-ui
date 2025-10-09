@@ -52,13 +52,11 @@ export default function HomePage({ selectedTool, setSelectedTool }) {
           <Founders />
           <Search
             onHeightChange={(h) => {
-             // acepta sólo números; si viene un objeto, intenta sacarlo
               const n =
                 typeof h === "number"
                   ? h
                   : Number(h?.height ?? h?.lg ?? h?.md ?? h?.value);
               if (Number.isFinite(n)) setSearchHeight(n);
-              // si no es número, ignóralo (no guardes objetos en state)
             }}
             selectedTool={selectedTool}
             setSelectedTool={setSelectedTool}
@@ -73,7 +71,7 @@ export default function HomePage({ selectedTool, setSelectedTool }) {
               mt: { xs: "0px", md: "42px" },
               mb: { xs: "25px", lg: "0px" },
               alignSelf: "flex-start",
-              height: hasOMOPFilters ? 520 : "auto",
+              height: hasOMOPFilters ? 480 : "auto",
               p: 0,
               borderRadius: "12px",
               display: "flex",
@@ -82,7 +80,7 @@ export default function HomePage({ selectedTool, setSelectedTool }) {
             }}
           >
             <FiltersContainer
-              searchHeight={hasOMOPFilters ? 485 : searchHeight}
+              searchHeight={hasOMOPFilters ? 410 : searchHeight}
               hasCommonFiltersConfig={hasCommonFiltersConfig}
               hasGenomicAnnotationsConfig={hasGenomicAnnotationsConfig}
               hasOMOPFilters={hasOMOPFilters}

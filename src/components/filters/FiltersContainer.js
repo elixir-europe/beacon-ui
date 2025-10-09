@@ -159,18 +159,11 @@ export default function FiltersContainer({
           />
         ))}
       </Tabs>
-      {/* This is for entire box where the filters are located, excluding the tabs on top */}
       <Box
         sx={{
           boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.05)",
           borderRadius: "8px",
           backgroundColor: "white",
-          // backgroundColor: {
-          //   lg: "salmon",
-          //   md: "pink",
-          //   sm: "lightgreen",
-          //   xs: "lightblue",
-          // },
           mt: "-4px",
           overflow: "hidden",
           height: {

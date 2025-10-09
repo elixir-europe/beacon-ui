@@ -294,13 +294,13 @@ export default function Search({
         sx={{
           flex: activeInput === type ? 1 : 0.3,
           display: "flex",
-          flexDirection: "column", // Important: allow dropdown to appear below
+          flexDirection: "column",
           alignItems: "stretch",
           border: `1.5px solid ${primaryDarkColor}`,
           borderRadius: "999px",
           backgroundColor: "#fff",
           transition: "flex 0.3s ease",
-          position: "relative", // anchors dropdown here
+          position: "relative",
           px: 2,
           py: 1,
         }}
