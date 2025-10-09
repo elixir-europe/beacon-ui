@@ -299,7 +299,7 @@ export default function ComponentConfiguration() {
       <Divider sx={{ my: 3 }} />
 
       <Typography variant="h5" gutterBottom>
-        Troubleshooting (plain language)
+        Troubleshooting
       </Typography>
       <Box component="ul" sx={{ pl: 3, color: "text.secondary" }}>
         <li><strong>I changed the file but nothing happens</strong> — hard refresh; ensure the file is at <code>public/config/config.json</code>.</li>
