@@ -22,7 +22,7 @@ import { AuthProvider } from "react-oidc-context";
       redirect_uri: `https://beacons.bsc.es/`,
       post_logout_redirect_uri: `https://beacons.bsc.es/`,
       response_type: "code",
-      scope: "openid profile email",
+      scope: "openid profile email ga4gh_passport_v1",
       automaticSilentRenew: false,
       onSigninCallback: () => {
         const to = sessionStorage.getItem("returnTo") || "/";
